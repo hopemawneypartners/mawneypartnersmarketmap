@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mawney Partners | Market Map</title>
+    
+    <!-- Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons from CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Leaflet CSS and JS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
+        <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
+            <div class="flex items-center gap-8">
+                <img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" />
+            </div>
+            <nav class="flex items-center gap-8">
+                <a href="#clients" style="color: var(--color-mawney-green);" class="text-base font-medium hover:underline">Our Clients</a>
+                <div class="relative">
+                    <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-4 py-1 text-sm focus:outline-none focus:ring-2" style="min-width: 160px; color: var(--color-espresso);">
+                    <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-sm border rounded px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background: var(--color-mawney-green);" class="w-full py-16">
+        <div class="max-w-5xl mx-auto px-4">
+            <h1 style="color: var(--color-parchment); font-weight: 400;" class="text-2xl md:text-3xl leading-tight">Mawney Partners is a leading independent<br>search firm active in both public and<br>private financial markets</h1>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="max-w-4xl mx-auto px-4 py-10 text-center">
+        <p style="color: var(--color-mawney-green);" class="text-base mb-4">Mawney Partners was founded in 2013 to provide hands-on search execution to a small group of select clients, typically undertaking long-term retained mandates within the fixed income and credit markets. Since then, we've expanded our search expertise to a number of closely-aligned asset classes, services and strategies. In 2014, we launched our private equity and corporate strategy practice, with restructuring and M&A following a year after.</p>
+        <p style="color: var(--color-mawney-green);" class="text-base mb-4">We advise a host of international clients across alternative and asset managers, private equity and VC funds, banks, corporates, advisors, CLOs and hedge funds. Through long-held relationships and an ever-expanding network, Mawney Partners has an impressive track record of securing talent and providing additional recruiting services to our valued clients.</p>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="max-w-6xl mx-auto px-4 py-8 w-full">
+        <h2 style="color: var(--color-mawney-green);" class="text-2xl font-medium text-center mb-8">Our Clients</h2>
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+            <button style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);" class="px-4 py-1 rounded text-sm border">Credit</button>
+            <button style="background: var(--color-mawney-green); color: var(--color-parchment);" class="px-4 py-1 rounded text-sm">Private Equity & Corporate Development</button>
+            <button style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);" class="px-4 py-1 rounded text-sm border">M&A, Restructuring & Advisory</button>
+            <button style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);" class="px-4 py-1 rounded text-sm border">Markets</button>
+            <button style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);" class="px-4 py-1 rounded text-sm border">Business Development & Investor Relations</button>
+        </div>
+        <!-- Alpha View -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8 text-sm" style="color: var(--color-mawney-green);">
+            <span>View:</span>
+            <button class="underline">A–C</button>
+            <button>D–F</button>
+            <button>G–I</button>
+            <button>J–L</button>
+            <button>M–O</button>
+            <button>P–R</button>
+            <button>S–U</button>
+            <button>V–Z</button>
+        </div>
+        <!-- Clients Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Row 1 -->
+            <a href="client.html" class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem; text-decoration: none;">
+                <img src="images/axar.png" alt="Axar" style="max-height: 48px; max-width: 100%; object-fit: contain;" />
+            </a>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">Allianz</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">AMEX</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">Apple Pay</span></div>
+            <!-- Row 2 -->
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">AXIS BANK</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">Bancomer</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">BBVA</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">BINANCE</span></div>
+            <!-- Row 3 -->
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><button style="background: var(--color-mawney-green); color: var(--color-parchment);" class="px-4 py-2 rounded">Employees</button></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><button style="background: var(--color-mawney-green); color: var(--color-parchment);" class="px-4 py-2 rounded">Structure</button></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">bradesco</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">CAIXA</span></div>
+            <!-- Row 4 -->
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">Cielo</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">CIMB BANK</span></div>
+            <div class="flex items-center justify-center h-24" style="background: var(--color-parchment); border-radius: 0.5rem;"><span style="color: var(--color-espresso);" class="text-2xl font-bold">citibank</span></div>
+            <div></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+            <div class="text-sm mb-4 md:mb-0">
+                37 Tanner Street<br>
+                London SE1 3LF<br>
+                <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
+                © Mawney Partners 2023 - Privacy Policy
+            </div>
+            <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+        </div>
+    </footer>
+</body>
+</html> 

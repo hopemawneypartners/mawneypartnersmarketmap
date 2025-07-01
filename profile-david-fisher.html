@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David Fisher - Profile</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
+    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
+      </div>
+      <nav class="flex items-center gap-8">
+        <a href="index.html" style="color: var(--color-mawney-green);" class="text-base font-medium hover:underline">Our Clients</a>
+        <div class="relative">
+          <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-4 py-1 text-sm focus:outline-none focus:ring-2" style="min-width: 160px; color: var(--color-espresso);">
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-sm border rounded px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section style="background: var(--color-mawney-green);" class="w-full py-16">
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
+      <img src="images/axar white.png" alt="Axar" style="max-height: 64px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" />
+    </div>
+  </section>
+
+  <!-- Profile Card -->
+  <section class="w-full max-w-5xl mx-auto mt-10 mb-16 px-4">
+    <div class="bg-[var(--color-parchment)] rounded-lg shadow p-8 flex flex-col gap-8">
+      <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+        <div class="flex-shrink-0 flex justify-center items-center w-40 h-40 rounded-full border border-gray-300 bg-white overflow-hidden">
+          <img src="images/profile.png" alt="Profile" class="w-32 h-32 rounded-full object-cover" />
+        </div>
+        <div class="flex-1">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="text-2xl font-serif font-semibold" style="color: var(--color-mawney-green);">David Fisher</h2>
+              <div class="text-base mb-2" style="color: var(--color-mawney-green);">Head of BD</div>
+            </div>
+            <button class="text-2xl text-gray-400 hover:text-gray-600">&times;</button>
+          </div>
+          <p class="mt-2 mb-2 text-sm" style="color: var(--color-espresso);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+          <div class="text-sm mb-2" style="color: var(--color-mawney-green);">Male - American - <a href="#" class="underline">LinkedIn</a></div>
+          <div class="mb-2">
+            <span class="font-semibold text-sm" style="color: var(--color-mawney-green);">Specialisms</span>
+            <div class="flex flex-wrap gap-2 mt-1">
+              <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Business Development</span>
+              <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Client Relations</span>
+              <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Sales Strategy</span>
+              <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Market Expansion</span>
+            </div>
+          </div>
+          <div class="border-t border-gray-300 mt-4 mb-2"></div>
+          <div>
+            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span class="text-xl">+</span></button>
+            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span class="text-xl">+</span></button>
+            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span class="text-xl">+</span></button>
+          </div>
+        </div>
+      </div>
+      <!-- LinkedIn Profile Mockup -->
+      <div class="bg-white rounded-lg shadow p-6 flex flex-col gap-6">
+        <div class="flex gap-6 items-center">
+          <div class="w-24 h-24 rounded-full bg-gray-200 border-4 border-white"></div>
+          <div>
+            <div class="font-semibold text-lg">LinkedIn Profile Mockup</div>
+            <div class="text-sm text-gray-500">Head of Business Development</div>
+            <div class="text-xs text-gray-400 mt-1">New York, NY - <a href="#" class="underline">Contact info</a></div>
+            <div class="flex gap-2 mt-2">
+              <span class="bg-blue-600 text-white rounded px-2 py-1 text-xs">+ Follow</span>
+              <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">Message</span>
+              <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">More</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-4 mt-4">
+          <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Business development</div>
+          <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Client acquisition</div>
+        </div>
+      </div>
+      <!-- Experience Section -->
+      <div class="bg-white rounded-lg shadow p-6 mt-4">
+        <div class="font-semibold mb-2">Experience</div>
+        <div class="text-sm text-gray-700 mb-4">David Fisher leads business development efforts at Axar Capital Management, focusing on expanding the firm's client base and strengthening relationships with existing investors.</div>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-start gap-2">
+            <span class="inline-block w-6 h-6 bg-blue-600 rounded-full mt-1"></span>
+            <div>
+              <div class="font-semibold">Head of Business Development</div>
+              <div class="text-xs text-gray-500">Axar Capital Management - 2016-Present</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="inline-block w-6 h-6 bg-blue-600 rounded-full mt-1"></span>
+            <div>
+              <div class="font-semibold">Business Development Manager</div>
+              <div class="text-xs text-gray-500">Previous Investment Firm - 2012-2016</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+      <div class="text-sm mb-4 md:mb-0">
+        37 Tanner Street<br>
+        London SE1 3LF<br>
+        <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
+        © Mawney Partners 2023 - Privacy Policy
+      </div>
+      <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+    </div>
+  </footer>
+</body>
+</html> 

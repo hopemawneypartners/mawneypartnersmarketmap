@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allianz - Client Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Remove conflicting custom styles, use shared style.css */
+  </style>
+</head>
+<body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
+    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
+      </div>
+      <nav class="flex items-center gap-8">
+        <a href="index.html" style="color: var(--color-mawney-green);" class="text-base font-medium hover:underline">Our Clients</a>
+        <div class="relative">
+          <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-4 py-1 text-sm focus:outline-none focus:ring-2" style="min-width: 160px; color: var(--color-espresso);">
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-sm border rounded px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section style="background: var(--color-mawney-green);" class="w-full py-16">
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
+      <img src="images/axar white.png" alt="Axar" style="max-height: 64px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" />
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="w-full max-w-4xl mx-auto mt-10 text-center">
+    <p class="mb-4 text-base" style="color: var(--color-mawney-green);">
+      Axar Capital Management is an opportunistic corporate credit investor focused on the U.S. middle market founded by Alex Axelrod and Timothy Parrott in 2015. Current AUM sits at ~$2.9bn, Axar actively invests across the capital structure in both public and private markets, with a particular emphasis on distressed credit, structured finance, and asset-heavy businesses. The firm is known for taking a hands-on approach to portfolio management, often pursuing influence or control positions to drive value creation.
+    </p>
+  </section>
+
+  <!-- Employee Map Button -->
+  <div class="w-full max-w-4xl mx-auto flex justify-center mt-12 mb-4">
+    <a href="employee-map.html" class="px-6 py-2 rounded text-base font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment); text-align: center; display: inline-block;">Employee Map</a>
+  </div>
+
+  <!-- Employees Section -->
+  <section class="w-full max-w-4xl mx-auto mt-12 mb-16">
+    <h2 class="text-2xl font-serif font-semibold mb-6" style="color: var(--color-mawney-green);">Employees</h2>
+    <div class="divide-y divide-gray-400">
+      <!-- Employee 1 -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
+          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="0">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="0">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 1 go here. Add more info as needed.</div>
+      </div>
+      <!-- Employee 2 -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
+          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="1">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="1">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 2 go here. Add more info as needed.</div>
+      </div>
+      <!-- Employee 3 -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
+          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="2">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="2">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 3 go here. Add more info as needed.</div>
+      </div>
+      <!-- Employee 4 -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
+          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="3">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="3">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 4 go here. Add more info as needed.</div>
+      </div>
+      <!-- Employee 5 -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
+          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="4">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="4">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 5 go here. Add more info as needed.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+      <div class="text-sm mb-4 md:mb-0">
+        37 Tanner Street<br>
+        London SE1 3LF<br>
+        <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
+        © Mawney Partners 2023 - Privacy Policy
+      </div>
+      <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+    </div>
+  </footer>
+</body>
+<script>
+  document.querySelectorAll('.expand-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var empId = btn.getAttribute('data-employee');
+      var details = document.querySelector('.employee-details[data-employee="' + empId + '"]');
+      if (details.classList.contains('hidden')) {
+        details.classList.remove('hidden');
+        btn.querySelector('span').textContent = '–';
+      } else {
+        details.classList.add('hidden');
+        btn.querySelector('span').textContent = '+';
+      }
+    });
+  });
+</script>
+</html> 

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Map - Allianz</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
+    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
+      </div>
+      <nav class="flex items-center gap-8">
+        <a href="index.html" style="color: var(--color-mawney-green);" class="text-base font-medium hover:underline">Our Clients</a>
+        <div class="relative">
+          <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-4 py-1 text-sm focus:outline-none focus:ring-2" style="min-width: 160px; color: var(--color-espresso);">
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-sm border rounded px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section style="background: var(--color-mawney-green);" class="w-full py-16">
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
+      <img src="images/axar white.png" alt="Axar" style="max-height: 64px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" />
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="w-full max-w-4xl mx-auto mt-10 text-center">
+    <p class="mb-4 text-base" style="color: var(--color-mawney-green);">
+      Axar Capital Management is an opportunistic corporate credit investor focused on the U.S. middle market founded by Alex Axelrod and Timothy Parrott in 2015. Current AUM sits at ~$2.9bn, Axar actively invests across the capital structure in both public and private markets, with a particular emphasis on distressed credit, structured finance, and asset-heavy businesses. The firm is known for taking a hands-on approach to portfolio management, often pursuing influence or control positions to drive value creation.
+    </p>
+  </section>
+
+  <!-- Employees Section -->
+  <section class="w-full mx-auto mt-8 mb-16 px-4" style="max-width: 100vw;">
+    <div class="flex flex-col items-center mb-8">
+      <h2 class="text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-sm mr-2">Navigate to department:</span>
+        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Customer Service</button>
+        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Finance</button>
+        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Human Resources</button>
+        <button class="px-4 py-1 rounded text-sm" style="background: var(--color-mawney-green); color: var(--color-parchment);">IT</button>
+        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Marketing</button>
+        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Research & Development</button>
+      </div>
+    </div>
+    <div class="flex justify-between items-center mb-4">
+      <div></div>
+      <button class="px-4 py-1 rounded text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
+        Filter Specialisms
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+    </div>
+    <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
+      <div class="flex flex-col md:flex-row gap-8 justify-between">
+        <!-- IT Department -->
+        <div class="w-1/2 min-w-0 overflow-x-auto relative">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">IT</h3>
+            <div class="flex items-center gap-2">
+              <button id="it-zoom-out" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+              <span id="it-zoom-label" class="text-xs text-gray-600">100%</span>
+              <button id="it-zoom-in" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
+            </div>
+          </div>
+          <div id="it-zoom-area" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+            <div class="flex flex-col items-start gap-4 w-[600px] max-w-full">
+              <!-- Row 1 -->
+              <div class="flex flex-row gap-4">
+                <a href="profile-andrew-axelrod.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Andrew Axelrod</div>
+                    <div class="text-xs">Founder/CIO</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+              </div>
+              <!-- Row 2 -->
+              <div class="flex flex-row gap-4">
+                <a href="profile-matt-magunson.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Matt Magunson</div>
+                    <div class="text-xs">Head of Trading</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+                <a href="profile-grant-mitchell.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Grant Mitchell</div>
+                    <div class="text-xs">Deputy CIO</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+                <a href="profile-thomas-h.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Thomas H.</div>
+                    <div class="text-xs">Head of Insurance Asset Management & Director, Portfolio Operations</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+              </div>
+              <!-- Row 3 -->
+              <div class="flex flex-row gap-4">
+                <a href="profile-akash-kumar.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Akash Kumar</div>
+                    <div class="text-xs">Senior Analyst</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="hidden md:block w-px bg-gray-300 mx-4"></div>
+        <!-- Marketing Department -->
+        <div class="w-1/2 min-w-0 overflow-x-auto relative">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">Marketing</h3>
+            <div class="flex items-center gap-2">
+              <button id="marketing-zoom-out" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+              <span id="marketing-zoom-label" class="text-xs text-gray-600">100%</span>
+              <button id="marketing-zoom-in" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
+            </div>
+          </div>
+          <div id="marketing-zoom-area" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+            <div class="flex flex-col items-start gap-4 w-[600px] max-w-full">
+              <!-- Row 1 -->
+              <div class="flex flex-row gap-4">
+                <a href="profile-timothy-parrott.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Timothy Parrott</div>
+                    <div class="text-xs">Co-Founder/President</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+              </div>
+              <!-- Row 2 -->
+              <div class="flex flex-row gap-4">
+                <a href="profile-david-fisher.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">David Fisher</div>
+                    <div class="text-xs">Head of BD</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+                <a href="profile-lionel-benichou.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Lionel Benichou</div>
+                    <div class="text-xs">CFO</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+                <a href="profile-ricardo-mosquera.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Ricardo Mosquera</div>
+                    <div class="text-xs">COO/CCO</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+              </div>
+              <!-- Row 3 -->
+              <div class="flex flex-row gap-4">
+                <a href="profile-sean-mulrenan.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Sean Mulrenan</div>
+                    <div class="text-xs">Director - IR</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+                <a href="profile-ronald-de-gier.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                  <div>
+                    <div class="font-semibold text-base">Ronald De Gier</div>
+                    <div class="text-xs">Head of Portfolio Operations</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+      <div class="text-sm mb-4 md:mb-0">
+        37 Tanner Street<br>
+        London SE1 3LF<br>
+        <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
+        © Mawney Partners 2023 - Privacy Policy
+      </div>
+      <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+    </div>
+  </footer>
+
+  <script>
+    // IT Zoom
+    let itZoom = 1;
+    const itZoomArea = document.getElementById('it-zoom-area');
+    const itZoomLabel = document.getElementById('it-zoom-label');
+    document.getElementById('it-zoom-in').onclick = function() {
+      if (itZoom < 2) itZoom += 0.1;
+      itZoom = Math.round(itZoom * 10) / 10;
+      itZoomArea.style.transform = `scale(${itZoom})`;
+      itZoomLabel.textContent = Math.round(itZoom * 100) + '%';
+    };
+    document.getElementById('it-zoom-out').onclick = function() {
+      if (itZoom > 0.1) itZoom -= 0.1;
+      itZoom = Math.round(itZoom * 10) / 10;
+      itZoomArea.style.transform = `scale(${itZoom})`;
+      itZoomLabel.textContent = Math.round(itZoom * 100) + '%';
+    };
+    // Marketing Zoom
+    let marketingZoom = 1;
+    const marketingZoomArea = document.getElementById('marketing-zoom-area');
+    const marketingZoomLabel = document.getElementById('marketing-zoom-label');
+    document.getElementById('marketing-zoom-in').onclick = function() {
+      if (marketingZoom < 2) marketingZoom += 0.1;
+      marketingZoom = Math.round(marketingZoom * 10) / 10;
+      marketingZoomArea.style.transform = `scale(${marketingZoom})`;
+      marketingZoomLabel.textContent = Math.round(marketingZoom * 100) + '%';
+    };
+    document.getElementById('marketing-zoom-out').onclick = function() {
+      if (marketingZoom > 0.1) marketingZoom -= 0.1;
+      marketingZoom = Math.round(marketingZoom * 10) / 10;
+      marketingZoomArea.style.transform = `scale(${marketingZoom})`;
+      marketingZoomLabel.textContent = Math.round(marketingZoom * 100) + '%';
+    };
+  </script>
+</body>
+</html> 
+</body>
+</html> 
