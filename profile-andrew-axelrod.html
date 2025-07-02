@@ -69,26 +69,6 @@
                     </div>
                 </div>
             </div>
-            <!-- LinkedIn Profile Mockup -->
-            <div class="bg-white rounded-lg shadow p-6 flex flex-col gap-6">
-                <div class="flex gap-6 items-center">
-                    <div class="w-24 h-24 rounded-full bg-gray-200 border-4 border-white"></div>
-                    <div>
-                        <div class="font-semibold text-lg">LinkedIn Profile Mockup</div>
-                        <div class="text-sm text-gray-500">Human resources</div>
-                        <div class="text-xs text-gray-400 mt-1">City, Country - <a href="#" class="underline">Contact info</a></div>
-                        <div class="flex gap-2 mt-2">
-                            <span class="bg-blue-600 text-white rounded px-2 py-1 text-xs">+ Follow</span>
-                            <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">Message</span>
-                            <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">More</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex gap-4 mt-4">
-                    <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Lorem ipsum dolor</div>
-                    <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Lorem ipsum dolor</div>
-                </div>
-            </div>
             <!-- Experience Section -->
             <div class="bg-white rounded-lg shadow p-6 mt-4">
                 <div class="font-semibold mb-2">Experience</div>
@@ -110,6 +90,54 @@
                     </div>
                 </div>
             </div>
+            <!-- LinkedIn Image Swiper -->
+            <div class="bg-white rounded-lg shadow p-6 mt-8 flex flex-col items-center">
+                <div class="relative w-full max-w-md flex justify-center items-center">
+                    <button id="prev-linkedin" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10" aria-label="Previous image">
+                        <span class="text-2xl">&#8592;</span>
+                    </button>
+                    <img id="linkedin-image" src="images/linkedin/AA LinkedIn 1.png" alt="LinkedIn Screenshot 1" class="rounded-lg object-contain max-h-96 max-w-full" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
+                    <button id="next-linkedin" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10" aria-label="Next image">
+                        <span class="text-2xl">&#8594;</span>
+                    </button>
+                </div>
+                <div class="mt-2 text-xs text-gray-500">Swipe or use arrows to view LinkedIn screenshots</div>
+            </div>
+            <script>
+                const linkedinImages = [
+                    'images/linkedin/AA LinkedIn 1.png',
+                    'images/linkedin/AA LinkedIn 2.png'
+                ];
+                let currentLinkedIn = 0;
+                const imgEl = document.getElementById('linkedin-image');
+                document.getElementById('prev-linkedin').onclick = function() {
+                    currentLinkedIn = (currentLinkedIn - 1 + linkedinImages.length) % linkedinImages.length;
+                    imgEl.src = linkedinImages[currentLinkedIn];
+                };
+                document.getElementById('next-linkedin').onclick = function() {
+                    currentLinkedIn = (currentLinkedIn + 1) % linkedinImages.length;
+                    imgEl.src = linkedinImages[currentLinkedIn];
+                };
+                // Swipe support for mobile
+                let startX = null;
+                imgEl.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                });
+                imgEl.addEventListener('touchend', function(e) {
+                    if (startX === null) return;
+                    let endX = e.changedTouches[0].clientX;
+                    if (endX - startX > 40) {
+                        // Swipe right
+                        currentLinkedIn = (currentLinkedIn - 1 + linkedinImages.length) % linkedinImages.length;
+                        imgEl.src = linkedinImages[currentLinkedIn];
+                    } else if (startX - endX > 40) {
+                        // Swipe left
+                        currentLinkedIn = (currentLinkedIn + 1) % linkedinImages.length;
+                        imgEl.src = linkedinImages[currentLinkedIn];
+                    }
+                    startX = null;
+                });
+            </script>
         </div>
     </section>
 
