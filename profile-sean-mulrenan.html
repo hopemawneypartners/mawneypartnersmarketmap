@@ -35,20 +35,21 @@
   <!-- Profile Card -->
   <section class="w-full max-w-5xl mx-auto mt-10 mb-16 px-4">
     <div class="bg-[var(--color-parchment)] rounded-lg shadow p-8 flex flex-col gap-8">
-      <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+      <div class="flex flex-col md:flex-row gap-8 items-start md:items-start">
         <div class="flex-shrink-0 flex justify-center items-center w-40 h-40 rounded-full border border-gray-300 bg-white overflow-hidden">
           <img src="images/profile.png" alt="Profile" class="w-32 h-32 rounded-full object-cover" />
         </div>
         <div class="flex-1">
           <div class="flex justify-between items-start">
             <div>
-              <h2 class="text-2xl font-serif font-semibold" style="color: var(--color-mawney-green);">Sean Mulrenan</h2>
-              <div class="text-base mb-2" style="color: var(--color-mawney-green);">Director - IR</div>
+              <h1 class="text-3xl font-bold mb-2" style="color: var(--color-mawney-green);">Sean Mulrenan</h1>
+              <h2 class="text-xl font-medium mb-4" style="color: var(--color-espresso);">Director of Investor Relations</h2>
+              <a href="employee-map.html" class="text-sm underline mb-4 inline-block" style="color: var(--color-mawney-green);">Back to Team</a>
             </div>
             <button class="text-2xl text-gray-400 hover:text-gray-600">&times;</button>
           </div>
-          <p class="mt-2 mb-2 text-sm" style="color: var(--color-espresso);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
-          <div class="text-sm mb-2" style="color: var(--color-mawney-green);">Male - Irish - <a href="#" class="underline">LinkedIn</a></div>
+          <p class="text-base mt-2" style="color: var(--color-espresso);">Sean Mulrenan serves as Director of Investor Relations at Axar Capital Management, managing relationships with investors and ensuring transparent communication about fund performance and strategy.</p>
+          <div class="text-sm mb-2 mt-4" style="color: var(--color-mawney-green);">Male - Irish - <a href="#" class="underline">LinkedIn</a></div>
           <div class="mb-2">
             <span class="font-semibold text-sm" style="color: var(--color-mawney-green);">Specialisms</span>
             <div class="flex flex-wrap gap-2 mt-1">
@@ -60,53 +61,113 @@
           </div>
           <div class="border-t border-gray-300 mt-4 mb-2"></div>
           <div>
-            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span class="text-xl">+</span></button>
-            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span class="text-xl">+</span></button>
-            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span class="text-xl">+</span></button>
-          </div>
-        </div>
-      </div>
-      <!-- LinkedIn Profile Mockup -->
-      <div class="bg-white rounded-lg shadow p-6 flex flex-col gap-6">
-        <div class="flex gap-6 items-center">
-          <div class="w-24 h-24 rounded-full bg-gray-200 border-4 border-white"></div>
-          <div>
-            <div class="font-semibold text-lg">LinkedIn Profile Mockup</div>
-            <div class="text-sm text-gray-500">Director of Investor Relations</div>
-            <div class="text-xs text-gray-400 mt-1">New York, NY - <a href="#" class="underline">Contact info</a></div>
-            <div class="flex gap-2 mt-2">
-              <span class="bg-blue-600 text-white rounded px-2 py-1 text-xs">+ Follow</span>
-              <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">Message</span>
-              <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">More</span>
+            <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span id="profile-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
+            <div id="profile-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
+              <div class="font-semibold">Director of Investor Relations at Axar Capital</div>
+              <div>New York, New York, United States</div>
             </div>
-          </div>
-        </div>
-        <div class="flex gap-4 mt-4">
-          <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Investor relations</div>
-          <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Fund communications</div>
-        </div>
-      </div>
-      <!-- Experience Section -->
-      <div class="bg-white rounded-lg shadow p-6 mt-4">
-        <div class="font-semibold mb-2">Experience</div>
-        <div class="text-sm text-gray-700 mb-4">Sean Mulrenan serves as Director of Investor Relations at Axar Capital Management, managing relationships with investors and ensuring transparent communication about fund performance and strategy.</div>
-        <div class="flex flex-col gap-2">
-          <div class="flex items-start gap-2">
-            <span class="inline-block w-6 h-6 bg-blue-600 rounded-full mt-1"></span>
-            <div>
+            <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span id="current-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
+            <div id="current-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
               <div class="font-semibold">Director of Investor Relations</div>
-              <div class="text-xs text-gray-500">Axar Capital Management - 2017-Present</div>
+              <div>AXAR CAPITAL MANAGEMENT LP &middot; Full-time</div>
+              <div>2017 – Present</div>
             </div>
-          </div>
-          <div class="flex items-start gap-2">
-            <span class="inline-block w-6 h-6 bg-blue-600 rounded-full mt-1"></span>
-            <div>
-              <div class="font-semibold">Investor Relations Manager</div>
-              <div class="text-xs text-gray-500">Previous Investment Firm - 2013-2017</div>
+            <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span id="past-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
+            <div id="past-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] bg-white hidden">
+              <div class="relative" style="padding-left: 2rem;">
+                <div class="absolute left-4 top-6 bottom-6 w-0.5 bg-[var(--color-mawney-green)]"></div>
+                <!-- Example Experience -->
+                <div class="mb-8 flex items-start gap-4 relative">
+                  <div class="ml-4">
+                    <div class="font-semibold">Director of Investor Relations</div>
+                    <div>Axar Capital Management</div>
+                    <div class="text-xs text-gray-500">2017 – Present</div>
+                    <div class="text-xs text-gray-500">New York, United States &middot; On-site</div>
+                  </div>
+                </div>
+                <div class="mb-2 flex items-start gap-4 relative">
+                  <div class="ml-4">
+                    <div class="font-semibold">Investor Relations Manager</div>
+                    <div>Previous Investment Firm</div>
+                    <div class="text-xs text-gray-500">2013 – 2017</div>
+                    <div class="text-xs text-gray-500">New York, United States &middot; On-site</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- LinkedIn Image Swiper -->
+      <div class="bg-white rounded-lg shadow p-6 mt-8 flex flex-col items-center w-full">
+        <div class="relative w-full flex justify-center items-center" style="padding:0;">
+          <button id="prev-linkedin" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10" aria-label="Previous image">
+            <span class="text-2xl">&#8592;</span>
+          </button>
+          <img id="linkedin-image" src="images/linkedin/placeholder1.png" alt="LinkedIn Screenshot 1" class="rounded-lg object-contain w-full" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-height: none;" />
+          <button id="next-linkedin" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10" aria-label="Next image">
+            <span class="text-2xl">&#8594;</span>
+          </button>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">Swipe or use arrows to view LinkedIn screenshots</div>
+      </div>
+      <script>
+        const linkedinImages = [
+          'images/linkedin/placeholder1.png',
+          'images/linkedin/placeholder2.png'
+        ];
+        let currentLinkedIn = 0;
+        const imgEl = document.getElementById('linkedin-image');
+        document.getElementById('prev-linkedin').onclick = function() {
+          currentLinkedIn = (currentLinkedIn - 1 + linkedinImages.length) % linkedinImages.length;
+          imgEl.src = linkedinImages[currentLinkedIn];
+        };
+        document.getElementById('next-linkedin').onclick = function() {
+          currentLinkedIn = (currentLinkedIn + 1) % linkedinImages.length;
+          imgEl.src = linkedinImages[currentLinkedIn];
+        };
+        // Swipe support for mobile
+        let startX = null;
+        imgEl.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+        });
+        imgEl.addEventListener('touchend', function(e) {
+          if (startX === null) return;
+          let endX = e.changedTouches[0].clientX;
+          if (endX - startX > 40) {
+            // Swipe right
+            currentLinkedIn = (currentLinkedIn - 1 + linkedinImages.length) % linkedinImages.length;
+            imgEl.src = linkedinImages[currentLinkedIn];
+          } else if (startX - endX > 40) {
+            // Swipe left
+            currentLinkedIn = (currentLinkedIn + 1) % linkedinImages.length;
+            imgEl.src = linkedinImages[currentLinkedIn];
+          }
+          startX = null;
+        });
+        // Dropdown logic
+        function setupDropdown(toggleId, contentId, iconId) {
+          const toggle = document.getElementById(toggleId);
+          const content = document.getElementById(contentId);
+          const icon = document.getElementById(iconId);
+          toggle.addEventListener('click', function() {
+            const isOpen = !content.classList.contains('hidden');
+            document.getElementById('profile-content').classList.add('hidden');
+            document.getElementById('current-content').classList.add('hidden');
+            document.getElementById('past-content').classList.add('hidden');
+            document.getElementById('profile-icon').textContent = '+';
+            document.getElementById('current-icon').textContent = '+';
+            document.getElementById('past-icon').textContent = '+';
+            if (!isOpen) {
+              content.classList.remove('hidden');
+              icon.textContent = '–';
+            }
+          });
+        }
+        setupDropdown('profile-toggle', 'profile-content', 'profile-icon');
+        setupDropdown('current-toggle', 'current-content', 'current-icon');
+        setupDropdown('past-toggle', 'past-content', 'past-icon');
+      </script>
     </div>
   </section>
 
