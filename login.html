@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Mawney Partners</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0b4c3a; }
+    .login-box { background: #eae3db; }
+    .login-label, .login-title, .login-link, .login-copyright { color: #0b4c3a; }
+    .login-btn { background: #0b4c3a; color: #eae3db; }
+    .login-btn:hover { background: #16624d; }
+    .login-link { text-decoration: underline; }
+    .login-link:hover { color: #16624d; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center">
+  <div class="w-full flex flex-col items-center mt-8">
+    <img src="images/MP Logo Espresso.png" alt="MP Logo" style="height: 90px;" class="mb-2" />
+    <div class="text-3xl font-serif font-normal login-title mb-8 tracking-wide">MAWNEY Partners</div>
+  </div>
+  <div class="login-box rounded shadow-lg px-10 py-10 w-full max-w-md flex flex-col items-center">
+    <div class="text-2xl font-serif font-semibold mb-6 login-title">Login</div>
+    <form id="login-form" class="w-full flex flex-col gap-4">
+      <div>
+        <label class="block mb-1 text-base font-medium login-label" for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="email@mawneypartners.com" class="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0b4c3a] bg-white" />
+      </div>
+      <div>
+        <label class="block mb-1 text-base font-medium login-label" for="password">Password</label>
+        <div class="relative">
+          <input id="password" name="password" type="password" required placeholder="Enter password" class="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0b4c3a] bg-white" />
+          <button type="button" id="toggle-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600" tabindex="-1">
+            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="login-btn w-full py-2 rounded text-lg font-medium mt-2">Log in</button>
+    </form>
+    <div class="flex justify-between w-full mt-4 text-sm">
+      <a href="#" class="login-link">Don't have an account?</a>
+      <a href="#" class="login-link">Forgot password?</a>
+    </div>
+  </div>
+  <div class="mt-8 text-center login-copyright text-sm">© Mawney Partners 2025</div>
+  <script>
+    // Show/hide password
+    document.getElementById('toggle-password').onclick = function() {
+      const pw = document.getElementById('password');
+      if (pw.type === 'password') {
+        pw.type = 'text';
+      } else {
+        pw.type = 'password';
+      }
+    };
+
+    // Login logic
+    document.getElementById('login-form').onsubmit = function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const validEmail = 'email@mawneypartners.com';
+      const validPassword = 'partners2024';
+      if (email.toLowerCase() === validEmail && password === validPassword) {
+        localStorage.setItem('mawney_logged_in', 'true');
+        window.location.href = 'index.html';
+      } else {
+        if (!document.getElementById('login-error')) {
+          const err = document.createElement('div');
+          err.id = 'login-error';
+          err.className = 'text-red-600 mt-2 text-center';
+          err.textContent = 'Invalid email or password.';
+          document.getElementById('login-form').appendChild(err);
+        }
+      }
+    };
+  </script>
+</body>
+</html> 

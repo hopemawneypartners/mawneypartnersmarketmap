@@ -9,6 +9,11 @@
   <style>
     /* Remove conflicting custom styles, use shared style.css */
   </style>
+  <script>
+    if (localStorage.getItem('mawney_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  </script>
 </head>
 <body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
   <!-- Header -->
@@ -51,70 +56,158 @@
   <section class="w-full max-w-4xl mx-auto mt-12 mb-16">
     <h2 class="text-2xl font-serif font-semibold mb-6" style="color: var(--color-mawney-green);">Employees</h2>
     <div class="divide-y divide-gray-400">
-      <!-- Employee 1 -->
+      <!-- Andrew Axelrod -->
       <div class="flex items-center justify-between py-4 employee-row">
         <div>
-          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
-          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Andrew Axelrod</div>
+          <div class="text-sm" style="color: #6b7280;">Founder/CIO</div>
         </div>
         <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="0">
           <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
         </button>
       </div>
       <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="0">
-        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 1 go here. Add more info as needed.</div>
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Founder and Chief Investment Officer of Axar Capital Management.</div>
       </div>
-      <!-- Employee 2 -->
+      
+      <!-- Timothy Parrott -->
       <div class="flex items-center justify-between py-4 employee-row">
         <div>
-          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
-          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Timothy Parrott</div>
+          <div class="text-sm" style="color: #6b7280;">Co-Founder/President</div>
         </div>
         <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="1">
           <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
         </button>
       </div>
       <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="1">
-        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 2 go here. Add more info as needed.</div>
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Co-Founder and President of Axar Capital Management.</div>
       </div>
-      <!-- Employee 3 -->
+      
+      <!-- Grant Mitchell -->
       <div class="flex items-center justify-between py-4 employee-row">
         <div>
-          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
-          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Grant Mitchell</div>
+          <div class="text-sm" style="color: #6b7280;">Deputy CIO</div>
         </div>
         <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="2">
           <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
         </button>
       </div>
       <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="2">
-        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 3 go here. Add more info as needed.</div>
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Deputy Chief Investment Officer at Axar Capital Management.</div>
       </div>
-      <!-- Employee 4 -->
+      
+      <!-- Lionel Benichou -->
       <div class="flex items-center justify-between py-4 employee-row">
         <div>
-          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
-          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Lionel Benichou</div>
+          <div class="text-sm" style="color: #6b7280;">CFO</div>
         </div>
         <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="3">
           <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
         </button>
       </div>
       <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="3">
-        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 4 go here. Add more info as needed.</div>
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Chief Financial Officer at Axar Capital Management.</div>
       </div>
-      <!-- Employee 5 -->
+      
+      <!-- Ricardo Mosquera -->
       <div class="flex items-center justify-between py-4 employee-row">
         <div>
-          <div class="font-medium text-lg" style="color: var(--color-espresso);">Name Surname</div>
-          <div class="text-sm" style="color: #6b7280;">Job title to go here</div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Ricardo Mosquera</div>
+          <div class="text-sm" style="color: #6b7280;">COO/CCO</div>
         </div>
         <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="4">
           <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
         </button>
       </div>
       <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="4">
-        <div class="text-sm text-left" style="color: var(--color-espresso);">Details about Employee 5 go here. Add more info as needed.</div>
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Chief Operating Officer and Chief Compliance Officer at Axar Capital Management.</div>
+      </div>
+      
+      <!-- Matt Magnuson -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Matt Magnuson</div>
+          <div class="text-sm" style="color: #6b7280;">Head of Trading</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="5">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="5">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Head of Trading at Axar Capital Management.</div>
+      </div>
+      
+      <!-- Sean Mulrenan -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Sean Mulrenan</div>
+          <div class="text-sm" style="color: #6b7280;">Director-IR</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="6">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="6">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Director of Investor Relations at Axar Capital Management.</div>
+      </div>
+      
+      <!-- David Fisher -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">David Fisher</div>
+          <div class="text-sm" style="color: #6b7280;">Head of BD</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="7">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="7">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Head of Business Development at Axar Capital Management.</div>
+      </div>
+      
+      <!-- Akash Kumar -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Akash Kumar</div>
+          <div class="text-sm" style="color: #6b7280;">Senior Analyst</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="8">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="8">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Senior Analyst at Axar Capital Management.</div>
+      </div>
+      
+      <!-- Thomas H -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Thomas H</div>
+          <div class="text-sm" style="color: #6b7280;">Head of Insurance Asset Management & Director, Portfolio Operations</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="9">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="9">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Head of Insurance Asset Management and Director of Portfolio Operations at Axar Capital Management.</div>
+      </div>
+      
+      <!-- Ronald de Gier -->
+      <div class="flex items-center justify-between py-4 employee-row">
+        <div>
+          <div class="font-medium text-lg" style="color: var(--color-espresso);">Ronald de Gier</div>
+          <div class="text-sm" style="color: #6b7280;">Head of Portfolio Operations</div>
+        </div>
+        <button class="expand-btn w-8 h-8 flex items-center justify-center border border-gray-400 rounded bg-white" data-employee="10">
+          <span class="text-2xl font-bold" style="color: var(--color-mawney-green);">+</span>
+        </button>
+      </div>
+      <div class="employee-details hidden px-4 py-2 bg-gray-50 rounded mb-2" data-employee="10">
+        <div class="text-sm text-left" style="color: var(--color-espresso);">Head of Portfolio Operations at Axar Capital Management.</div>
       </div>
     </div>
   </section>

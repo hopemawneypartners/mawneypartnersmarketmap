@@ -17,6 +17,12 @@
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="style.css">
+
+    <script>
+      if (localStorage.getItem('mawney_logged_in') !== 'true') {
+        window.location.href = 'login.html';
+      }
+    </script>
 </head>
 <body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
     <!-- Header -->

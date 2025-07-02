@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Map - Allianz</title>
+  <title>Employee Map - Axar</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (localStorage.getItem('mawney_logged_in') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  </script>
 </head>
 <body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
   <!-- Header -->
@@ -76,44 +81,44 @@
             <div class="flex flex-col items-start gap-4 w-[600px] max-w-full">
               <!-- Row 1 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-andrew-axelrod.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-andrew-axelrod.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Andrew Axelrod</div>
-                    <div class="text-xs">Founder/CIO</div>
+                    <div class="font-semibold text-sm leading-tight">Andrew<br>Axelrod</div>
+                    <div class="text-xs mt-1">Founder/CIO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
               </div>
               <!-- Row 2 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-matt-magunson.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-matt-magunson.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Matt Magunson</div>
-                    <div class="text-xs">Head of Trading</div>
+                    <div class="font-semibold text-sm leading-tight">Matt<br>Magunson</div>
+                    <div class="text-xs mt-1">Head of Trading</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-grant-mitchell.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-grant-mitchell.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Grant Mitchell</div>
-                    <div class="text-xs">Deputy CIO</div>
+                    <div class="font-semibold text-sm leading-tight">Grant<br>Mitchell</div>
+                    <div class="text-xs mt-1">Deputy CIO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-thomas-h.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-thomas-h.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Thomas H.</div>
-                    <div class="text-xs">Head of Insurance Asset Management & Director, Portfolio Operations</div>
+                    <div class="font-semibold text-sm leading-tight">Thomas<br>H.</div>
+                    <div class="text-xs mt-1">Head of IAM & Director, PO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
               </div>
               <!-- Row 3 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-akash-kumar.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-akash-kumar.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Akash Kumar</div>
-                    <div class="text-xs">Senior Analyst</div>
+                    <div class="font-semibold text-sm leading-tight">Akash<br>Kumar</div>
+                    <div class="text-xs mt-1">Senior Analyst</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
@@ -137,51 +142,51 @@
             <div class="flex flex-col items-start gap-4 w-[600px] max-w-full">
               <!-- Row 1 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-timothy-parrott.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-timothy-parrott.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Timothy Parrott</div>
-                    <div class="text-xs">Co-Founder/President</div>
+                    <div class="font-semibold text-sm leading-tight">Timothy<br>Parrott</div>
+                    <div class="text-xs mt-1">Co-Founder/President</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
               </div>
               <!-- Row 2 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-david-fisher.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-david-fisher.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">David Fisher</div>
-                    <div class="text-xs">Head of BD</div>
+                    <div class="font-semibold text-sm leading-tight">David<br>Fisher</div>
+                    <div class="text-xs mt-1">Head of BD</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-lionel-benichou.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-lionel-benichou.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Lionel Benichou</div>
-                    <div class="text-xs">CFO</div>
+                    <div class="font-semibold text-sm leading-tight">Lionel<br>Benichou</div>
+                    <div class="text-xs mt-1">CFO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-ricardo-mosquera.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-ricardo-mosquera.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Ricardo Mosquera</div>
-                    <div class="text-xs">COO/CCO</div>
+                    <div class="font-semibold text-sm leading-tight">Ricardo<br>Mosquera</div>
+                    <div class="text-xs mt-1">COO/CCO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
               </div>
               <!-- Row 3 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-sean-mulrenan.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-sean-mulrenan.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Sean Mulrenan</div>
-                    <div class="text-xs">Director - IR</div>
+                    <div class="font-semibold text-sm leading-tight">Sean<br>Mulrenan</div>
+                    <div class="text-xs mt-1">Director - IR</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-ronald-de-gier.html" class="bg-[#0b4c3a] text-white rounded p-2 w-52 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
+                <a href="profile-ronald-de-gier.html" class="bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center transition hover:shadow-lg" style="text-decoration: none;">
                   <div>
-                    <div class="font-semibold text-base">Ronald De Gier</div>
-                    <div class="text-xs">Head of Portfolio Operations</div>
+                    <div class="font-semibold text-sm leading-tight">Ronald<br>de Gier</div>
+                    <div class="text-xs mt-1">Head of Portfolio Operations</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
@@ -240,7 +245,5 @@
       marketingZoomLabel.textContent = Math.round(marketingZoom * 100) + '%';
     };
   </script>
-</body>
-</html> 
 </body>
 </html> 
