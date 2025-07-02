@@ -63,21 +63,28 @@
                     </div>
                     <div class="border-t border-gray-300 mt-4 mb-2"></div>
                     <div>
-                        <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span id="profile-icon" class="text-xl">+</span></button>
+                        <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">
+                            Profile <span id="profile-icon" class="text-xl inline-block w-6 text-center align-middle">+</span>
+                        </button>
                         <div id="profile-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
                             <div class="font-semibold">Founder and CEO at Axar Capital</div>
                             <div>New York, New York, United States</div>
                         </div>
-                        <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span id="current-icon" class="text-xl">+</span></button>
+                        <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">
+                            Current Employment <span id="current-icon" class="text-xl inline-block w-6 text-center align-middle">+</span>
+                        </button>
                         <div id="current-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
                             <div class="font-semibold">Chief Executive Officer</div>
                             <div>AXAR CAPITAL MANAGEMENT LP &middot; Full-time</div>
                             <div>Apr 2015 – Present &middot; 10 yrs 4 mos</div>
                         </div>
-                        <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span id="past-icon" class="text-xl">+</span></button>
+                        <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">
+                            Past Experience <span id="past-icon" class="text-xl inline-block w-6 text-center align-middle">+</span>
+                        </button>
                         <div id="past-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] bg-white hidden">
                             <div class="relative" style="padding-left: 3.5rem;">
-                                <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-[var(--color-mawney-green)]"></div>
+                                <!-- Timeline vertical line: only between first and last circle -->
+                                <div class="absolute left-8 top-6 bottom-6 w-0.5 bg-[var(--color-mawney-green)]"></div>
                                 <!-- Mount Kellett -->
                                 <div class="mb-8 flex items-start gap-4 relative">
                                     <div class="absolute left-7 top-2 w-4 h-4 bg-[var(--color-mawney-green)] rounded-full border-2 border-white z-10"></div>
