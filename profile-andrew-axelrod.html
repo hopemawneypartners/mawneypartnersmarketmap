@@ -63,19 +63,19 @@
                     </div>
                     <div class="border-t border-gray-300 mt-4 mb-2"></div>
                     <div>
-                        <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span class="text-xl">+</span></button>
-                        <div class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white">
+                        <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span id="profile-icon" class="text-xl">+</span></button>
+                        <div id="profile-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
                             <div class="font-semibold">Founder and CEO at Axar Capital</div>
                             <div>New York, New York, United States</div>
                         </div>
-                        <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span class="text-xl">+</span></button>
-                        <div class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white">
+                        <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span id="current-icon" class="text-xl">+</span></button>
+                        <div id="current-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
                             <div class="font-semibold">Chief Executive Officer</div>
                             <div>AXAR CAPITAL MANAGEMENT LP &middot; Full-time</div>
                             <div>Apr 2015 – Present &middot; 10 yrs 4 mos</div>
                         </div>
-                        <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span class="text-xl">+</span></button>
-                        <div class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] bg-white">
+                        <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span id="past-icon" class="text-xl">+</span></button>
+                        <div id="past-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] bg-white hidden">
                             <div class="relative border-l-2 border-[var(--color-mawney-green)] ml-4">
                                 <!-- Mount Kellett -->
                                 <div class="mb-8 flex items-start gap-4 relative">
@@ -178,5 +178,28 @@
             <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
         </div>
     </footer>
+    <script>
+        function setupDropdown(toggleId, contentId, iconId) {
+            const toggle = document.getElementById(toggleId);
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            toggle.addEventListener('click', function() {
+                const isOpen = !content.classList.contains('hidden');
+                document.getElementById('profile-content').classList.add('hidden');
+                document.getElementById('current-content').classList.add('hidden');
+                document.getElementById('past-content').classList.add('hidden');
+                document.getElementById('profile-icon').textContent = '+';
+                document.getElementById('current-icon').textContent = '+';
+                document.getElementById('past-icon').textContent = '+';
+                if (!isOpen) {
+                    content.classList.remove('hidden');
+                    icon.textContent = '–';
+                }
+            });
+        }
+        setupDropdown('profile-toggle', 'profile-content', 'profile-icon');
+        setupDropdown('current-toggle', 'current-content', 'current-icon');
+        setupDropdown('past-toggle', 'past-content', 'past-icon');
+    </script>
 </body>
 </html> 
