@@ -667,26 +667,6 @@
     // At the end of the script, add:
     selectedDepartments = ['business'];
     renderDepartmentGrids();
-
-    function setupDropdown(toggleId, contentId, iconId) {
-      const toggle = document.getElementById(toggleId);
-      const content = document.getElementById(contentId);
-      const icon = document.getElementById(iconId);
-      if (!toggle || !content || !icon) return;
-      toggle.addEventListener('click', function() {
-        const isOpen = !content.classList.contains('hidden');
-        document.getElementById('profile-content').classList.add('hidden');
-        document.getElementById('current-content').classList.add('hidden');
-        document.getElementById('past-content').classList.add('hidden');
-        document.getElementById('profile-icon').textContent = '+';
-        document.getElementById('current-icon').textContent = '+';
-        document.getElementById('past-icon').textContent = '+';
-        if (!isOpen) {
-          content.classList.remove('hidden');
-          icon.textContent = '−';
-        }
-      });
-    }
   </script>
 </body>
 </html> 
