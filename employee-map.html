@@ -348,7 +348,7 @@
       "c-suite": { name: "C-Suite", color: "#0b4c3a" }
     };
 
-    let selectedDepartments = ["business"];
+    let selectedDepartments = ['business'];
     let zoomLevels = {};
 
     // Initialize zoom levels for all departments
@@ -664,10 +664,9 @@
       return rows.join('');
     }
 
-    // Move this to the very end of the script, outside any function:
-    document.addEventListener('DOMContentLoaded', function() {
-      renderDepartmentGrids();
-    });
+    // At the end of the script, add:
+    selectedDepartments = ['business'];
+    renderDepartmentGrids();
   </script>
 </body>
 </html> 
