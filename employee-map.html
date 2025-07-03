@@ -368,46 +368,16 @@
     deptButtons.forEach(btn => {
       btn.addEventListener('click', function() {
         const dept = this.getAttribute('data-department');
-        
-        if (dept === 'business') {
-          // Whole Team is exclusive - if selected, deselect others
-          selectedDepartments = ['business'];
-          deptButtons.forEach(b => {
-            b.style.background = 'var(--color-parchment)';
-            b.style.color = 'var(--color-mawney-green)';
-          });
-          this.style.background = 'var(--color-mawney-green)';
-          this.style.color = 'var(--color-parchment)';
-        } else {
-          // Remove business if other department is selected
-          selectedDepartments = selectedDepartments.filter(d => d !== 'business');
-          
-          if (selectedDepartments.includes(dept)) {
-            // Deselect department
-            selectedDepartments = selectedDepartments.filter(d => d !== dept);
-            this.style.background = 'var(--color-parchment)';
-            this.style.color = 'var(--color-mawney-green)';
-          } else {
-            // Select department
-            selectedDepartments.push(dept);
-            this.style.background = 'var(--color-mawney-green)';
-            this.style.color = 'var(--color-parchment)';
-          }
-          
-          // Update business button
-          const businessBtn = document.querySelector('[data-department="business"]');
-          businessBtn.style.background = 'var(--color-parchment)';
-          businessBtn.style.color = 'var(--color-mawney-green)';
-        }
-        
-        // If no departments selected, default to business
-        if (selectedDepartments.length === 0) {
-          selectedDepartments = ['business'];
-          const businessBtn = document.querySelector('[data-department="business"]');
-          businessBtn.style.background = 'var(--color-mawney-green)';
-          businessBtn.style.color = 'var(--color-parchment)';
-        }
-        
+        // Deselect all buttons
+        deptButtons.forEach(b => {
+          b.style.background = 'var(--color-parchment)';
+          b.style.color = 'var(--color-mawney-green)';
+        });
+        // Select only the clicked button
+        this.style.background = 'var(--color-mawney-green)';
+        this.style.color = 'var(--color-parchment)';
+        // Set selectedDepartments to only the clicked department
+        selectedDepartments = [dept];
         renderDepartmentGrids();
       });
     });
