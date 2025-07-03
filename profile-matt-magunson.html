@@ -125,5 +125,30 @@
       <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
     </div>
   </footer>
+
+  <script>
+    // Dropdown logic
+    function setupDropdown(toggleId, contentId, iconId) {
+      const toggle = document.getElementById(toggleId);
+      const content = document.getElementById(contentId);
+      const icon = document.getElementById(iconId);
+      toggle.addEventListener('click', function() {
+        const isOpen = !content.classList.contains('hidden');
+        document.getElementById('profile-content').classList.add('hidden');
+        document.getElementById('current-content').classList.add('hidden');
+        document.getElementById('past-content').classList.add('hidden');
+        document.getElementById('profile-icon').textContent = '+';
+        document.getElementById('current-icon').textContent = '+';
+        document.getElementById('past-icon').textContent = '+';
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          icon.textContent = '–';
+        }
+      });
+    }
+    setupDropdown('profile-toggle', 'profile-content', 'profile-icon');
+    setupDropdown('current-toggle', 'current-content', 'current-icon');
+    setupDropdown('past-toggle', 'past-content', 'past-icon');
+  </script>
 </body>
 </html> 
