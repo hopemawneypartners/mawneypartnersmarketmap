@@ -61,12 +61,11 @@
       <h2 class="text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
       <div class="flex flex-wrap gap-2 mb-4">
         <span class="text-sm mr-2">Navigate to department:</span>
-        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Customer Service</button>
-        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Finance</button>
-        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Human Resources</button>
-        <button class="px-4 py-1 rounded text-sm" style="background: var(--color-mawney-green); color: var(--color-parchment);">IT</button>
-        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Marketing</button>
-        <button class="px-4 py-1 rounded text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Research & Development</button>
+        <button class="dept-btn px-4 py-1 rounded text-sm border" data-department="whole-team" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Whole Team</button>
+        <button class="dept-btn px-4 py-1 rounded text-sm border" data-department="investment" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Investment</button>
+        <button class="dept-btn px-4 py-1 rounded text-sm border" data-department="trading" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Trading</button>
+        <button class="dept-btn px-4 py-1 rounded text-sm border" data-department="capital-formation" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Capital Formation</button>
+        <button class="dept-btn px-4 py-1 rounded text-sm border" data-department="c-suite" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">C-Suite</button>
       </div>
     </div>
     <div class="flex justify-between items-center mb-4">
@@ -231,134 +230,8 @@
       </div>
     </div>
     <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
-      <div class="flex flex-col md:flex-row gap-8 justify-between">
-        <!-- IT Department -->
-        <div class="w-1/2 min-w-0 overflow-x-auto relative">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">IT</h3>
-            <div class="flex items-center gap-2">
-              <button id="it-zoom-out" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-              <span id="it-zoom-label" class="text-xs text-gray-600">100%</span>
-              <button id="it-zoom-in" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
-            </div>
-          </div>
-          <div id="it-zoom-area" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
-            <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
-              <!-- Row 1 -->
-              <div class="flex flex-row gap-4">
-                <a href="profile-andrew-axelrod.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Distressed Credit,Special Situations,Corporate Strategy,Investment Management">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Andrew<br>Axelrod</div>
-                    <div class="text-xs mt-1">Founder/CIO</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-              </div>
-              <!-- Row 2 -->
-              <div class="flex flex-row gap-4">
-                <a href="profile-matt-magunson.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Trading,Capital Solutions,Special Situations,Research">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Matt<br>Magunson</div>
-                    <div class="text-xs mt-1">Head of Trading</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-                <a href="profile-grant-mitchell.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Credit Analysis,Portfolio Management,Risk Management,Investment Strategy">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Grant<br>Mitchell</div>
-                    <div class="text-xs mt-1">Deputy CIO</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-                <a href="profile-thomas-h.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Insurance Asset Management,Portfolio Operations,Risk Management,Asset Allocation">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Thomas Henke</div>
-                    <div class="text-xs mt-1">Head of IAM & Director, PO</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-              </div>
-              <!-- Row 3 -->
-              <div class="flex flex-row gap-4">
-                <a href="profile-akash-kumar.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Financial Analysis,Credit Research,Data Modeling,Market Research">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Akash<br>Kumar</div>
-                    <div class="text-xs mt-1">Senior Analyst</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Divider -->
-        <div class="hidden md:block w-px bg-gray-300 mx-4"></div>
-        <!-- Marketing Department -->
-        <div class="w-1/2 min-w-0 overflow-x-auto relative">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">Marketing</h3>
-            <div class="flex items-center gap-2">
-              <button id="marketing-zoom-out" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-              <span id="marketing-zoom-label" class="text-xs text-gray-600">100%</span>
-              <button id="marketing-zoom-in" class="px-2 py-1 border rounded text-sm" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
-            </div>
-          </div>
-          <div id="marketing-zoom-area" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
-            <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
-              <!-- Row 1 -->
-              <div class="flex flex-row gap-4">
-                <a href="profile-timothy-parrott.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Corporate Strategy,Business Development,Leadership,Strategic Planning">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Timothy<br>Parrott</div>
-                    <div class="text-xs mt-1">Co-Founder/President</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-              </div>
-              <!-- Row 2 -->
-              <div class="flex flex-row gap-4">
-                <a href="profile-david-fisher.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Business Development,Client Relations,Sales Strategy,Market Expansion">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">David<br>Fisher</div>
-                    <div class="text-xs mt-1">Head of BD</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-                <a href="profile-lionel-benichou.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Financial Management,Accounting,Treasury,Compliance">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Lionel<br>Benichou</div>
-                    <div class="text-xs mt-1">CFO</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-                <a href="profile-ricardo-mosquera.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Operations Management,Compliance,Risk Management,Regulatory Affairs">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Ricardo<br>Mosquera</div>
-                    <div class="text-xs mt-1">COO/CCO</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-              </div>
-              <!-- Row 3 -->
-              <div class="flex flex-row gap-4">
-                <a href="profile-sean-mulrenan.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Investor Relations,Client Communications,Fund Reporting,Stakeholder Management">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Sean<br>Mulrenan</div>
-                    <div class="text-xs mt-1">Director - IR</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-                <a href="profile-ronald-de-gier.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Portfolio Operations,Trade Execution,Risk Management,Operations Management">
-                  <div>
-                    <div class="font-semibold text-sm leading-tight">Ronald<br>de Gier</div>
-                    <div class="text-xs mt-1">Head of Portfolio Operations</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div id="department-grids-container">
+        <!-- Dynamic department grids will be inserted here -->
       </div>
     </div>
   </section>
@@ -377,38 +250,263 @@
   </footer>
 
   <script>
-    // IT Zoom
-    let itZoom = 1;
-    const itZoomArea = document.getElementById('it-zoom-area');
-    const itZoomLabel = document.getElementById('it-zoom-label');
-    document.getElementById('it-zoom-in').onclick = function() {
-      if (itZoom < 2) itZoom += 0.1;
-      itZoom = Math.round(itZoom * 10) / 10;
-      itZoomArea.style.transform = `scale(${itZoom})`;
-      itZoomLabel.textContent = Math.round(itZoom * 100) + '%';
+    // Employee data with departments
+    const employees = [
+      {
+        name: "Andrew Axelrod",
+        shortName: "Andrew<br>Axelrod",
+        title: "Founder/CIO",
+        profile: "profile-andrew-axelrod.html",
+        departments: ["whole-team", "investment", "c-suite"],
+        specialisms: "Distressed Credit,Special Situations,Corporate Strategy,Investment Management"
+      },
+      {
+        name: "Matt Magnuson",
+        shortName: "Matt<br>Magunson",
+        title: "Head of Trading",
+        profile: "profile-matt-magunson.html",
+        departments: ["whole-team", "trading"],
+        specialisms: "Trading,Capital Solutions,Special Situations,Research"
+      },
+      {
+        name: "Grant Mitchell",
+        shortName: "Grant<br>Mitchell",
+        title: "Deputy CIO",
+        profile: "profile-grant-mitchell.html",
+        departments: ["whole-team", "investment"],
+        specialisms: "Credit Analysis,Portfolio Management,Risk Management,Investment Strategy"
+      },
+      {
+        name: "Thomas Henke",
+        shortName: "Thomas Henke",
+        title: "Head of IAM & Director, PO",
+        profile: "profile-thomas-h.html",
+        departments: ["whole-team"],
+        specialisms: "Insurance Asset Management,Portfolio Operations,Risk Management,Asset Allocation"
+      },
+      {
+        name: "Akash Kumar",
+        shortName: "Akash<br>Kumar",
+        title: "Senior Analyst",
+        profile: "profile-akash-kumar.html",
+        departments: ["whole-team", "investment"],
+        specialisms: "Financial Analysis,Credit Research,Data Modeling,Market Research"
+      },
+      {
+        name: "Timothy Parrott",
+        shortName: "Timothy<br>Parrott",
+        title: "Co-Founder/President",
+        profile: "profile-timothy-parrott.html",
+        departments: ["whole-team", "capital-formation", "c-suite"],
+        specialisms: "Corporate Strategy,Business Development,Leadership,Strategic Planning"
+      },
+      {
+        name: "David Fisher",
+        shortName: "David<br>Fisher",
+        title: "Head of BD",
+        profile: "profile-david-fisher.html",
+        departments: ["whole-team", "capital-formation"],
+        specialisms: "Business Development,Client Relations,Sales Strategy,Market Expansion"
+      },
+      {
+        name: "Lionel Benichou",
+        shortName: "Lionel<br>Benichou",
+        title: "CFO",
+        profile: "profile-lionel-benichou.html",
+        departments: ["whole-team", "c-suite"],
+        specialisms: "Financial Management,Accounting,Treasury,Compliance"
+      },
+      {
+        name: "Ricardo Mosquera",
+        shortName: "Ricardo<br>Mosquera",
+        title: "COO/CCO",
+        profile: "profile-ricardo-mosquera.html",
+        departments: ["whole-team", "c-suite"],
+        specialisms: "Operations Management,Compliance,Risk Management,Regulatory Affairs"
+      },
+      {
+        name: "Sean Mulrenan",
+        shortName: "Sean<br>Mulrenan",
+        title: "Director - IR",
+        profile: "profile-sean-mulrenan.html",
+        departments: ["whole-team", "capital-formation"],
+        specialisms: "Investor Relations,Client Communications,Fund Reporting,Stakeholder Management"
+      },
+      {
+        name: "Ronald de Gier",
+        shortName: "Ronald<br>de Gier",
+        title: "Head of Portfolio Operations",
+        profile: "profile-ronald-de-gier.html",
+        departments: ["whole-team"],
+        specialisms: "Portfolio Operations,Trade Execution,Risk Management,Operations Management"
+      }
+    ];
+
+    // Department configurations
+    const departments = {
+      "whole-team": { name: "Whole Team", color: "#0b4c3a" },
+      "investment": { name: "Investment", color: "#0b4c3a" },
+      "trading": { name: "Trading", color: "#0b4c3a" },
+      "capital-formation": { name: "Capital Formation", color: "#0b4c3a" },
+      "c-suite": { name: "C-Suite", color: "#0b4c3a" }
     };
-    document.getElementById('it-zoom-out').onclick = function() {
-      if (itZoom > 0.1) itZoom -= 0.1;
-      itZoom = Math.round(itZoom * 10) / 10;
-      itZoomArea.style.transform = `scale(${itZoom})`;
-      itZoomLabel.textContent = Math.round(itZoom * 100) + '%';
-    };
-    // Marketing Zoom
-    let marketingZoom = 1;
-    const marketingZoomArea = document.getElementById('marketing-zoom-area');
-    const marketingZoomLabel = document.getElementById('marketing-zoom-label');
-    document.getElementById('marketing-zoom-in').onclick = function() {
-      if (marketingZoom < 2) marketingZoom += 0.1;
-      marketingZoom = Math.round(marketingZoom * 10) / 10;
-      marketingZoomArea.style.transform = `scale(${marketingZoom})`;
-      marketingZoomLabel.textContent = Math.round(marketingZoom * 100) + '%';
-    };
-    document.getElementById('marketing-zoom-out').onclick = function() {
-      if (marketingZoom > 0.1) marketingZoom -= 0.1;
-      marketingZoom = Math.round(marketingZoom * 10) / 10;
-      marketingZoomArea.style.transform = `scale(${marketingZoom})`;
-      marketingZoomLabel.textContent = Math.round(marketingZoom * 100) + '%';
-    };
+
+    let selectedDepartments = ["whole-team"];
+    let zoomLevels = {};
+
+    // Initialize zoom levels for all departments
+    Object.keys(departments).forEach(dept => {
+      zoomLevels[dept] = 1;
+    });
+
+    // Department button functionality
+    const deptButtons = document.querySelectorAll('.dept-btn');
+    deptButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const dept = this.getAttribute('data-department');
+        
+        if (dept === 'whole-team') {
+          // Whole Team is exclusive - if selected, deselect others
+          selectedDepartments = ['whole-team'];
+          deptButtons.forEach(b => {
+            b.style.background = 'var(--color-parchment)';
+            b.style.color = 'var(--color-mawney-green)';
+          });
+          this.style.background = 'var(--color-mawney-green)';
+          this.style.color = 'var(--color-parchment)';
+        } else {
+          // Remove whole-team if other department is selected
+          selectedDepartments = selectedDepartments.filter(d => d !== 'whole-team');
+          
+          if (selectedDepartments.includes(dept)) {
+            // Deselect department
+            selectedDepartments = selectedDepartments.filter(d => d !== dept);
+            this.style.background = 'var(--color-parchment)';
+            this.style.color = 'var(--color-mawney-green)';
+          } else {
+            // Select department
+            selectedDepartments.push(dept);
+            this.style.background = 'var(--color-mawney-green)';
+            this.style.color = 'var(--color-parchment)';
+          }
+          
+          // Update whole-team button
+          const wholeTeamBtn = document.querySelector('[data-department="whole-team"]');
+          wholeTeamBtn.style.background = 'var(--color-parchment)';
+          wholeTeamBtn.style.color = 'var(--color-mawney-green)';
+        }
+        
+        // If no departments selected, default to whole-team
+        if (selectedDepartments.length === 0) {
+          selectedDepartments = ['whole-team'];
+          const wholeTeamBtn = document.querySelector('[data-department="whole-team"]');
+          wholeTeamBtn.style.background = 'var(--color-mawney-green)';
+          wholeTeamBtn.style.color = 'var(--color-parchment)';
+        }
+        
+        renderDepartmentGrids();
+      });
+    });
+
+    // Render department grids
+    function renderDepartmentGrids() {
+      const container = document.getElementById('department-grids-container');
+      container.innerHTML = '';
+      
+      selectedDepartments.forEach((dept, index) => {
+        const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
+        
+        if (deptEmployees.length === 0) return;
+        
+        const gridDiv = document.createElement('div');
+        gridDiv.className = 'w-full mb-8';
+        if (index > 0) {
+          gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
+        }
+        
+        gridDiv.innerHTML = `
+          <div class="w-full min-w-0 overflow-x-auto relative">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">${departments[dept].name}</h3>
+              <div class="flex items-center gap-2">
+                <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+                <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">100%</span>
+                <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
+              </div>
+            </div>
+            <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+              <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
+                ${generateEmployeeRows(deptEmployees)}
+              </div>
+            </div>
+          </div>
+        `;
+        
+        container.appendChild(gridDiv);
+      });
+      
+      // Re-attach zoom event listeners
+      attachZoomListeners();
+    }
+
+    // Generate employee rows for a department
+    function generateEmployeeRows(employees) {
+      const rows = [];
+      let currentRow = [];
+      
+      employees.forEach((emp, index) => {
+        currentRow.push(`
+          <a href="${emp.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${emp.specialisms}">
+            <div>
+              <div class="font-semibold text-sm leading-tight">${emp.shortName}</div>
+              <div class="text-xs mt-1">${emp.title}</div>
+            </div>
+            <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+          </a>
+        `);
+        
+        // Create new row every 3 employees or at the end
+        if (currentRow.length === 3 || index === employees.length - 1) {
+          rows.push(`<div class="flex flex-row gap-4">${currentRow.join('')}</div>`);
+          currentRow = [];
+        }
+      });
+      
+      return rows.join('');
+    }
+
+    // Attach zoom event listeners
+    function attachZoomListeners() {
+      // Zoom in buttons
+      document.querySelectorAll('.zoom-in-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const dept = this.getAttribute('data-dept');
+          if (zoomLevels[dept] < 2) zoomLevels[dept] += 0.1;
+          zoomLevels[dept] = Math.round(zoomLevels[dept] * 10) / 10;
+          
+          const zoomArea = document.querySelector(`[data-dept="${dept}"].zoom-area`);
+          const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
+          
+          zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
+          zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
+        });
+      });
+      
+      // Zoom out buttons
+      document.querySelectorAll('.zoom-out-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const dept = this.getAttribute('data-dept');
+          if (zoomLevels[dept] > 0.1) zoomLevels[dept] -= 0.1;
+          zoomLevels[dept] = Math.round(zoomLevels[dept] * 10) / 10;
+          
+          const zoomArea = document.querySelector(`[data-dept="${dept}"].zoom-area`);
+          const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
+          
+          zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
+          zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
+        });
+      });
+    }
 
     // Specialism Filter Functionality
     const filterToggle = document.getElementById('filter-toggle');
@@ -417,7 +515,6 @@
     const clearAllBtn = document.getElementById('clear-all');
     const applyFilterBtn = document.getElementById('apply-filter');
     const specialismFilters = document.querySelectorAll('.specialism-filter');
-    const employeeBoxes = document.querySelectorAll('.employee-box');
 
     // Toggle filter dropdown
     filterToggle.addEventListener('click', function(e) {
@@ -452,6 +549,8 @@
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value);
 
+      const employeeBoxes = document.querySelectorAll('.employee-box');
+      
       employeeBoxes.forEach(box => {
         const boxSpecialisms = box.getAttribute('data-specialisms');
         if (!boxSpecialisms) {
@@ -471,6 +570,13 @@
       // Close dropdown after applying filter
       filterDropdown.classList.add('hidden');
     });
+
+    // Initialize with whole team selected
+    document.querySelector('[data-department="whole-team"]').style.background = 'var(--color-mawney-green)';
+    document.querySelector('[data-department="whole-team"]').style.color = 'var(--color-parchment)';
+    
+    // Render initial grid
+    renderDepartmentGrids();
   </script>
 </body>
 </html> 
