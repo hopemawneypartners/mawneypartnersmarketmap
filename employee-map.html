@@ -62,7 +62,7 @@
       <div class="flex flex-col sm:flex-row items-center gap-2 mb-4">
         <span class="text-xs md:text-sm mr-2">Navigate to department:</span>
         <div class="flex flex-wrap justify-center gap-2">
-          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="business" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Business</button>
+          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border selected-dept" data-department="business" style="border-color: var(--color-mawney-green); color: var(--color-parchment); background: var(--color-mawney-green);">Business</button>
           <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="investment" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Investment</button>
           <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="trading" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Trading</button>
           <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="capital-formation" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Capital Formation</button>
@@ -491,6 +491,18 @@
       
       // Re-attach zoom event listeners
       attachZoomListeners();
+
+      // After rendering, update department button selected state
+      const deptButtons = document.querySelectorAll('.dept-btn');
+      deptButtons.forEach(btn => {
+        if (selectedDepartments.includes(btn.getAttribute('data-department'))) {
+          btn.style.background = 'var(--color-mawney-green)';
+          btn.style.color = 'var(--color-parchment)';
+        } else {
+          btn.style.background = 'var(--color-parchment)';
+          btn.style.color = 'var(--color-mawney-green)';
+        }
+      });
     }
 
     // Generate employee rows for a department
@@ -625,13 +637,6 @@
       // Close dropdown after applying filter
       filterDropdown.classList.add('hidden');
     });
-
-    // Initialize with business selected
-    document.querySelector('[data-department="business"]').style.background = 'var(--color-mawney-green)';
-    document.querySelector('[data-department="business"]').style.color = 'var(--color-parchment)';
-    
-    // Render initial grid
-    renderDepartmentGrids();
 
     // Generate custom employee rows for a given hierarchy
     function generateCustomEmployeeRows(hierarchy, employees) {
