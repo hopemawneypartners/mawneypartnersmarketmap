@@ -578,9 +578,9 @@
     // Specialism Filter Functionality
     const filterToggle = document.getElementById('filter-toggle');
     const filterDropdown = document.getElementById('filter-dropdown');
-    const selectAllBtn = document.getElementById('select-all');
-    const clearAllBtn = document.getElementById('clear-all');
-    const applyFilterBtn = document.getElementById('apply-filter');
+    // const selectAllBtn = document.getElementById('select-all'); // No select-all button in HTML
+    const clearAllBtn = document.getElementById('clear-filters');
+    const applyFilterBtn = document.getElementById('apply-filters');
     const specialismFilters = document.querySelectorAll('.specialism-filter');
 
     // Toggle filter dropdown
@@ -596,47 +596,53 @@
       }
     });
 
-    // Select all specialisms
-    selectAllBtn.addEventListener('click', function() {
-      specialismFilters.forEach(checkbox => {
-        checkbox.checked = true;
-      });
-    });
+    // Remove selectAllBtn event listener (no button in HTML)
+    // if (selectAllBtn) {
+    //   selectAllBtn.addEventListener('click', function() {
+    //     specialismFilters.forEach(checkbox => {
+    //       checkbox.checked = true;
+    //     });
+    //   });
+    // }
 
     // Clear all specialisms
-    clearAllBtn.addEventListener('click', function() {
-      specialismFilters.forEach(checkbox => {
-        checkbox.checked = false;
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', function() {
+        specialismFilters.forEach(checkbox => {
+          checkbox.checked = false;
+        });
       });
-    });
+    }
 
     // Apply filter
-    applyFilterBtn.addEventListener('click', function() {
-      const selectedSpecialisms = Array.from(specialismFilters)
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.value);
+    if (applyFilterBtn) {
+      applyFilterBtn.addEventListener('click', function() {
+        const selectedSpecialisms = Array.from(specialismFilters)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.value);
 
-      const employeeBoxes = document.querySelectorAll('.employee-box');
-      
-      employeeBoxes.forEach(box => {
-        const boxSpecialisms = box.getAttribute('data-specialisms');
-        if (!boxSpecialisms) {
-          box.style.display = 'none';
-          return;
-        }
+        const employeeBoxes = document.querySelectorAll('.employee-box');
+        
+        employeeBoxes.forEach(box => {
+          const boxSpecialisms = box.getAttribute('data-specialisms');
+          if (!boxSpecialisms) {
+            box.style.display = 'none';
+            return;
+          }
 
-        const boxSpecialismArray = boxSpecialisms.split(',').map(s => s.trim());
-        
-        // Show box if it has ANY of the selected specialisms, or if no specialisms are selected (show all)
-        const shouldShow = selectedSpecialisms.length === 0 || 
-                          selectedSpecialisms.some(specialism => boxSpecialismArray.includes(specialism));
-        
-        box.style.display = shouldShow ? 'flex' : 'none';
+          const boxSpecialismArray = boxSpecialisms.split(',').map(s => s.trim());
+          
+          // Show box if it has ANY of the selected specialisms, or if no specialisms are selected (show all)
+          const shouldShow = selectedSpecialisms.length === 0 || 
+                            selectedSpecialisms.some(specialism => boxSpecialismArray.includes(specialism));
+          
+          box.style.display = shouldShow ? 'flex' : 'none';
+        });
+
+        // Close dropdown after applying filter
+        filterDropdown.classList.add('hidden');
       });
-
-      // Close dropdown after applying filter
-      filterDropdown.classList.add('hidden');
-    });
+    }
 
     // Generate custom employee rows for a given hierarchy
     function generateCustomEmployeeRows(hierarchy, employees) {
