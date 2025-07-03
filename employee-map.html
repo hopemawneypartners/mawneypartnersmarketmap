@@ -71,10 +71,164 @@
     </div>
     <div class="flex justify-between items-center mb-4">
       <div></div>
-      <button class="px-4 py-1 rounded text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
-        Filter Specialisms
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-      </button>
+      <div class="relative">
+        <button id="filter-toggle" class="px-4 py-1 rounded text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
+          Filter Specialisms
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div id="filter-dropdown" class="absolute right-0 top-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-4 z-50 hidden" style="min-width: 300px;">
+          <div class="mb-3">
+            <label class="text-sm font-semibold" style="color: var(--color-mawney-green);">Select Specialisms:</label>
+          </div>
+          <div class="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto">
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Accounting" class="specialism-filter">
+              <span>Accounting</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Asset Allocation" class="specialism-filter">
+              <span>Asset Allocation</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Business Development" class="specialism-filter">
+              <span>Business Development</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Capital Solutions" class="specialism-filter">
+              <span>Capital Solutions</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Client Communications" class="specialism-filter">
+              <span>Client Communications</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Client Relations" class="specialism-filter">
+              <span>Client Relations</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Compliance" class="specialism-filter">
+              <span>Compliance</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Corporate Strategy" class="specialism-filter">
+              <span>Corporate Strategy</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Credit Analysis" class="specialism-filter">
+              <span>Credit Analysis</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Credit Research" class="specialism-filter">
+              <span>Credit Research</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Data Modeling" class="specialism-filter">
+              <span>Data Modeling</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Distressed Credit" class="specialism-filter">
+              <span>Distressed Credit</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Financial Analysis" class="specialism-filter">
+              <span>Financial Analysis</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Financial Management" class="specialism-filter">
+              <span>Financial Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Fund Reporting" class="specialism-filter">
+              <span>Fund Reporting</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Insurance Asset Management" class="specialism-filter">
+              <span>Insurance Asset Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Investment Management" class="specialism-filter">
+              <span>Investment Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Investment Strategy" class="specialism-filter">
+              <span>Investment Strategy</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Investor Relations" class="specialism-filter">
+              <span>Investor Relations</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Leadership" class="specialism-filter">
+              <span>Leadership</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Market Expansion" class="specialism-filter">
+              <span>Market Expansion</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Market Research" class="specialism-filter">
+              <span>Market Research</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Operations Management" class="specialism-filter">
+              <span>Operations Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Portfolio Management" class="specialism-filter">
+              <span>Portfolio Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Portfolio Operations" class="specialism-filter">
+              <span>Portfolio Operations</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Regulatory Affairs" class="specialism-filter">
+              <span>Regulatory Affairs</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Research" class="specialism-filter">
+              <span>Research</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Risk Management" class="specialism-filter">
+              <span>Risk Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Sales Strategy" class="specialism-filter">
+              <span>Sales Strategy</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Special Situations" class="specialism-filter">
+              <span>Special Situations</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Stakeholder Management" class="specialism-filter">
+              <span>Stakeholder Management</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Strategic Planning" class="specialism-filter">
+              <span>Strategic Planning</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Trade Execution" class="specialism-filter">
+              <span>Trade Execution</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Trading" class="specialism-filter">
+              <span>Trading</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" value="Treasury" class="specialism-filter">
+              <span>Treasury</span>
+            </label>
+          </div>
+          <div class="flex gap-2 mt-3 pt-3 border-t border-gray-200">
+            <button id="select-all" class="px-3 py-1 text-xs border rounded" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green);">Select All</button>
+            <button id="clear-all" class="px-3 py-1 text-xs border rounded" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green);">Clear All</button>
+            <button id="apply-filter" class="px-3 py-1 text-xs rounded ml-auto" style="background: var(--color-mawney-green); color: var(--color-parchment);">Apply</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
       <div class="flex flex-col md:flex-row gap-8 justify-between">
@@ -92,7 +246,7 @@
             <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
               <!-- Row 1 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-andrew-axelrod.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-andrew-axelrod.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Distressed Credit,Special Situations,Corporate Strategy,Investment Management">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Andrew<br>Axelrod</div>
                     <div class="text-xs mt-1">Founder/CIO</div>
@@ -102,21 +256,21 @@
               </div>
               <!-- Row 2 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-matt-magunson.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-matt-magunson.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Trading,Capital Solutions,Special Situations,Research">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Matt<br>Magunson</div>
                     <div class="text-xs mt-1">Head of Trading</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-grant-mitchell.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-grant-mitchell.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Credit Analysis,Portfolio Management,Risk Management,Investment Strategy">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Grant<br>Mitchell</div>
                     <div class="text-xs mt-1">Deputy CIO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-thomas-h.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-thomas-h.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Insurance Asset Management,Portfolio Operations,Risk Management,Asset Allocation">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Thomas Henke</div>
                     <div class="text-xs mt-1">Head of IAM & Director, PO</div>
@@ -126,7 +280,7 @@
               </div>
               <!-- Row 3 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-akash-kumar.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-akash-kumar.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Financial Analysis,Credit Research,Data Modeling,Market Research">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Akash<br>Kumar</div>
                     <div class="text-xs mt-1">Senior Analyst</div>
@@ -153,7 +307,7 @@
             <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
               <!-- Row 1 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-timothy-parrott.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-timothy-parrott.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Corporate Strategy,Business Development,Leadership,Strategic Planning">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Timothy<br>Parrott</div>
                     <div class="text-xs mt-1">Co-Founder/President</div>
@@ -163,21 +317,21 @@
               </div>
               <!-- Row 2 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-david-fisher.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-david-fisher.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Business Development,Client Relations,Sales Strategy,Market Expansion">
                   <div>
                     <div class="font-semibold text-sm leading-tight">David<br>Fisher</div>
                     <div class="text-xs mt-1">Head of BD</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-lionel-benichou.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-lionel-benichou.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Financial Management,Accounting,Treasury,Compliance">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Lionel<br>Benichou</div>
                     <div class="text-xs mt-1">CFO</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-ricardo-mosquera.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-ricardo-mosquera.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Operations Management,Compliance,Risk Management,Regulatory Affairs">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Ricardo<br>Mosquera</div>
                     <div class="text-xs mt-1">COO/CCO</div>
@@ -187,14 +341,14 @@
               </div>
               <!-- Row 3 -->
               <div class="flex flex-row gap-4">
-                <a href="profile-sean-mulrenan.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-sean-mulrenan.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Investor Relations,Client Communications,Fund Reporting,Stakeholder Management">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Sean<br>Mulrenan</div>
                     <div class="text-xs mt-1">Director - IR</div>
                   </div>
                   <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
                 </a>
-                <a href="profile-ronald-de-gier.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;">
+                <a href="profile-ronald-de-gier.html" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="Portfolio Operations,Trade Execution,Risk Management,Operations Management">
                   <div>
                     <div class="font-semibold text-sm leading-tight">Ronald<br>de Gier</div>
                     <div class="text-xs mt-1">Head of Portfolio Operations</div>
@@ -255,6 +409,68 @@
       marketingZoomArea.style.transform = `scale(${marketingZoom})`;
       marketingZoomLabel.textContent = Math.round(marketingZoom * 100) + '%';
     };
+
+    // Specialism Filter Functionality
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterDropdown = document.getElementById('filter-dropdown');
+    const selectAllBtn = document.getElementById('select-all');
+    const clearAllBtn = document.getElementById('clear-all');
+    const applyFilterBtn = document.getElementById('apply-filter');
+    const specialismFilters = document.querySelectorAll('.specialism-filter');
+    const employeeBoxes = document.querySelectorAll('.employee-box');
+
+    // Toggle filter dropdown
+    filterToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      filterDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
+        filterDropdown.classList.add('hidden');
+      }
+    });
+
+    // Select all specialisms
+    selectAllBtn.addEventListener('click', function() {
+      specialismFilters.forEach(checkbox => {
+        checkbox.checked = true;
+      });
+    });
+
+    // Clear all specialisms
+    clearAllBtn.addEventListener('click', function() {
+      specialismFilters.forEach(checkbox => {
+        checkbox.checked = false;
+      });
+    });
+
+    // Apply filter
+    applyFilterBtn.addEventListener('click', function() {
+      const selectedSpecialisms = Array.from(specialismFilters)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+
+      employeeBoxes.forEach(box => {
+        const boxSpecialisms = box.getAttribute('data-specialisms');
+        if (!boxSpecialisms) {
+          box.style.display = 'none';
+          return;
+        }
+
+        const boxSpecialismArray = boxSpecialisms.split(',').map(s => s.trim());
+        
+        // Show box if it has ANY of the selected specialisms, or if no specialisms are selected (show all)
+        const shouldShow = selectedSpecialisms.length === 0 || 
+                          selectedSpecialisms.some(specialism => boxSpecialismArray.includes(specialism));
+        
+        box.style.display = shouldShow ? 'flex' : 'none';
+      });
+
+      // Close dropdown after applying filter
+      filterDropdown.classList.add('hidden');
+    });
   </script>
 </body>
 </html> 
