@@ -664,7 +664,7 @@
       return rows.join('');
     }
 
-    // Add this at the end of the script:
+    // Move this to the very end of the script, outside any function:
     document.addEventListener('DOMContentLoaded', function() {
       renderDepartmentGrids();
     });
