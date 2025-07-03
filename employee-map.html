@@ -403,11 +403,11 @@
         
         // Container for both grids side by side
         const businessContainer = document.createElement('div');
-        businessContainer.className = 'flex flex-col md:flex-row gap-8 justify-between w-full';
+        businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
         
         // Grid 1
         const gridDiv1 = document.createElement('div');
-        gridDiv1.className = 'w-1/2 min-w-0 overflow-x-auto relative';
+        gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
         gridDiv1.innerHTML = `
           <div class="w-full min-w-0 overflow-x-auto relative">
             <div class="flex items-center justify-between mb-2">
@@ -428,7 +428,7 @@
         
         // Grid 2
         const gridDiv2 = document.createElement('div');
-        gridDiv2.className = 'w-1/2 min-w-0 overflow-x-auto relative';
+        gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
         gridDiv2.innerHTML = `
           <div class="w-full min-w-0 overflow-x-auto relative">
             <div class="flex items-center justify-between mb-2">
@@ -511,19 +511,19 @@
           const employee = employees.find(emp => emp.name === empName);
           if (employee) {
             rowDivs.push(`
-              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-16 md:h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
                 <div>
-                  <div class="font-semibold text-sm leading-tight">${employee.shortName}</div>
+                  <div class="font-semibold text-xs md:text-sm leading-tight">${employee.shortName}</div>
                   <div class="text-xs mt-1">${employee.title}</div>
                 </div>
-                <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                <img src="images/profile.png" alt="Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" />
               </a>
             `);
           }
         });
         
         if (rowDivs.length > 0) {
-          rows.push(`<div class="flex flex-row gap-4">${rowDivs.join('')}</div>`);
+          rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
         }
       });
       
@@ -642,18 +642,18 @@
           const employee = employees.find(emp => emp.name === empName);
           if (employee) {
             rowDivs.push(`
-              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-16 md:h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
                 <div>
-                  <div class="font-semibold text-sm leading-tight">${employee.shortName}</div>
+                  <div class="font-semibold text-xs md:text-sm leading-tight">${employee.shortName}</div>
                   <div class="text-xs mt-1">${employee.title}</div>
                 </div>
-                <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                <img src="images/profile.png" alt="Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" />
               </a>
             `);
           }
         });
         if (rowDivs.length > 0) {
-          rows.push(`<div class="flex flex-row gap-4">${rowDivs.join('')}</div>`);
+          rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
         }
       });
       return rows.join('');

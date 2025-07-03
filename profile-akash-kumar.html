@@ -11,46 +11,46 @@
   <!-- Header -->
   <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
     <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
-      <div class="flex items-center gap-8">
+      <div class="flex items-center gap-4 md:gap-8">
         <a href="index.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
       </div>
-      <nav class="flex items-center gap-8">
-        <a href="index.html" style="color: var(--color-mawney-green);" class="text-base font-medium hover:underline">Our Clients</a>
+      <nav class="flex items-center gap-4 md:gap-8">
+        <a href="index.html" style="color: var(--color-mawney-green);" class="text-sm md:text-base font-medium hover:underline hidden sm:block">Our Clients</a>
         <div class="relative">
-          <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-4 py-1 text-sm focus:outline-none focus:ring-2" style="min-width: 160px; color: var(--color-espresso);">
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-3 md:px-4 py-1 text-xs md:text-sm focus:outline-none focus:ring-2" style="min-width: 120px; max-width: 160px; color: var(--color-espresso);">
+          <svg class="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
-        <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-sm border rounded px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
+        <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-xs md:text-sm border rounded px-2 md:px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section style="background: var(--color-mawney-green);" class="w-full py-16">
+  <section style="background: var(--color-mawney-green);" class="w-full py-12 md:py-16">
     <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
-      <img src="images/axar white.png" alt="Axar" style="max-height: 64px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" />
+      <img src="images/axar white.png" alt="Axar" style="max-height: 48px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" class="md:max-h-64" />
     </div>
   </section>
 
   <!-- Profile Card -->
-  <section class="w-full max-w-5xl mx-auto mt-10 mb-16 px-4">
-    <div class="bg-[var(--color-parchment)] rounded-lg shadow p-8 flex flex-col gap-8">
-      <div class="flex flex-col md:flex-row gap-8 items-start md:items-start">
-        <div class="flex-shrink-0 flex justify-center items-center w-40 h-40 rounded-full border border-gray-300 bg-white overflow-hidden">
-          <img src="images/profile.png" alt="Profile" class="w-32 h-32 rounded-full object-cover" />
+  <section class="w-full max-w-5xl mx-auto mt-8 md:mt-10 mb-12 md:mb-16 px-4">
+    <div class="bg-[var(--color-parchment)] rounded-lg shadow p-4 md:p-8 flex flex-col gap-6 md:gap-8">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+        <div class="flex-shrink-0 flex justify-center items-center w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-300 bg-white overflow-hidden mx-auto md:mx-0">
+          <img src="images/profile.png" alt="Profile" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover" />
         </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-start">
-            <div>
-              <h1 class="text-3xl font-bold mb-2" style="color: var(--color-mawney-green);">Akash Kumar</h1>
-              <h2 class="text-xl font-medium mb-4" style="color: var(--color-espresso);">Senior Analyst</h2>
+        <div class="flex-1 w-full">
+          <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+            <div class="text-center md:text-left">
+              <h1 class="text-2xl md:text-3xl font-bold mb-2" style="color: var(--color-mawney-green);">Akash Kumar</h1>
+              <h2 class="text-lg md:text-xl font-medium mb-4" style="color: var(--color-espresso);">Senior Analyst</h2>
             </div>
-            <a href="employee-map.html" class="text-sm underline mb-4 inline-block" style="color: var(--color-mawney-green); margin-left: 1rem;">Back to Team</a>
+            <a href="employee-map.html" class="text-xs md:text-sm underline mb-4 inline-block text-center md:text-left" style="color: var(--color-mawney-green);">Back to Team</a>
           </div>
-          <div class="text-sm mb-2 mt-4" style="color: var(--color-mawney-green);">Male - American - <a href="https://www.linkedin.com/in/akash-kumar-262a956/" class="underline" target="_blank" rel="noopener">LinkedIn</a></div>
+          <div class="text-xs md:text-sm mb-2 mt-4 text-center md:text-left" style="color: var(--color-mawney-green);">Male - American - <a href="https://www.linkedin.com/in/akash-kumar-262a956/" class="underline" target="_blank" rel="noopener">LinkedIn</a></div>
           <div class="mb-2">
-            <span class="font-semibold text-sm" style="color: var(--color-mawney-green);">Specialisms</span>
-            <div class="flex flex-wrap gap-2 mt-1">
+            <span class="font-semibold text-xs md:text-sm" style="color: var(--color-mawney-green);">Specialisms</span>
+            <div class="flex flex-wrap gap-2 mt-1 justify-center md:justify-start">
               <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Financial Analysis</span>
               <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Credit Research</span>
               <span class="border border-[var(--color-mawney-green)] text-[var(--color-mawney-green)] rounded px-2 py-1 text-xs">Data Modeling</span>
@@ -59,99 +59,105 @@
           </div>
           <div class="border-t border-gray-300 mt-4 mb-2"></div>
           <div>
-            <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span id="profile-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
-            <div id="profile-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
+            <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">
+              Profile <span id="profile-icon" class="text-lg md:text-xl inline-block w-6 text-center align-middle">+</span>
+            </button>
+            <div id="profile-content" class="pl-4 pr-2 py-3 text-xs md:text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
               <div class="font-semibold">Senior Analyst at Axar Capital</div>
               <div>New York, New York, United States</div>
               <div class="mt-4"></div>
-              <div class="mt-2 text-sm" style="color: var(--color-espresso);">
+              <div class="mt-2 text-xs md:text-sm leading-relaxed" style="color: var(--color-espresso);">
                 Akash Kumar is a Senior Analyst on the investment team at Axar, which he joined in 2021. Prior to Axar, Mr. Kumar was a research analyst at Millennium Management, where he focused on equity investments across the consumer, industrial, and payments sectors. Prior to Millennium, he held various investing roles at Talpion Fund Management and HIG Capital.  He began his career as a restructuring analyst at Houlihan Lokey. Mr. Kumar graduated summa cum laude with a B.S. in Economics from The Wharton School of the University of Pennsylvania.
               </div>
             </div>
-            <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span id="current-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
-            <div id="current-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
+            <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">
+              Current Employment <span id="current-icon" class="text-lg md:text-xl inline-block w-6 text-center align-middle">+</span>
+            </button>
+            <div id="current-content" class="pl-4 pr-2 py-3 text-xs md:text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
               <div class="font-semibold">Senior Analyst</div>
               <div>Axar Capital</div>
               <div class="text-xs text-gray-500">Feb 2021 – Present</div>
               <div class="text-xs text-gray-500">New York, New York, United States</div>
             </div>
-            <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span id="past-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
-            <div id="past-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] bg-white hidden">
-              <div class="relative" style="padding-left: 2rem;">
-                <div class="absolute left-4 top-6 bottom-6 w-0.5 bg-[var(--color-mawney-green)]"></div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+            <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">
+              Past Experience <span id="past-icon" class="text-lg md:text-xl inline-block w-6 text-center align-middle">+</span>
+            </button>
+            <div id="past-content" class="pl-4 pr-2 py-3 text-xs md:text-sm text-[var(--color-espresso)] bg-white hidden">
+              <div class="relative" style="padding-left: 1rem;">
+                <div class="absolute left-2 md:left-4 top-6 bottom-6 w-0.5 bg-[var(--color-mawney-green)]"></div>
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Analyst</div>
-                      <div>Millennium Management</div>
+                      <div class="font-semibold text-xs md:text-sm">Analyst</div>
+                      <div class="text-xs md:text-sm">Millennium Management</div>
                       <div class="text-xs text-gray-500">Jan 2019 – Aug 2020</div>
                       <div class="text-xs text-gray-500">New York, New York</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Analyst</div>
-                      <div>Talpion LP</div>
+                      <div class="font-semibold text-xs md:text-sm">Analyst</div>
+                      <div class="text-xs md:text-sm">Talpion LP</div>
                       <div class="text-xs text-gray-500">Jan 2015 – Dec 2018</div>
                       <div class="text-xs text-gray-500">New York City Metropolitan Area</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Associate</div>
-                      <div>H.I.G. Capital</div>
+                      <div class="font-semibold text-xs md:text-sm">Associate</div>
+                      <div class="text-xs md:text-sm">H.I.G. Capital</div>
                       <div class="text-xs text-gray-500">Aug 2013 – Jan 2015</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Financial Analyst</div>
-                      <div>Millstein and Co.</div>
+                      <div class="font-semibold text-xs md:text-sm">Financial Analyst</div>
+                      <div class="text-xs md:text-sm">Millstein and Co.</div>
                       <div class="text-xs text-gray-500">Jan 2012 – Jul 2013</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Financial Restructuring Analyst</div>
-                      <div>Houlihan Lokey</div>
+                      <div class="font-semibold text-xs md:text-sm">Financial Restructuring Analyst</div>
+                      <div class="text-xs md:text-sm">Houlihan Lokey</div>
                       <div class="text-xs text-gray-500">Jul 2011 – Jan 2012</div>
                       <div class="text-xs text-gray-500">Los Angeles</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Summer Research Analyst</div>
-                      <div>TPG Capital</div>
+                      <div class="font-semibold text-xs md:text-sm">Summer Research Analyst</div>
+                      <div class="text-xs md:text-sm">TPG Capital</div>
                       <div class="text-xs text-gray-500">Jun 2010 – Aug 2010</div>
-                      <div>TPG Opportunities Partners is focused on the spectrum of fixed income products</div>
+                      <div class="text-xs md:text-sm">TPG Opportunities Partners is focused on the spectrum of fixed income products</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-8 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-6 md:mb-8 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Global Compact Research Analyst</div>
-                      <div>United Nations</div>
+                      <div class="font-semibold text-xs md:text-sm">Global Compact Research Analyst</div>
+                      <div class="text-xs md:text-sm">United Nations</div>
                       <div class="text-xs text-gray-500">Sep 2009 – Dec 2009</div>
-                      <div>Member of Wharton student team</div>
+                      <div class="text-xs md:text-sm">Member of Wharton student team</div>
                     </div>
                   </div>
                 </div>
-                <div class="mb-2 flex items-start gap-4 relative">
-                  <div class="ml-4 flex items-start gap-2">
+                <div class="mb-2 flex items-start gap-3 md:gap-4 relative">
+                  <div class="ml-2 md:ml-4 flex items-start gap-2">
                     <div>
-                      <div class="font-semibold">Summer Analyst</div>
-                      <div>ValStone Partners</div>
+                      <div class="font-semibold text-xs md:text-sm">Summer Analyst</div>
+                      <div class="text-xs md:text-sm">ValStone Partners</div>
                       <div class="text-xs text-gray-500">May 2009 – Aug 2009</div>
                     </div>
                   </div>
@@ -160,7 +166,7 @@
             </div>
           </div>
           <!-- LinkedIn Screenshot -->
-          <div class="bg-white rounded-lg shadow p-6 mt-8 flex flex-col items-center w-full">
+          <div class="bg-white rounded-lg shadow p-4 md:p-6 mt-6 md:mt-8 flex flex-col items-center w-full">
             <img src="images/linkedin/ak_linkedin.png?v=3" alt="LinkedIn Screenshot" class="rounded-lg object-contain w-full" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-height: none;" />
             <div class="mt-2 text-xs text-gray-500">LinkedIn screenshot</div>
           </div>
@@ -170,15 +176,15 @@
   </section>
 
   <!-- Footer -->
-  <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
+  <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-8 md:mt-12 py-6 md:py-8">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
-      <div class="text-sm mb-4 md:mb-0">
+      <div class="text-xs md:text-sm mb-4 md:mb-0 text-center md:text-left">
         37 Tanner Street<br>
         London SE1 3LF<br>
         <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
         © Mawney Partners 2023 - Privacy Policy
       </div>
-      <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+      <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 28px; object-fit: contain;" class="block md:h-36" />
     </div>
   </footer>
 
@@ -198,10 +204,11 @@
         document.getElementById('past-icon').textContent = '+';
         if (!isOpen) {
           content.classList.remove('hidden');
-          icon.textContent = '–';
+          icon.textContent = '−';
         }
       });
     }
+    
     setupDropdown('profile-toggle', 'profile-content', 'profile-icon');
     setupDropdown('current-toggle', 'current-content', 'current-icon');
     setupDropdown('past-toggle', 'past-content', 'past-icon');
