@@ -35,20 +35,19 @@
   <!-- Profile Card -->
   <section class="w-full max-w-5xl mx-auto mt-10 mb-16 px-4">
     <div class="bg-[var(--color-parchment)] rounded-lg shadow p-8 flex flex-col gap-8">
-      <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+      <div class="flex flex-col md:flex-row gap-8 items-start md:items-start">
         <div class="flex-shrink-0 flex justify-center items-center w-40 h-40 rounded-full border border-gray-300 bg-white overflow-hidden">
           <img src="images/profile.png" alt="Profile" class="w-32 h-32 rounded-full object-cover" />
         </div>
         <div class="flex-1">
           <div class="flex justify-between items-start">
             <div>
-              <h2 class="text-2xl font-serif font-semibold" style="color: var(--color-mawney-green);">Lionel Benichou</h2>
-              <div class="text-base mb-2" style="color: var(--color-mawney-green);">CFO</div>
+              <h1 class="text-3xl font-bold mb-2" style="color: var(--color-mawney-green);">Lionel Benichou</h1>
+              <h2 class="text-xl font-medium mb-4" style="color: var(--color-espresso);">Chief Financial Officer</h2>
             </div>
-            <button class="text-2xl text-gray-400 hover:text-gray-600">&times;</button>
+            <a href="employee-map.html" class="text-sm underline mb-4 inline-block" style="color: var(--color-mawney-green); margin-left: 1rem;">Back to Team</a>
           </div>
-          <p class="mt-2 mb-2 text-sm" style="color: var(--color-espresso);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
-          <div class="text-sm mb-2" style="color: var(--color-mawney-green);">Male - French - <a href="#" class="underline">LinkedIn</a></div>
+          <div class="text-sm mb-2 mt-4" style="color: var(--color-mawney-green);">Male - American - <a href="https://www.linkedin.com/in/lionelbenichou/" class="underline" target="_blank" rel="noopener">LinkedIn</a></div>
           <div class="mb-2">
             <span class="font-semibold text-sm" style="color: var(--color-mawney-green);">Specialisms</span>
             <div class="flex flex-wrap gap-2 mt-1">
@@ -60,52 +59,65 @@
           </div>
           <div class="border-t border-gray-300 mt-4 mb-2"></div>
           <div>
-            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span class="text-xl">+</span></button>
-            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span class="text-xl">+</span></button>
-            <button class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span class="text-xl">+</span></button>
-          </div>
-        </div>
-      </div>
-      <!-- LinkedIn Profile Mockup -->
-      <div class="bg-white rounded-lg shadow p-6 flex flex-col gap-6">
-        <div class="flex gap-6 items-center">
-          <div class="w-24 h-24 rounded-full bg-gray-200 border-4 border-white"></div>
-          <div>
-            <div class="font-semibold text-lg">LinkedIn Profile Mockup</div>
-            <div class="text-sm text-gray-500">Chief Financial Officer</div>
-            <div class="text-xs text-gray-400 mt-1">New York, NY - <a href="#" class="underline">Contact info</a></div>
-            <div class="flex gap-2 mt-2">
-              <span class="bg-blue-600 text-white rounded px-2 py-1 text-xs">+ Follow</span>
-              <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">Message</span>
-              <span class="bg-gray-200 text-gray-700 rounded px-2 py-1 text-xs">More</span>
+            <button id="profile-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Profile <span id="profile-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
+            <div id="profile-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
+              <div class="font-semibold">Chief Financial Officer at Axar Capital</div>
+              <div>New York, New York, United States</div>
+              <div class="mt-4"></div>
+              <div class="mt-2 text-sm" style="color: var(--color-espresso);">
+                Lionel Benichou is Chief Financial Officer at Axar. Prior to joining Axar, Lionel was a Vice President at Altemis Capital Management, LLC, (“Altemis”), a spin-off from Credit Suisse Asset Management, where he was responsible for the management of multi-strategy hedge fund of funds portfolios. Before his role at Altemis, Lionel spent seven years at Credit Suisse in New York within the Asset Management Division. Lionel was a member of the Credit Suisse Hedge Fund Index team and his responsibilities included the middle office management of multi-strategy hedge fund of funds portfolios. Earlier in his career, Lionel was a senior financial analyst at PlusFunds Group Inc. in New York, a $3 billion hedge fund managed account platform. Lionel holds an M.B.A in International Management from the European Business School in Paris, France.
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="flex gap-4 mt-4">
-          <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Financial management</div>
-          <div class="flex items-center gap-2 text-xs text-gray-500"><span class="inline-block w-4 h-4 bg-blue-600 rounded-full"></span> Treasury operations</div>
-        </div>
-      </div>
-      <!-- Experience Section -->
-      <div class="bg-white rounded-lg shadow p-6 mt-4">
-        <div class="font-semibold mb-2">Experience</div>
-        <div class="text-sm text-gray-700 mb-4">Lionel Benichou serves as Chief Financial Officer at Axar Capital Management, overseeing all financial operations, accounting, treasury, and compliance functions.</div>
-        <div class="flex flex-col gap-2">
-          <div class="flex items-start gap-2">
-            <span class="inline-block w-6 h-6 bg-blue-600 rounded-full mt-1"></span>
-            <div>
+            <button id="current-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Current Employment <span id="current-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
+            <div id="current-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] border-b border-gray-200 bg-white hidden">
               <div class="font-semibold">Chief Financial Officer</div>
-              <div class="text-xs text-gray-500">Axar Capital Management - 2015-Present</div>
+              <div>Axar Capital</div>
+              <div class="text-xs text-gray-500">May 2015 – Present</div>
+              <div class="text-xs text-gray-500">New York City Metropolitan Area</div>
             </div>
-          </div>
-          <div class="flex items-start gap-2">
-            <span class="inline-block w-6 h-6 bg-blue-600 rounded-full mt-1"></span>
-            <div>
-              <div class="font-semibold">Finance Director</div>
-              <div class="text-xs text-gray-500">Previous Investment Firm - 2010-2015</div>
+            <button id="past-toggle" class="w-full flex justify-between items-center py-2 border-b border-gray-200 text-left font-semibold" style="color: var(--color-mawney-green);">Past Experience <span id="past-icon" class="text-xl inline-block w-6 text-center align-middle">+</span></button>
+            <div id="past-content" class="pl-4 pr-2 py-3 text-sm text-[var(--color-espresso)] bg-white hidden">
+              <div class="relative" style="padding-left: 2rem;">
+                <div class="absolute left-4 top-6 bottom-6 w-0.5 bg-[var(--color-mawney-green)]"></div>
+                <div class="mb-8 flex items-start gap-4 relative">
+                  <div class="ml-4 flex items-start gap-2">
+                    <div>
+                      <div class="font-semibold">Vice President</div>
+                      <div>Altemis Capital Management</div>
+                      <div class="text-xs text-gray-500">Aug 2013 – Apr 2015</div>
+                      <div class="text-xs text-gray-500">New York City Metropolitan Area</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-8 flex items-start gap-4 relative">
+                  <div class="ml-4 flex items-start gap-2">
+                    <div>
+                      <div class="font-semibold">Vice President</div>
+                      <div>Credit Suisse Asset Management</div>
+                      <div class="text-xs text-gray-500">Apr 2006 – Jul 2013</div>
+                      <div class="text-xs text-gray-500">New York City Metropolitan Area</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2 flex items-start gap-4 relative">
+                  <div class="ml-4 flex items-start gap-2">
+                    <div>
+                      <div class="font-semibold">Senior Analyst</div>
+                      <div>PlusFunds Group Inc.</div>
+                      <div class="text-xs text-gray-500">Jan 2003 – Apr 2006</div>
+                      <div class="text-xs text-gray-500">New York City Metropolitan Area</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <!-- LinkedIn Screenshot -->
+      <div class="bg-white rounded-lg shadow p-6 mt-8 flex flex-col items-center w-full">
+        <img src="images/linkedin/LB LinkedIn.png" alt="LinkedIn Screenshot" class="rounded-lg object-contain w-full" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-height: none;" />
+        <div class="mt-2 text-xs text-gray-500">LinkedIn screenshot</div>
       </div>
     </div>
   </section>
@@ -122,5 +134,30 @@
       <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
     </div>
   </footer>
+
+  <script>
+    // Dropdown logic
+    function setupDropdown(toggleId, contentId, iconId) {
+      const toggle = document.getElementById(toggleId);
+      const content = document.getElementById(contentId);
+      const icon = document.getElementById(iconId);
+      toggle.addEventListener('click', function() {
+        const isOpen = !content.classList.contains('hidden');
+        document.getElementById('profile-content').classList.add('hidden');
+        document.getElementById('current-content').classList.add('hidden');
+        document.getElementById('past-content').classList.add('hidden');
+        document.getElementById('profile-icon').textContent = '+';
+        document.getElementById('current-icon').textContent = '+';
+        document.getElementById('past-icon').textContent = '+';
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          icon.textContent = '–';
+        }
+      });
+    }
+    setupDropdown('profile-toggle', 'profile-content', 'profile-icon');
+    setupDropdown('current-toggle', 'current-content', 'current-icon');
+    setupDropdown('past-toggle', 'past-content', 'past-icon');
+  </script>
 </body>
 </html> 
