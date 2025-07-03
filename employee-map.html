@@ -358,6 +358,10 @@
     Object.keys(departments).forEach(dept => {
       zoomLevels[dept] = 1;
     });
+    
+    // Initialize zoom levels for Business sub-grids
+    zoomLevels["business1"] = 1;
+    zoomLevels["business2"] = 1;
 
     // Department button functionality
     const deptButtons = document.querySelectorAll('.dept-btn');
