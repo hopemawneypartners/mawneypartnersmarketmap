@@ -663,6 +663,11 @@
       });
       return rows.join('');
     }
+
+    // Add this at the end of the script:
+    document.addEventListener('DOMContentLoaded', function() {
+      renderDepartmentGrids();
+    });
   </script>
 </body>
 </html> 
