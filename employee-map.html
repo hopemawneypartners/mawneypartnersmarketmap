@@ -414,7 +414,7 @@
       container.innerHTML = '';
       
       if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
-        // Business view: two grids
+        // Business view: two grids side by side
         // Grid 1
         const grid1Hierarchy = [
           ["Andrew Axelrod"],
@@ -430,13 +430,17 @@
         const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
         const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
         
+        // Container for both grids side by side
+        const businessContainer = document.createElement('div');
+        businessContainer.className = 'flex flex-col md:flex-row gap-8 justify-between w-full';
+        
         // Grid 1
         const gridDiv1 = document.createElement('div');
-        gridDiv1.className = 'w-full mb-8';
+        gridDiv1.className = 'w-1/2 min-w-0 overflow-x-auto relative';
         gridDiv1.innerHTML = `
           <div class="w-full min-w-0 overflow-x-auto relative">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">Business Team 1</h3>
+              <div></div>
               <div class="flex items-center gap-2">
                 <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
                 <span class="zoom-label text-xs text-gray-600" data-dept="business1">100%</span>
@@ -450,15 +454,14 @@
             </div>
           </div>
         `;
-        container.appendChild(gridDiv1);
         
         // Grid 2
         const gridDiv2 = document.createElement('div');
-        gridDiv2.className = 'w-full mb-8 mt-8 pt-8 border-t border-gray-300';
+        gridDiv2.className = 'w-1/2 min-w-0 overflow-x-auto relative';
         gridDiv2.innerHTML = `
           <div class="w-full min-w-0 overflow-x-auto relative">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">Business Team 2</h3>
+              <div></div>
               <div class="flex items-center gap-2">
                 <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
                 <span class="zoom-label text-xs text-gray-600" data-dept="business2">100%</span>
@@ -472,7 +475,10 @@
             </div>
           </div>
         `;
-        container.appendChild(gridDiv2);
+        
+        businessContainer.appendChild(gridDiv1);
+        businessContainer.appendChild(gridDiv2);
+        container.appendChild(businessContainer);
         
         // Attach zoom listeners for both grids
         attachZoomListeners();
