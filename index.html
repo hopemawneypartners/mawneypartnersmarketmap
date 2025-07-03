@@ -119,12 +119,13 @@
 
     <script>
         // Filter functionality
-        let activeFilters = new Set();
+        let activeFilter = null;
 
         function updateFilterButtons() {
             const filterButtons = document.querySelectorAll('.filter-btn');
             filterButtons.forEach(btn => {
-                if (activeFilters.has(btn.id.replace('filter-', ''))) {
+                const filterType = btn.id.replace('filter-', '');
+                if (activeFilter === filterType) {
                     btn.style.background = 'var(--color-mawney-green)';
                     btn.style.color = 'var(--color-parchment)';
                     btn.style.borderColor = 'var(--color-mawney-green)';
@@ -142,22 +143,24 @@
             clientCards.forEach(card => {
                 const categories = card.getAttribute('data-categories').split(',');
                 
-                if (activeFilters.size === 0) {
-                    // Show all when no filters are active
+                if (activeFilter === null) {
+                    // Show all when no filter is active
                     card.style.display = 'flex';
                 } else {
-                    // Show only if card matches any active filter
-                    const shouldShow = categories.some(category => activeFilters.has(category));
+                    // Show only if card matches the active filter
+                    const shouldShow = categories.includes(activeFilter);
                     card.style.display = shouldShow ? 'flex' : 'none';
                 }
             });
         }
 
         function toggleFilter(filterType) {
-            if (activeFilters.has(filterType)) {
-                activeFilters.delete(filterType);
+            if (activeFilter === filterType) {
+                // If clicking the same filter, deselect it
+                activeFilter = null;
             } else {
-                activeFilters.add(filterType);
+                // Select the new filter (deselecting any previous one)
+                activeFilter = filterType;
             }
             
             updateFilterButtons();
