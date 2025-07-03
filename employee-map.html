@@ -511,12 +511,12 @@
           const employee = employees.find(emp => emp.name === empName);
           if (employee) {
             rowDivs.push(`
-              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-16 md:h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                <div>
-                  <div class="font-semibold text-xs md:text-sm leading-tight">${employee.shortName}</div>
-                  <div class="text-xs mt-1">${employee.title}</div>
+              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                <div class="flex-1">
+                  <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                  <div class="text-xs mt-1 break-words">${employee.title}</div>
                 </div>
-                <img src="images/profile.png" alt="Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" />
+                <img src="images/profile.png" alt="Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
               </a>
             `);
           }
@@ -642,12 +642,12 @@
           const employee = employees.find(emp => emp.name === empName);
           if (employee) {
             rowDivs.push(`
-              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-16 md:h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                <div>
-                  <div class="font-semibold text-xs md:text-sm leading-tight">${employee.shortName}</div>
-                  <div class="text-xs mt-1">${employee.title}</div>
+              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                <div class="flex-1">
+                  <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                  <div class="text-xs mt-1 break-words">${employee.title}</div>
                 </div>
-                <img src="images/profile.png" alt="Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" />
+                <img src="images/profile.png" alt="Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
               </a>
             `);
           }
