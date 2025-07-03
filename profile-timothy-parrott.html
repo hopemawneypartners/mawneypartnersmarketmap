@@ -102,10 +102,18 @@
           </div>
         </div>
       </div>
-      <!-- LinkedIn Screenshot -->
+      <!-- LinkedIn Image Swiper -->
       <div class="bg-white rounded-lg shadow p-6 mt-8 flex flex-col items-center w-full">
-        <img src="images/linkedin/tp_linkedin.png?v=2" alt="LinkedIn Screenshot" class="rounded-lg object-contain w-full" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-height: none;" />
-        <div class="mt-2 text-xs text-gray-500">LinkedIn screenshot</div>
+        <div class="relative w-full flex justify-center items-center" style="padding:0;">
+          <button id="prev-linkedin" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10" aria-label="Previous image">
+            <span class="text-2xl">&#8592;</span>
+          </button>
+          <img id="linkedin-image" src="images/linkedin/tp_linkedin.png?v=2" alt="LinkedIn Screenshot 1" class="rounded-lg object-contain w-full" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-height: none;" />
+          <button id="next-linkedin" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10" aria-label="Next image">
+            <span class="text-2xl">&#8594;</span>
+          </button>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">Swipe or use arrows to view LinkedIn screenshots</div>
       </div>
     </div>
   </section>
@@ -146,6 +154,39 @@
     setupDropdown('profile-toggle', 'profile-content', 'profile-icon');
     setupDropdown('current-toggle', 'current-content', 'current-icon');
     setupDropdown('past-toggle', 'past-content', 'past-icon');
+
+    const linkedinImages = [
+      'images/linkedin/tp_linkedin.png?v=2'
+    ];
+    let currentLinkedIn = 0;
+    const imgEl = document.getElementById('linkedin-image');
+    document.getElementById('prev-linkedin').onclick = function() {
+      currentLinkedIn = (currentLinkedIn - 1 + linkedinImages.length) % linkedinImages.length;
+      imgEl.src = linkedinImages[currentLinkedIn];
+    };
+    document.getElementById('next-linkedin').onclick = function() {
+      currentLinkedIn = (currentLinkedIn + 1) % linkedinImages.length;
+      imgEl.src = linkedinImages[currentLinkedIn];
+    };
+    // Swipe support for mobile
+    let startX = null;
+    imgEl.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+    });
+    imgEl.addEventListener('touchend', function(e) {
+      if (startX === null) return;
+      let endX = e.changedTouches[0].clientX;
+      if (endX - startX > 40) {
+        // Swipe right
+        currentLinkedIn = (currentLinkedIn - 1 + linkedinImages.length) % linkedinImages.length;
+        imgEl.src = linkedinImages[currentLinkedIn];
+      } else if (startX - endX > 40) {
+        // Swipe left
+        currentLinkedIn = (currentLinkedIn + 1) % linkedinImages.length;
+        imgEl.src = linkedinImages[currentLinkedIn];
+      }
+      startX = null;
+    });
   </script>
 </body>
 </html> 
