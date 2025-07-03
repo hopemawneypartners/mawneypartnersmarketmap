@@ -451,24 +451,35 @@
 
     // Generate employee rows for a department
     function generateEmployeeRows(employees) {
-      const rows = [];
-      let currentRow = [];
+      // Define the hierarchy structure
+      const hierarchy = [
+        ["Andrew Axelrod", "Timothy Parrott"], // Row 1: AA, TP
+        ["Matt Magnuson", "Grant Mitchell", "Thomas Henke", "David Fisher", "Lionel Benichou", "Ricardo Mosquera"], // Row 2: MM, GM, TH, DF, LB, RM
+        ["Akash Kumar", "Sean Mulrenan", "Ronald de Gier"] // Row 3: AK, SM, RDG
+      ];
       
-      employees.forEach((emp, index) => {
-        currentRow.push(`
-          <a href="${emp.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${emp.specialisms}">
-            <div>
-              <div class="font-semibold text-sm leading-tight">${emp.shortName}</div>
-              <div class="text-xs mt-1">${emp.title}</div>
-            </div>
-            <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-          </a>
-        `);
+      const rows = [];
+      
+      hierarchy.forEach(rowEmployees => {
+        const rowDivs = [];
         
-        // Create new row every 3 employees or at the end
-        if (currentRow.length === 3 || index === employees.length - 1) {
-          rows.push(`<div class="flex flex-row gap-4">${currentRow.join('')}</div>`);
-          currentRow = [];
+        rowEmployees.forEach(empName => {
+          const employee = employees.find(emp => emp.name === empName);
+          if (employee) {
+            rowDivs.push(`
+              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-40 h-20 text-left flex justify-between items-center" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                <div>
+                  <div class="font-semibold text-sm leading-tight">${employee.shortName}</div>
+                  <div class="text-xs mt-1">${employee.title}</div>
+                </div>
+                <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+              </a>
+            `);
+          }
+        });
+        
+        if (rowDivs.length > 0) {
+          rows.push(`<div class="flex flex-row gap-4">${rowDivs.join('')}</div>`);
         }
       });
       
