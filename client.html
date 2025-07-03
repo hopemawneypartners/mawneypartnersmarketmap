@@ -232,8 +232,13 @@
       expandButtons.forEach(button => {
         button.addEventListener('click', function() {
           const employeeId = this.getAttribute('data-employee');
-          const details = document.querySelector(`[data-employee="${employeeId}"]`);
+          const details = document.querySelector(`.employee-details[data-employee="${employeeId}"]`);
           const icon = this.querySelector('span');
+          
+          if (!details || !icon) {
+            console.error('Dropdown error: details or icon not found for employee', employeeId);
+            return;
+          }
           
           // Close all other details
           document.querySelectorAll('.employee-details').forEach(detail => {
