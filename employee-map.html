@@ -872,16 +872,16 @@
 
     // Toggle sidebar
     notesToggle.addEventListener('click', function() {
-      if (mainSidebarContainer.classList.contains('sidebar-open')) {
+      if (document.body.classList.contains('sidebar-open')) {
         // Close sidebar
-        mainSidebarContainer.classList.remove('sidebar-open');
+        document.body.classList.remove('sidebar-open');
         // Reset button to default styling
         this.style.borderColor = 'var(--color-mawney-green)';
         this.style.color = 'var(--color-mawney-green)';
         this.style.background = 'var(--color-parchment)';
       } else {
         // Open sidebar
-        mainSidebarContainer.classList.add('sidebar-open');
+        document.body.classList.add('sidebar-open');
         // Set button to active styling (green background)
         this.style.borderColor = 'var(--color-mawney-green)';
         this.style.color = 'var(--color-parchment)';
@@ -891,7 +891,7 @@
     });
 
     closeNotes.addEventListener('click', function() {
-      mainSidebarContainer.classList.remove('sidebar-open');
+      document.body.classList.remove('sidebar-open');
       // Reset button to default styling
       notesToggle.style.borderColor = 'var(--color-mawney-green)';
       notesToggle.style.color = 'var(--color-mawney-green)';
@@ -945,8 +945,8 @@
 
     // Close sidebar when clicking outside
     document.addEventListener('click', function(e) {
-      if (!notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && mainSidebarContainer.classList.contains('sidebar-open')) {
-        mainSidebarContainer.classList.remove('sidebar-open');
+      if (!notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && document.body.classList.contains('sidebar-open')) {
+        document.body.classList.remove('sidebar-open');
       }
     });
   </script>
