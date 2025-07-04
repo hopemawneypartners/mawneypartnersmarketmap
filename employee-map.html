@@ -818,6 +818,77 @@
     console.log('Add note button element:', addNoteBtn);
     console.log('Notes list element:', notesList);
 
+    // Only add event listeners if elements exist
+    if (notesToggle) {
+      // Toggle sidebar
+      notesToggle.addEventListener('click', function() {
+        console.log('Notes button clicked!');
+        console.log('Current body classes:', document.body.classList.toString());
+        console.log('Notes sidebar element:', notesSidebar);
+        
+        if (document.body.classList.contains('sidebar-open')) {
+          console.log('Closing sidebar');
+          // Close sidebar
+          document.body.classList.remove('sidebar-open');
+          // Reset button to default styling
+          this.style.borderColor = 'var(--color-mawney-green)';
+          this.style.color = 'var(--color-mawney-green)';
+          this.style.background = 'var(--color-parchment)';
+        } else {
+          console.log('Opening sidebar');
+          // Open sidebar
+          document.body.classList.add('sidebar-open');
+          // Set button to active styling (green background)
+          this.style.borderColor = 'var(--color-mawney-green)';
+          this.style.color = 'var(--color-parchment)';
+          this.style.background = 'var(--color-mawney-green)';
+          if (typeof renderNotes === 'function') {
+            renderNotes();
+          }
+        }
+        
+        console.log('After toggle - body classes:', document.body.classList.toString());
+      });
+    } else {
+      console.error('Notes toggle button not found!');
+    }
+
+    if (closeNotes) {
+      closeNotes.addEventListener('click', function() {
+        document.body.classList.remove('sidebar-open');
+        // Reset button to default styling
+        if (notesToggle) {
+          notesToggle.style.borderColor = 'var(--color-mawney-green)';
+          notesToggle.style.color = 'var(--color-mawney-green)';
+          notesToggle.style.background = 'var(--color-parchment)';
+        }
+      });
+    }
+
+    if (addNoteBtn && noteInput) {
+      // Add note
+      addNoteBtn.addEventListener('click', async function() {
+        const noteText = noteInput.value.trim();
+        if (noteText) {
+          const newNote = await addNote(noteText);
+          if (newNote) {
+            noteInput.value = '';
+            if (typeof renderNotes === 'function') {
+              renderNotes();
+            }
+          }
+        }
+      });
+
+      // Enter key to add note
+      noteInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          addNoteBtn.click();
+        }
+      });
+    }
+
     // Supabase configuration - REPLACE WITH YOUR ACTUAL VALUES
     const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
     const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
@@ -878,62 +949,6 @@
       }
     }
 
-    // Toggle sidebar
-    notesToggle.addEventListener('click', function() {
-      console.log('Notes button clicked!');
-      console.log('Current body classes:', document.body.classList.toString());
-      console.log('Notes sidebar element:', notesSidebar);
-      
-      if (document.body.classList.contains('sidebar-open')) {
-        console.log('Closing sidebar');
-        // Close sidebar
-        document.body.classList.remove('sidebar-open');
-        // Reset button to default styling
-        this.style.borderColor = 'var(--color-mawney-green)';
-        this.style.color = 'var(--color-mawney-green)';
-        this.style.background = 'var(--color-parchment)';
-      } else {
-        console.log('Opening sidebar');
-        // Open sidebar
-        document.body.classList.add('sidebar-open');
-        // Set button to active styling (green background)
-        this.style.borderColor = 'var(--color-mawney-green)';
-        this.style.color = 'var(--color-parchment)';
-        this.style.background = 'var(--color-mawney-green)';
-        renderNotes();
-      }
-      
-      console.log('After toggle - body classes:', document.body.classList.toString());
-    });
-
-    closeNotes.addEventListener('click', function() {
-      document.body.classList.remove('sidebar-open');
-      // Reset button to default styling
-      notesToggle.style.borderColor = 'var(--color-mawney-green)';
-      notesToggle.style.color = 'var(--color-mawney-green)';
-      notesToggle.style.background = 'var(--color-parchment)';
-    });
-
-    // Add note
-    addNoteBtn.addEventListener('click', async function() {
-      const noteText = noteInput.value.trim();
-      if (noteText) {
-        const newNote = await addNote(noteText);
-        if (newNote) {
-          noteInput.value = '';
-          renderNotes();
-        }
-      }
-    });
-
-    // Enter key to add note
-    noteInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        addNoteBtn.click();
-      }
-    });
-
     // Render notes
     async function renderNotes() {
       const notes = await loadNotes();
@@ -961,7 +976,7 @@
 
     // Close sidebar when clicking outside
     document.addEventListener('click', function(e) {
-      if (!notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && document.body.classList.contains('sidebar-open')) {
+      if (notesSidebar && notesToggle && !notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && document.body.classList.contains('sidebar-open')) {
         document.body.classList.remove('sidebar-open');
       }
     });
