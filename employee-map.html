@@ -6,6 +6,7 @@
   <title>Employee Map - Axar</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <style>
     .employee-box {
       transition: all 0.2s ease-in-out;
@@ -15,6 +16,60 @@
     .employee-box:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Center text in department buttons */
+    .dept-btn.filter-dropdown,
+    .dept-btn.filter-active {
+      justify-content: center !important;
+    }
+    
+    /* Notes sidebar styles */
+    .sidebar-open #main-content {
+      margin-right: 320px; /* 320px = 320px sidebar width */
+    }
+    
+    .sidebar-open #notes-sidebar {
+      transform: translateX(0);
+    }
+    
+    #notes-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .note-item {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .note-item .note-date {
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    
+    .note-item .note-text {
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--color-espresso);
+    }
+    
+    .note-item .delete-note {
+      float: right;
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 4px;
     }
   </style>
   <script>
@@ -54,6 +109,15 @@
     <p class="mb-4 text-sm md:text-base leading-relaxed" style="color: var(--color-mawney-green);">
       Axar Capital Management is an opportunistic corporate credit investor focused on the U.S. middle market founded by Alex Axelrod and Timothy Parrott in 2015. Current AUM sits at ~$2.9bn, Axar actively invests across the capital structure in both public and private markets, with a particular emphasis on distressed credit, structured finance, and asset-heavy businesses. The firm is known for taking a hands-on approach to portfolio management, often pursuing influence or control positions to drive value creation.
     </p>
+    
+    <!-- Filter Tags -->
+    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-6 md:mt-8">
+      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Credit</span>
+      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Alternative</span>
+      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">New York City</span>
+      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Special Situations</span>
+      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">$1-3bn AUM</span>
+    </div>
   </section>
 
   <!-- Employees Section -->
@@ -63,16 +127,27 @@
       <div class="flex flex-col sm:flex-row items-center gap-2 mb-4">
         <span class="text-xs md:text-sm mr-2">Navigate to department:</span>
         <div class="flex flex-wrap justify-center gap-2">
-          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border selected-dept" data-department="business" style="border-color: var(--color-mawney-green); color: var(--color-parchment); background: var(--color-mawney-green);">Business</button>
-          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="investment" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Investment</button>
-          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="trading" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Trading</button>
-          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="capital-formation" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Capital Formation</button>
-          <button class="dept-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" data-department="c-suite" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">C-Suite</button>
+          <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
+          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment">Investment</button>
+          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="trading">Trading</button>
+          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="capital-formation">Capital Formation</button>
+          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="c-suite">C-Suite</button>
         </div>
       </div>
     </div>
     <div class="flex justify-between items-center mb-4">
-      <div></div>
+      <div>
+        <button id="notes-toggle" class="filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14,2 14,8 20,8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10,9 9,9 8,9"></polyline>
+          </svg>
+          <span class="font-bold">Notes</span>
+        </button>
+      </div>
       <div class="relative">
         <button id="filter-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
         Filter Specialisms
@@ -227,9 +302,42 @@
         </div>
       </div>
     </div>
-    <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
-      <div id="department-grids-container">
-        <!-- Dynamic department grids will be inserted here -->
+    
+    <!-- Main content and sidebar container -->
+    <div class="flex gap-6 transition-all duration-300 ease-in-out" id="main-sidebar-container">
+      <!-- Main content area -->
+      <div class="flex-1 transition-all duration-300 ease-in-out" id="main-content">
+        <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
+          <div id="department-grids-container">
+            <!-- Dynamic department grids will be inserted here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Notes Sidebar -->
+      <div id="notes-sidebar" class="w-80 bg-white border-l border-gray-300 p-6 transition-all duration-300 ease-in-out transform translate-x-full" style="background: var(--color-parchment);">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold" style="color: var(--color-mawney-green);">Notes</h3>
+          <button id="close-notes" class="text-gray-500 hover:text-gray-700">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--color-mawney-green);">Add Note</label>
+            <textarea id="note-input" rows="4" class="w-full p-3 border border-gray-300 rounded text-sm resize-none" placeholder="Enter your notes here..." style="background: white; color: var(--color-espresso);"></textarea>
+            <button id="add-note" class="mt-2 px-4 py-2 bg-[var(--color-mawney-green)] text-[var(--color-parchment)] rounded text-sm hover:opacity-90">Add Note</button>
+          </div>
+          <div>
+            <h4 class="text-sm font-medium mb-2" style="color: var(--color-mawney-green);">Recent Notes</h4>
+            <div id="notes-list" class="space-y-2">
+              <!-- Notes will be dynamically added here -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -368,12 +476,12 @@
         const dept = this.getAttribute('data-department');
         // Deselect all buttons
         deptButtons.forEach(b => {
-          b.style.background = 'var(--color-parchment)';
-          b.style.color = 'var(--color-mawney-green)';
+          b.classList.remove('filter-active');
+          b.classList.add('filter-dropdown');
         });
         // Select only the clicked button
-        this.style.background = 'var(--color-mawney-green)';
-        this.style.color = 'var(--color-parchment)';
+        this.classList.remove('filter-dropdown');
+        this.classList.add('filter-active');
         // Set selectedDepartments to only the clicked department
         selectedDepartments = [dept];
         renderDepartmentGrids();
@@ -427,6 +535,16 @@
           </div>
         `;
         
+        businessContainer.appendChild(gridDiv1);
+        
+        // Add dashed line divider between teams
+        const divider = document.createElement('div');
+        divider.className = 'hidden lg:block w-px mx-4';
+        divider.style.borderLeft = '2px dashed var(--color-espresso)';
+        divider.style.height = '100%';
+        divider.style.minHeight = '400px';
+        businessContainer.appendChild(divider);
+        
         // Grid 2
         const gridDiv2 = document.createElement('div');
         gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
@@ -448,7 +566,6 @@
           </div>
         `;
         
-        businessContainer.appendChild(gridDiv1);
         businessContainer.appendChild(gridDiv2);
         container.appendChild(businessContainer);
         
@@ -497,11 +614,11 @@
       const deptButtons = document.querySelectorAll('.dept-btn');
       deptButtons.forEach(btn => {
         if (selectedDepartments.includes(btn.getAttribute('data-department'))) {
-          btn.style.background = 'var(--color-mawney-green)';
-          btn.style.color = 'var(--color-parchment)';
+          btn.classList.remove('filter-dropdown');
+          btn.classList.add('filter-active');
         } else {
-          btn.style.background = 'var(--color-parchment)';
-          btn.style.color = 'var(--color-mawney-green)';
+          btn.classList.remove('filter-active');
+          btn.classList.add('filter-dropdown');
         }
       });
     }
@@ -683,6 +800,149 @@
         window.location.href = 'login.html';
       };
     }
+
+    // Notes Sidebar Functionality
+    const notesToggle = document.getElementById('notes-toggle');
+    const closeNotes = document.getElementById('close-notes');
+    const notesSidebar = document.getElementById('notes-sidebar');
+    const mainSidebarContainer = document.getElementById('main-sidebar-container');
+    const noteInput = document.getElementById('note-input');
+    const addNoteBtn = document.getElementById('add-note');
+    const notesList = document.getElementById('notes-list');
+
+    // Supabase configuration - REPLACE WITH YOUR ACTUAL VALUES
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+    
+    // Initialize Supabase client
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Load notes from Supabase
+    async function loadNotes() {
+      try {
+        const { data, error } = await supabase
+          .from('notes')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        return data || [];
+      } catch (error) {
+        console.error('Error loading notes:', error);
+        return [];
+      }
+    }
+
+    // Add note via Supabase
+    async function addNote(noteText) {
+      try {
+        const { data, error } = await supabase
+          .from('notes')
+          .insert([
+            { 
+              text: noteText,
+              created_at: new Date().toISOString()
+            }
+          ])
+          .select();
+        
+        if (error) throw error;
+        return data[0];
+      } catch (error) {
+        console.error('Error adding note:', error);
+        return null;
+      }
+    }
+
+    // Delete note via Supabase
+    async function deleteNote(noteId) {
+      try {
+        const { error } = await supabase
+          .from('notes')
+          .delete()
+          .eq('id', noteId);
+        
+        if (error) throw error;
+        return true;
+      } catch (error) {
+        console.error('Error deleting note:', error);
+        return false;
+      }
+    }
+
+    // Toggle sidebar
+    notesToggle.addEventListener('click', function() {
+      if (mainSidebarContainer.classList.contains('sidebar-open')) {
+        // Close sidebar
+        mainSidebarContainer.classList.remove('sidebar-open');
+        this.classList.remove('filter-active');
+        this.classList.add('filter-dropdown');
+      } else {
+        // Open sidebar
+        mainSidebarContainer.classList.add('sidebar-open');
+        this.classList.remove('filter-dropdown');
+        this.classList.add('filter-active');
+        renderNotes();
+      }
+    });
+
+    closeNotes.addEventListener('click', function() {
+      mainSidebarContainer.classList.remove('sidebar-open');
+      notesToggle.classList.remove('filter-active');
+      notesToggle.classList.add('filter-dropdown');
+    });
+
+    // Add note
+    addNoteBtn.addEventListener('click', async function() {
+      const noteText = noteInput.value.trim();
+      if (noteText) {
+        const newNote = await addNote(noteText);
+        if (newNote) {
+          noteInput.value = '';
+          renderNotes();
+        }
+      }
+    });
+
+    // Enter key to add note
+    noteInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        addNoteBtn.click();
+      }
+    });
+
+    // Render notes
+    async function renderNotes() {
+      const notes = await loadNotes();
+      notesList.innerHTML = '';
+      notes.forEach(note => {
+        const noteElement = document.createElement('div');
+        noteElement.className = 'note-item';
+        const date = new Date(note.created_at).toLocaleString();
+        noteElement.innerHTML = `
+          <button class="delete-note" onclick="deleteNoteFromUI(${note.id})">×</button>
+          <div class="note-date">${date}</div>
+          <div class="note-text">${note.text.replace(/\n/g, '<br>')}</div>
+        `;
+        notesList.appendChild(noteElement);
+      });
+    }
+
+    // Delete note from UI
+    window.deleteNoteFromUI = async function(noteId) {
+      const success = await deleteNote(noteId);
+      if (success) {
+        renderNotes();
+      }
+    };
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && mainSidebarContainer.classList.contains('sidebar-open')) {
+        mainSidebarContainer.classList.remove('sidebar-open');
+      }
+    });
   </script>
 </body>
 </html> 
