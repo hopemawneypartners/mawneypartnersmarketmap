@@ -810,6 +810,14 @@
     const addNoteBtn = document.getElementById('add-note');
     const notesList = document.getElementById('notes-list');
 
+    // Debug: Check if elements are found
+    console.log('Notes toggle element:', notesToggle);
+    console.log('Notes sidebar element:', notesSidebar);
+    console.log('Close notes element:', closeNotes);
+    console.log('Note input element:', noteInput);
+    console.log('Add note button element:', addNoteBtn);
+    console.log('Notes list element:', notesList);
+
     // Supabase configuration - REPLACE WITH YOUR ACTUAL VALUES
     const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
     const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
@@ -872,7 +880,12 @@
 
     // Toggle sidebar
     notesToggle.addEventListener('click', function() {
+      console.log('Notes button clicked!');
+      console.log('Current body classes:', document.body.classList.toString());
+      console.log('Notes sidebar element:', notesSidebar);
+      
       if (document.body.classList.contains('sidebar-open')) {
+        console.log('Closing sidebar');
         // Close sidebar
         document.body.classList.remove('sidebar-open');
         // Reset button to default styling
@@ -880,6 +893,7 @@
         this.style.color = 'var(--color-mawney-green)';
         this.style.background = 'var(--color-parchment)';
       } else {
+        console.log('Opening sidebar');
         // Open sidebar
         document.body.classList.add('sidebar-open');
         // Set button to active styling (green background)
@@ -888,6 +902,8 @@
         this.style.background = 'var(--color-mawney-green)';
         renderNotes();
       }
+      
+      console.log('After toggle - body classes:', document.body.classList.toString());
     });
 
     closeNotes.addEventListener('click', function() {
