@@ -59,13 +59,121 @@
     <!-- Clients Section -->
     <section id="clients" class="max-w-6xl mx-auto px-4 py-6 md:py-8 w-full">
         <h2 style="color: var(--color-mawney-green);" class="text-xl md:text-2xl font-medium text-center mb-6 md:mb-8">Our Clients</h2>
-        <!-- Filters -->
-        <div class="flex flex-wrap justify-center gap-2 mb-6">
-            <button id="filter-credit" class="filter-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Credit Funds</button>
-            <button id="filter-pe" class="filter-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Private Equity Funds</button>
-            <button id="filter-alternative" class="filter-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Alternative Credit / Special Situations / Distressed</button>
-            <button id="filter-multi" class="filter-btn px-3 md:px-4 py-2 rounded text-xs md:text-sm border" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">Alternative Asset Managers / Multi-Strategy</button>
+        
+        <!-- Advanced Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-6">
+            <!-- Category Filter -->
+            <div class="relative dropdown-container">
+                <div id="category-filter" class="filter-dropdown">
+                    <span id="category-display">All Strategies</span>
+                    <svg class="dropdown-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div id="category-menu" class="dropdown-menu">
+                    <div class="dropdown-option" data-value="">All Strategies</div>
+                    <div class="dropdown-option" data-value="credit">Credit Funds</div>
+                    <div class="dropdown-option" data-value="pe">Private Equity Funds</div>
+                    <div class="dropdown-option" data-value="alternative">Alternative Credit / Special Situations / Distressed</div>
+                    <div class="dropdown-option" data-value="multi">Alternative Asset Managers / Multi-Strategy</div>
+                </div>
+            </div>
+
+            <!-- Location Filter -->
+            <div class="relative dropdown-container">
+                <div id="location-filter" class="filter-dropdown">
+                    <span id="location-display">All Locations</span>
+                    <svg class="dropdown-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div id="location-menu" class="dropdown-menu">
+                    <div class="dropdown-option" data-value="">All Locations</div>
+                    <div class="dropdown-region" data-region="europe">
+                        <div class="dropdown-region-header" data-region-toggle="europe">
+                            Europe <span class="dropdown-chevron">&#8250;</span>
+                        </div>
+                        <div class="dropdown-region-list" data-region-list="europe" style="display: none;">
+                            <div class="dropdown-option" data-value="amsterdam">Amsterdam</div>
+                            <div class="dropdown-option" data-value="barcelona">Barcelona</div>
+                            <div class="dropdown-option" data-value="berlin">Berlin</div>
+                            <div class="dropdown-option" data-value="brussels">Brussels</div>
+                            <div class="dropdown-option" data-value="copenhagen">Copenhagen</div>
+                            <div class="dropdown-option" data-value="dublin">Dublin</div>
+                            <div class="dropdown-option" data-value="frankfurt">Frankfurt</div>
+                            <div class="dropdown-option" data-value="geneva">Geneva</div>
+                            <div class="dropdown-option" data-value="hamburg">Hamburg</div>
+                            <div class="dropdown-option" data-value="helsinki">Helsinki</div>
+                            <div class="dropdown-option" data-value="london">London</div>
+                            <div class="dropdown-option" data-value="lugano">Lugano</div>
+                            <div class="dropdown-option" data-value="madrid">Madrid</div>
+                            <div class="dropdown-option" data-value="milan">Milan</div>
+                            <div class="dropdown-option" data-value="munich">Munich</div>
+                            <div class="dropdown-option" data-value="oslo">Oslo</div>
+                            <div class="dropdown-option" data-value="paris">Paris</div>
+                            <div class="dropdown-option" data-value="rome">Rome</div>
+                            <div class="dropdown-option" data-value="stockholm">Stockholm</div>
+                            <div class="dropdown-option" data-value="vienna">Vienna</div>
+                            <div class="dropdown-option" data-value="zurich">Zurich</div>
+                            <div class="dropdown-option" data-value="europe-other">Other Europe</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-region" data-region="americas">
+                        <div class="dropdown-region-header" data-region-toggle="americas">
+                            Americas <span class="dropdown-chevron">&#8250;</span>
+                        </div>
+                        <div class="dropdown-region-list" data-region-list="americas" style="display: none;">
+                            <div class="dropdown-option" data-value="austin">Austin</div>
+                            <div class="dropdown-option" data-value="boston">Boston</div>
+                            <div class="dropdown-option" data-value="chicago">Chicago</div>
+                            <div class="dropdown-option" data-value="dallas">Dallas</div>
+                            <div class="dropdown-option" data-value="denver">Denver</div>
+                            <div class="dropdown-option" data-value="greenwich">Greenwich</div>
+                            <div class="dropdown-option" data-value="houston">Houston</div>
+                            <div class="dropdown-option" data-value="los-angeles">Los Angeles</div>
+                            <div class="dropdown-option" data-value="miami">Miami</div>
+                            <div class="dropdown-option" data-value="midwest">Midwest</div>
+                            <div class="dropdown-option" data-value="new-york-city">New York City</div>
+                            <div class="dropdown-option" data-value="north-carolina">North Carolina</div>
+                            <div class="dropdown-option" data-value="san-francisco">San Francisco</div>
+                            <div class="dropdown-option" data-value="seattle">Seattle</div>
+                            <div class="dropdown-option" data-value="americas-other">Other Americas</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-region" data-region="asia">
+                        <div class="dropdown-region-header" data-region-toggle="asia">
+                            Asia <span class="dropdown-chevron">&#8250;</span>
+                        </div>
+                        <div class="dropdown-region-list" data-region-list="asia" style="display: none;">
+                            <div class="dropdown-option" data-value="beijing">Beijing</div>
+                            <div class="dropdown-option" data-value="hong-kong">Hong Kong</div>
+                            <div class="dropdown-option" data-value="middle-east">Middle East</div>
+                            <div class="dropdown-option" data-value="singapore">Singapore</div>
+                            <div class="dropdown-option" data-value="tokyo">Tokyo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AUM Filter -->
+            <div class="relative dropdown-container">
+                <div id="aum-filter" class="filter-dropdown">
+                    <span id="aum-display">All AUM</span>
+                    <svg class="dropdown-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <div id="aum-menu" class="dropdown-menu">
+                    <div class="dropdown-option" data-value="">All AUM</div>
+                    <div class="dropdown-option" data-value="0-1">$0-1 bn</div>
+                    <div class="dropdown-option" data-value="1-3">$1-3 bn</div>
+                    <div class="dropdown-option" data-value="3-10">$3-10 bn</div>
+                    <div class="dropdown-option" data-value="10-30">$10-30 bn</div>
+                    <div class="dropdown-option" data-value="30+">$30 bn +</div>
+                </div>
+            </div>
         </div>
+
         <!-- Alpha View -->
         <div class="flex flex-wrap justify-center gap-1 md:gap-2 mb-6 md:mb-8 text-xs md:text-sm" style="color: var(--color-mawney-green);">
             <span class="mr-2">View:</span>
@@ -80,28 +188,28 @@
         </div>
         <!-- Clients Grid -->
         <div id="clients-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6">
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/alpha wave.png" alt="Alpha Wave" style="max-height: 28px; max-width: 100%; object-fit: contain;" class="md:max-h-36" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/apollo.png" alt="Apollo Asset Management" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/arini.png" alt="Arini" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/ares.png" alt="Ares" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/attestor.png" alt="Attestor" style="max-height: 80px; max-width: 100%; object-fit: contain;" class="md:max-h-120" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/avenue capital.png" alt="Avenue Capital Group" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
-            <a href="client.html" class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" style="background: var(--color-parchment); border-radius: 0.5rem; text-decoration: none;">
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="multi" data-location="london" data-strategy="multi-strategy" data-aum="10-30" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/alpha wave.png" alt="Alpha Wave" style="max-height: 28px; max-width: 100%; object-fit: contain;" class="md:max-h-36" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" data-location="new-york-city" data-strategy="private-equity" data-aum="30+" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/apollo.png" alt="Apollo Asset Management" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit" data-location="london" data-strategy="credit" data-aum="1-3" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/arini.png" alt="Arini" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" data-location="los-angeles" data-strategy="private-equity" data-aum="30+" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/ares.png" alt="Ares" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" data-location="london" data-strategy="special-situations" data-aum="3-10" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/attestor.png" alt="Attestor" style="max-height: 80px; max-width: 100%; object-fit: contain;" class="md:max-h-120" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" data-location="new-york-city" data-strategy="distressed" data-aum="10-30" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/avenue capital.png" alt="Avenue Capital Group" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
+            <a href="client.html" class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" data-location="new-york-city" data-strategy="special-situations" data-aum="1-3" style="background: var(--color-parchment); border-radius: 0.5rem; text-decoration: none;">
                 <img src="images/axar.png" alt="Axar" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" />
             </a>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,pe" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/bain capital.png" alt="Bain Capital Credit" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/bardin hill.png" alt="Bardin Hill" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/black diamond.png" alt="Black Diamond" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/blackrock.png" alt="BlackRock" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/blackstone.png" alt="Blackstone" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,pe,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/blue owl.png" alt="Blue Owl Capital" style="max-height: 28px; max-width: 100%; object-fit: contain;" class="md:max-h-36" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/bridgepoint.png" alt="Bridgepoint" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/brigade.png" alt="Brigade" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/carlyle.png" alt="Carlyle" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,pe,alternative,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/centerbridge.png" alt="Centrebridge" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/cheyne capital.png" alt="Cheyne Capital" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/crestline.png" alt="Crestline Investors" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
-            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/cvc.png" alt="CVC" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,pe" data-location="boston" data-strategy="credit" data-aum="10-30" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/bain capital.png" alt="Bain Capital Credit" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" data-location="new-york-city" data-strategy="credit" data-aum="3-10" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/bardin hill.png" alt="Bardin Hill" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" data-location="new-york-city" data-strategy="credit" data-aum="1-3" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/black diamond.png" alt="Black Diamond" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="multi" data-location="new-york-city" data-strategy="multi-strategy" data-aum="30+" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/blackrock.png" alt="BlackRock" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" data-location="new-york-city" data-strategy="private-equity" data-aum="30+" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/blackstone.png" alt="Blackstone" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,pe,multi" data-location="new-york-city" data-strategy="credit" data-aum="10-30" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/blue owl.png" alt="Blue Owl Capital" style="max-height: 28px; max-width: 100%; object-fit: contain;" class="md:max-h-36" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe" data-location="london" data-strategy="private-equity" data-aum="3-10" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/bridgepoint.png" alt="Bridgepoint" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit" data-location="new-york-city" data-strategy="credit" data-aum="3-10" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/brigade.png" alt="Brigade" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" data-location="americas-other" data-strategy="private-equity" data-aum="30+" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/carlyle.png" alt="Carlyle" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,pe,alternative,multi" data-location="new-york-city" data-strategy="special-situations" data-aum="10-30" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/centerbridge.png" alt="Centrebridge" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative,multi" data-location="london" data-strategy="credit" data-aum="3-10" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/cheyne capital.png" alt="Cheyne Capital" style="max-height: 36px; max-width: 100%; object-fit: contain;" class="md:max-h-48" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="credit,alternative" data-location="americas-other" data-strategy="credit" data-aum="1-3" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/crestline.png" alt="Crestline Investors" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
+            <div class="client-card flex items-center justify-center h-24 md:h-32" data-categories="pe,multi" data-location="london" data-strategy="private-equity" data-aum="10-30" style="background: var(--color-parchment); border-radius: 0.5rem;"><img src="images/cvc.png" alt="CVC" style="max-height: 28px; max-width: 80%; object-fit: contain; padding: 4px 0;" class="md:max-h-36 md:p-2" /></div>
         </div>
     </section>
 
@@ -119,64 +227,228 @@
     </footer>
 
     <script>
-        // Filter functionality
-        let activeFilter = null;
-
-        function updateFilterButtons() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                const filterType = btn.id.replace('filter-', '');
-                if (activeFilter === filterType) {
-                    btn.style.background = 'var(--color-mawney-green)';
-                    btn.style.color = 'var(--color-parchment)';
-                    btn.style.borderColor = 'var(--color-mawney-green)';
-                } else {
-                    btn.style.background = 'var(--color-parchment)';
-                    btn.style.color = 'var(--color-mawney-green)';
-                    btn.style.borderColor = 'var(--color-mawney-green)';
-                }
-            });
-        }
+        // Simple filtering system
+        let activeFilters = {
+            category: '',
+            strategy: '',
+            location: '',
+            aum: ''
+        };
 
         function filterClients() {
             const clientCards = document.querySelectorAll('.client-card');
+            let visibleCount = 0;
             
-            clientCards.forEach(card => {
-                const categories = card.getAttribute('data-categories').split(',');
+            clientCards.forEach((card, index) => {
+                const categories = card.getAttribute('data-categories') ? card.getAttribute('data-categories').split(',') : [];
+                const location = card.getAttribute('data-location') || '';
+                const strategy = card.getAttribute('data-strategy') || '';
+                const aum = card.getAttribute('data-aum') || '';
                 
-                if (activeFilter === null) {
-                    // Show all when no filter is active
-                    card.style.display = 'flex';
-                } else {
-                    // Show only if card matches the active filter
-                    const shouldShow = categories.includes(activeFilter);
-                    card.style.display = shouldShow ? 'flex' : 'none';
+                let shouldShow = true;
+                let reason = '';
+                
+                // Category filter
+                if (activeFilters.category && activeFilters.category !== '') {
+                    if (!categories.includes(activeFilters.category)) {
+                        shouldShow = false;
+                        reason = `Category mismatch: card has [${categories.join(',')}], filter wants "${activeFilters.category}"`;
+                    }
+                }
+                
+                // Strategy filter
+                if (activeFilters.strategy && activeFilters.strategy !== '' && shouldShow) {
+                    if (strategy !== activeFilters.strategy) {
+                        shouldShow = false;
+                        reason = `Strategy mismatch: card has "${strategy}", filter wants "${activeFilters.strategy}"`;
+                    }
+                }
+                
+                // Location filter
+                if (activeFilters.location && activeFilters.location !== '' && shouldShow) {
+                    if (location !== activeFilters.location) {
+                        shouldShow = false;
+                        reason = `Location mismatch: card has "${location}", filter wants "${activeFilters.location}"`;
+                    }
+                }
+                
+                // AUM filter
+                if (activeFilters.aum && activeFilters.aum !== '' && shouldShow) {
+                    if (aum !== activeFilters.aum) {
+                        shouldShow = false;
+                        reason = `AUM mismatch: card has "${aum}", filter wants "${activeFilters.aum}"`;
+                    }
+                }
+                
+                card.style.display = shouldShow ? 'flex' : 'none';
+                
+                if (shouldShow) {
+                    visibleCount++;
+                }
+                
+                // Debug logging for first few cards
+                if (index < 5) {
+                    console.log(`Card ${index + 1}:`, {
+                        categories,
+                        location,
+                        strategy,
+                        aum,
+                        shouldShow,
+                        reason: reason || 'Shows'
+                    });
                 }
             });
+            
+            console.log('=== FILTER SUMMARY ===');
+            console.log('Active filters:', activeFilters);
+            console.log('Total cards:', clientCards.length);
+            console.log('Visible cards:', visibleCount);
+            console.log('Hidden cards:', clientCards.length - visibleCount);
         }
 
-        function toggleFilter(filterType) {
-            if (activeFilter === filterType) {
-                // If clicking the same filter, deselect it
-                activeFilter = null;
-            } else {
-                // Select the new filter (deselecting any previous one)
-                activeFilter = filterType;
-            }
-            
-            updateFilterButtons();
+        function handleFilterChange(filterType, value) {
+            activeFilters[filterType] = value;
+            console.log(`Filter changed: ${filterType} = "${value}"`);
             filterClients();
         }
 
-        // Add event listeners to filter buttons
+        // Initialize dropdowns
         document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const filterType = this.id.replace('filter-', '');
-                    toggleFilter(filterType);
+            const dropdowns = document.querySelectorAll('.dropdown-container');
+            // Accordion logic for location dropdown
+            const locationMenu = document.getElementById('location-menu');
+            if (locationMenu) {
+                const regionHeaders = locationMenu.querySelectorAll('.dropdown-region-header');
+                regionHeaders.forEach(header => {
+                    header.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const region = this.getAttribute('data-region-toggle');
+                        const regionDiv = this.closest('.dropdown-region');
+                        const regionList = locationMenu.querySelector(`[data-region-list="${region}"]`);
+                        // Close all other regions
+                        locationMenu.querySelectorAll('.dropdown-region').forEach(r => {
+                            if (r !== regionDiv) {
+                                r.classList.remove('open');
+                                const l = r.querySelector('.dropdown-region-list');
+                                if (l) l.style.display = 'none';
+                            }
+                        });
+                        // Toggle this region
+                        const isOpen = regionDiv.classList.contains('open');
+                        if (isOpen) {
+                            regionDiv.classList.remove('open');
+                            regionList.style.display = 'none';
+                        } else {
+                            regionDiv.classList.add('open');
+                            regionList.style.display = 'block';
+                        }
+                    });
                 });
+                // Handle city selection in accordion
+                locationMenu.querySelectorAll('.dropdown-region-list .dropdown-option').forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const value = this.getAttribute('data-value');
+                        const text = this.textContent;
+                        // Update display
+                        document.getElementById('location-display').textContent = text;
+                        handleFilterChange('location', value);
+                        // Close dropdown and all regions
+                        dropdowns.forEach(container => container.classList.remove('open'));
+                        locationMenu.querySelectorAll('.dropdown-region').forEach(r => {
+                            r.classList.remove('open');
+                            const l = r.querySelector('.dropdown-region-list');
+                            if (l) l.style.display = 'none';
+                        });
+                    });
+                });
+                // Handle "All Locations"
+                const allLoc = locationMenu.querySelector('.dropdown-option[data-value=""]');
+                if (allLoc) {
+                    allLoc.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        document.getElementById('location-display').textContent = 'All Locations';
+                        handleFilterChange('location', '');
+                        dropdowns.forEach(container => container.classList.remove('open'));
+                        locationMenu.querySelectorAll('.dropdown-region').forEach(r => {
+                            r.classList.remove('open');
+                            const l = r.querySelector('.dropdown-region-list');
+                            if (l) l.style.display = 'none';
+                        });
+                    });
+                }
+            }
+            // General dropdown logic
+            dropdowns.forEach(container => {
+                const trigger = container.querySelector('.filter-dropdown');
+                const menu = container.querySelector('.dropdown-menu');
+                const options = menu.querySelectorAll('.dropdown-option');
+                const display = container.querySelector('[id$="-display"]');
+                // Helper: set active style
+                function updateActiveStyle(trigger, value) {
+                    const isDefault = value === '';
+                    if (isDefault) {
+                        trigger.classList.remove('filter-active');
+                    } else {
+                        trigger.classList.add('filter-active');
+                    }
+                }
+                // Toggle dropdown
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Close all other dropdowns
+                    dropdowns.forEach(other => {
+                        if (other !== container) {
+                            other.classList.remove('open');
+                        }
+                    });
+                    // Toggle this dropdown
+                    container.classList.toggle('open');
+                });
+                // Handle option clicks (except location dropdown, handled above)
+                if (container.querySelector('.dropdown-menu') && container.id !== 'location-filter') {
+                    options.forEach(option => {
+                        option.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const value = this.getAttribute('data-value');
+                            const text = this.textContent;
+                            display.textContent = text;
+                            let filterType = '';
+                            if (trigger.id === 'category-filter') {
+                                filterType = 'category';
+                            } else if (trigger.id === 'aum-filter') {
+                                filterType = 'aum';
+                            }
+                            handleFilterChange(filterType, value);
+                            updateActiveStyle(trigger, value);
+                            container.classList.remove('open');
+                        });
+                    });
+                }
+                // On page load, set correct style
+                updateActiveStyle(trigger, '');
             });
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown-container')) {
+                    dropdowns.forEach(container => {
+                        container.classList.remove('open');
+                    });
+                    if (locationMenu) {
+                        locationMenu.querySelectorAll('.dropdown-region').forEach(r => {
+                            r.classList.remove('open');
+                            const l = r.querySelector('.dropdown-region-list');
+                            if (l) l.style.display = 'none';
+                        });
+                    }
+                }
+            });
+            // Ensure all cards are visible on load
+            filterClients();
         });
 
         // Logout logic
