@@ -137,7 +137,7 @@
     </div>
     <div class="flex justify-between items-center mb-4">
       <div>
-        <button id="notes-toggle" class="filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2">
+        <button id="notes-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
           <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14,2 14,8 20,8"></polyline>
@@ -875,21 +875,27 @@
       if (mainSidebarContainer.classList.contains('sidebar-open')) {
         // Close sidebar
         mainSidebarContainer.classList.remove('sidebar-open');
-        this.classList.remove('filter-active');
-        this.classList.add('filter-dropdown');
+        // Reset button to default styling
+        this.style.borderColor = 'var(--color-mawney-green)';
+        this.style.color = 'var(--color-mawney-green)';
+        this.style.background = 'var(--color-parchment)';
       } else {
         // Open sidebar
         mainSidebarContainer.classList.add('sidebar-open');
-        this.classList.remove('filter-dropdown');
-        this.classList.add('filter-active');
+        // Set button to active styling (green background)
+        this.style.borderColor = 'var(--color-mawney-green)';
+        this.style.color = 'var(--color-parchment)';
+        this.style.background = 'var(--color-mawney-green)';
         renderNotes();
       }
     });
 
     closeNotes.addEventListener('click', function() {
       mainSidebarContainer.classList.remove('sidebar-open');
-      notesToggle.classList.remove('filter-active');
-      notesToggle.classList.add('filter-dropdown');
+      // Reset button to default styling
+      notesToggle.style.borderColor = 'var(--color-mawney-green)';
+      notesToggle.style.color = 'var(--color-mawney-green)';
+      notesToggle.style.background = 'var(--color-parchment)';
     });
 
     // Add note
