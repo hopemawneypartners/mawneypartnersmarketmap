@@ -893,58 +893,118 @@
     const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
     const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
     
-    // Initialize Supabase client
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Load notes from Supabase
-    async function loadNotes() {
+    // Initialize Supabase client only if configuration is provided
+    let supabase = null;
+    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY_HERE') {
       try {
-        const { data, error } = await supabase
-          .from('notes')
-          .select('*')
-          .order('created_at', { ascending: false });
-        
-        if (error) throw error;
-        return data || [];
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log('Supabase client initialized successfully');
       } catch (error) {
-        console.error('Error loading notes:', error);
+        console.error('Error initializing Supabase client:', error);
+      }
+    } else {
+      console.log('Supabase not configured - using local storage fallback');
+    }
+
+    // Load notes from Supabase or localStorage
+    async function loadNotes() {
+      if (supabase) {
+        try {
+          const { data, error } = await supabase
+            .from('notes')
+            .select('*')
+            .order('created_at', { ascending: false });
+          
+          if (error) throw error;
+          return data || [];
+        } catch (error) {
+          console.error('Error loading notes from Supabase:', error);
+          return loadNotesFromLocalStorage();
+        }
+      } else {
+        return loadNotesFromLocalStorage();
+      }
+    }
+
+    // Load notes from localStorage
+    function loadNotesFromLocalStorage() {
+      try {
+        const notes = localStorage.getItem('employee-map-notes');
+        return notes ? JSON.parse(notes) : [];
+      } catch (error) {
+        console.error('Error loading notes from localStorage:', error);
         return [];
       }
     }
 
-    // Add note via Supabase
+    // Add note via Supabase or localStorage
     async function addNote(noteText) {
+      const newNote = {
+        id: Date.now(),
+        text: noteText,
+        created_at: new Date().toISOString()
+      };
+
+      if (supabase) {
+        try {
+          const { data, error } = await supabase
+            .from('notes')
+            .insert([newNote])
+            .select();
+          
+          if (error) throw error;
+          return data[0];
+        } catch (error) {
+          console.error('Error adding note to Supabase:', error);
+          return addNoteToLocalStorage(newNote);
+        }
+      } else {
+        return addNoteToLocalStorage(newNote);
+      }
+    }
+
+    // Add note to localStorage
+    function addNoteToLocalStorage(note) {
       try {
-        const { data, error } = await supabase
-          .from('notes')
-          .insert([
-            { 
-              text: noteText,
-              created_at: new Date().toISOString()
-            }
-          ])
-          .select();
-        
-        if (error) throw error;
-        return data[0];
+        const notes = loadNotesFromLocalStorage();
+        notes.unshift(note);
+        localStorage.setItem('employee-map-notes', JSON.stringify(notes));
+        return note;
       } catch (error) {
-        console.error('Error adding note:', error);
+        console.error('Error adding note to localStorage:', error);
         return null;
       }
     }
 
-    // Delete note via Supabase
+    // Delete note via Supabase or localStorage
     async function deleteNote(noteId) {
+      if (supabase) {
+        try {
+          const { error } = await supabase
+            .from('notes')
+            .delete()
+            .eq('id', noteId);
+          
+          if (error) throw error;
+          return true;
+        } catch (error) {
+          console.error('Error deleting note from Supabase:', error);
+          return deleteNoteFromLocalStorage(noteId);
+        }
+      } else {
+        return deleteNoteFromLocalStorage(noteId);
+      }
+    }
+
+    // Delete note from localStorage
+    function deleteNoteFromLocalStorage(noteId) {
       try {
-        const { error } = await supabase
-          .from('notes')
-          .delete()
-          .eq('id', noteId);
-        
-        if (error) throw error;
+        const notes = loadNotesFromLocalStorage();
+        const filteredNotes = notes.filter(note => note.id !== noteId);
+        localStorage.setItem('employee-map-notes', JSON.stringify(filteredNotes));
         return true;
       } catch (error) {
-        console.error('Error deleting note:', error);
+        console.error('Error deleting note from localStorage:', error);
         return false;
       }
     }
