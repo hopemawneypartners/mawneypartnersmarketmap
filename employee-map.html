@@ -90,12 +90,23 @@
     
     .note-item .delete-note {
       float: right;
-      background: none;
+      background: #ef4444;
       border: none;
-      color: #ef4444;
+      color: white;
       cursor: pointer;
-      font-size: 12px;
-      padding: 2px 4px;
+      font-size: 16px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      min-width: 24px;
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+    
+    .note-item .delete-note:hover {
+      background: #dc2626;
     }
     
     /* Mobile optimizations */
@@ -937,9 +948,8 @@
             this.style.borderColor = 'var(--color-mawney-green)';
             this.style.color = 'var(--color-parchment)';
             this.style.background = 'var(--color-mawney-green)';
-            if (typeof renderNotes === 'function') {
-              renderNotes();
-            }
+            // Always render notes when opening sidebar
+            renderNotes();
           }
           
           console.log('After toggle - body classes:', document.body.classList.toString());
@@ -968,9 +978,7 @@
             const newNote = await addNote(noteText);
             if (newNote) {
               noteInput.value = '';
-              if (typeof renderNotes === 'function') {
-                renderNotes();
-              }
+              renderNotes();
             }
           }
         });
@@ -1036,7 +1044,7 @@
       // Add note via Supabase or localStorage
       async function addNote(noteText) {
         const newNote = {
-          id: Date.now(),
+          id: Date.now().toString(), // Ensure ID is a string
           text: noteText,
           created_at: new Date().toISOString()
         };
@@ -1072,9 +1080,10 @@
         }
       }
 
-      // Update deleteNote to log errors
-      window.deleteNote = async function(noteId) {
+      // Delete note function
+      async function deleteNote(noteId) {
         console.log('deleteNote called with ID:', noteId, 'Type:', typeof noteId);
+        
         if (supabase) {
           try {
             console.log('Attempting to delete from Supabase...');
@@ -1099,33 +1108,61 @@
         }
       }
 
+      // Delete note from localStorage
+      function deleteNoteFromLocalStorage(noteId) {
+        try {
+          console.log('Deleting from localStorage with ID:', noteId);
+          const notes = loadNotesFromLocalStorage();
+          console.log('Current notes in localStorage:', notes);
+          const filteredNotes = notes.filter(note => note.id.toString() !== noteId.toString());
+          console.log('Filtered notes:', filteredNotes);
+          localStorage.setItem('employee-map-notes', JSON.stringify(filteredNotes));
+          console.log('Successfully deleted from localStorage');
+          return true;
+        } catch (error) {
+          console.error('Error deleting note from localStorage:', error);
+          return false;
+        }
+      }
+
       // Render notes
       async function renderNotes() {
+        console.log('renderNotes called');
+        if (!notesList) {
+          console.error('notesList element not found');
+          return;
+        }
+        
         const notes = await loadNotes();
+        console.log('Loaded notes:', notes);
+        
         notesList.innerHTML = '';
         notes.forEach(note => {
           const noteElement = document.createElement('div');
           noteElement.className = 'note-item';
           const date = new Date(note.created_at).toLocaleString();
           noteElement.innerHTML = `
-            <button class="delete-note" data-note-id="${note.id}">×</button>
+            <button class="delete-note" data-note-id="${note.id}" title="Delete note">×</button>
             <div class="note-date">${date}</div>
             <div class="note-text">${note.text.replace(/\n/g, '<br>')}</div>
           `;
           notesList.appendChild(noteElement);
+          console.log('Added note element with ID:', note.id);
         });
+        console.log('Notes rendered, total elements:', notesList.children.length);
       }
 
-      // Event delegation for delete note buttons
-      notesList.addEventListener('click', async function(e) {
-        console.log('Click event on notesList:', e.target);
+      // Event delegation for delete note buttons - use document level for better reliability
+      document.addEventListener('click', async function(e) {
+        console.log('Document click event:', e.target);
         if (e.target.classList.contains('delete-note')) {
           console.log('Delete button clicked!');
           const noteId = e.target.getAttribute('data-note-id');
           console.log('Note ID to delete:', noteId);
+          
           if (confirm('Are you sure you want to delete this note?')) {
             console.log('User confirmed deletion');
-            const success = await deleteNote(noteId.toString());
+            const success = await deleteNote(noteId);
             console.log('Delete result:', success);
             if (success) {
               renderNotes();
@@ -1140,23 +1177,6 @@
           document.body.classList.remove('sidebar-open');
         }
       });
-
-      // Delete note from localStorage
-      function deleteNoteFromLocalStorage(noteId) {
-        try {
-          console.log('Deleting from localStorage with ID:', noteId);
-          const notes = loadNotesFromLocalStorage();
-          console.log('Current notes in localStorage:', notes);
-          const filteredNotes = notes.filter(note => note.id != noteId); // Use != for type coercion
-          console.log('Filtered notes:', filteredNotes);
-          localStorage.setItem('employee-map-notes', JSON.stringify(filteredNotes));
-          console.log('Successfully deleted from localStorage');
-          return true;
-        } catch (error) {
-          console.error('Error deleting note from localStorage:', error);
-          return false;
-        }
-      }
     }); // End DOMContentLoaded
   </script>
 </body>
