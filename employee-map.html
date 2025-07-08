@@ -42,15 +42,20 @@
       right: 0;
     }
     
-    /* Push main content when sidebar is open */
-    .sidebar-open #main-content {
+    /* Push entire page content when sidebar is open */
+    .sidebar-open {
+      overflow-x: hidden;
+    }
+    
+    .sidebar-open body {
       transform: translateX(-320px);
       transition: transform 0.3s ease-in-out;
     }
     
-    /* Also shift the entire page content */
-    .sidebar-open {
-      overflow-x: hidden;
+    /* Also shift the main content for consistency */
+    .sidebar-open #main-content {
+      transform: translateX(-320px);
+      transition: transform 0.3s ease-in-out;
     }
     
     .note-item {
