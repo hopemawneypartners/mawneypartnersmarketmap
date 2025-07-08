@@ -801,4 +801,487 @@ body {
     padding-left: 18px;
     font-size: 0.95rem;
     border-radius: 0;
+}
+
+/* --- Tablet Optimizations (768px - 1024px) --- */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* General tablet improvements */
+  body {
+    font-size: 16px; /* Prevents zoom on iOS tablets */
+  }
+  
+  /* Touch-friendly buttons and interactive elements */
+  button, 
+  .btn-primary, 
+  .btn-secondary,
+  .nav-link,
+  .dropdown-container,
+  .filter-dropdown,
+  .filter-active {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  
+  /* Improved spacing for tablet layouts */
+  .card {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Better form inputs for tablets */
+  .input-field {
+    font-size: 16px;
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+  
+  /* Enhanced navigation for tablets */
+  .nav-link {
+    padding: 12px 16px;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Improved dropdown menus for touch */
+  .dropdown-menu {
+    min-width: 200px;
+    padding: 0.5rem 0;
+  }
+  
+  .dropdown-option {
+    padding: 12px 16px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Better profile cards for tablets */
+  .profile-card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Enhanced grid layouts for tablets */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Better spacing for sections */
+  section {
+    padding: 2rem 1.5rem;
+  }
+  
+  /* Improved header for tablets */
+  header {
+    padding: 1rem 1.5rem;
+  }
+  
+  /* Better footer for tablets */
+  footer {
+    padding: 2rem 1.5rem;
+  }
+  
+  /* Enhanced search functionality for tablets */
+  input[type="search"],
+  input[type="text"] {
+    font-size: 16px;
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+  
+  /* Better modal/dialog sizing for tablets */
+  .modal,
+  .dialog {
+    max-width: 90vw;
+    max-height: 90vh;
+    margin: 5vh auto;
+  }
+  
+  /* Improved sidebar behavior for tablets */
+  .sidebar {
+    width: 280px;
+  }
+  
+  /* Better table layouts for tablets */
+  table {
+    font-size: 14px;
+  }
+  
+  th, td {
+    padding: 12px 8px;
+  }
+  
+  /* Enhanced image handling for tablets */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Better text sizing for tablets */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.125rem; }
+  h6 { font-size: 1rem; }
+  
+  /* Improved spacing for lists */
+  ul, ol {
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Better link styling for tablets */
+  a {
+    padding: 4px 0;
+  }
+  
+  /* Enhanced focus states for accessibility */
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  a:focus {
+    outline: 2px solid var(--color-mawney-green);
+    outline-offset: 2px;
+  }
+  
+  /* Better hover states for tablets */
+  button:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .nav-link:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
+  }
+  
+  /* Improved loading states for tablets */
+  .loading {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  /* Better error states for tablets */
+  .error {
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+  }
+  
+  /* Enhanced success states for tablets */
+  .success {
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+  }
+  
+  /* Better responsive images for tablets */
+  .responsive-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Improved video handling for tablets */
+  video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Better iframe handling for tablets */
+  iframe {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  /* Enhanced scrollbar for tablets */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+  }
+  
+  /* Better text selection for tablets */
+  ::selection {
+    background-color: var(--color-mawney-green);
+    color: white;
+  }
+  
+  /* Improved print styles for tablets */
+  @media print {
+    body {
+      font-size: 12pt;
+      line-height: 1.4;
+    }
+    
+    .no-print {
+      display: none;
+    }
+  }
+}
+
+/* --- Additional Tablet Optimizations --- */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Enhanced touch targets for tablets */
+  .client-card {
+    min-height: 120px;
+    padding: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .client-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Better employee rows for tablets */
+  .employee-row {
+    padding: 1rem 0;
+  }
+  
+  .expand-btn {
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 8px;
+  }
+  
+  /* Enhanced profile cards for tablets */
+  .profile-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Better LinkedIn image viewer for tablets */
+  #linkedin-image {
+    max-height: 60vh;
+    border-radius: 12px;
+  }
+  
+  #prev-linkedin,
+  #next-linkedin {
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Improved specialism tags for tablets */
+  .border {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+  
+  /* Better timeline for tablets */
+  .relative {
+    padding-left: 1.5rem;
+  }
+  
+  /* Enhanced dropdowns for tablets */
+  .dropdown-container {
+    margin-bottom: 1rem;
+  }
+  
+  .filter-dropdown,
+  .filter-active {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+  
+  /* Better search input for tablets */
+  input[type="text"],
+  input[type="search"] {
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+  
+  /* Improved navigation for tablets */
+  nav {
+    gap: 1rem;
+  }
+  
+  nav a,
+  nav button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+  
+  /* Better header spacing for tablets */
+  header {
+    padding: 1rem 1.5rem;
+  }
+  
+  header img {
+    height: 44px;
+  }
+  
+  /* Enhanced footer for tablets */
+  footer {
+    padding: 2rem 1.5rem;
+  }
+  
+  footer img {
+    height: 44px;
+  }
+  
+  /* Better section spacing for tablets */
+  section {
+    padding: 2rem 1.5rem;
+  }
+  
+  /* Improved grid layouts for tablets */
+  .grid {
+    gap: 1.5rem;
+  }
+  
+  /* Better card spacing for tablets */
+  .card {
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  /* Enhanced button styling for tablets */
+  button {
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  
+  /* Better form styling for tablets */
+  form {
+    gap: 1.5rem;
+  }
+  
+  /* Improved text readability for tablets */
+  p {
+    line-height: 1.6;
+  }
+  
+  /* Better heading hierarchy for tablets */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+  }
+  
+  /* Enhanced focus states for tablets */
+  *:focus {
+    outline: 2px solid var(--color-mawney-green);
+    outline-offset: 2px;
+  }
+  
+  /* Better hover effects for tablets */
+  a:hover,
+  button:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
+  }
+  
+  /* Improved loading states for tablets */
+  .loading {
+    padding: 3rem;
+    font-size: 18px;
+  }
+  
+  /* Better error handling for tablets */
+  .error {
+    padding: 2rem;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+  
+  /* Enhanced success messages for tablets */
+  .success {
+    padding: 2rem;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+  
+  /* Better responsive images for tablets */
+  img {
+    border-radius: 8px;
+  }
+  
+  /* Improved video containers for tablets */
+  video {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Better iframe styling for tablets */
+  iframe {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Enhanced scrollbar for tablets */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--color-mawney-green);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-lighter-green);
+  }
+  
+  /* Better text selection for tablets */
+  ::selection {
+    background-color: var(--color-mawney-green);
+    color: white;
+  }
+  
+  /* Improved print styles for tablets */
+  @media print {
+    body {
+      font-size: 14pt;
+      line-height: 1.5;
+    }
+    
+    .no-print {
+      display: none;
+    }
+    
+    .card {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  /* Better accessibility for tablets */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Enhanced dark mode support for tablets */
+  @media (prefers-color-scheme: dark) {
+    /* Add dark mode styles if needed */
+  }
+  
+  /* Better high contrast mode for tablets */
+  @media (prefers-contrast: high) {
+    * {
+      border-width: 2px;
+    }
+  }
 } 

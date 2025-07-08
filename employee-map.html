@@ -28,8 +28,8 @@
     #notes-sidebar {
       position: fixed;
       top: 0;
-      right: -320px;
-      width: 320px;
+      right: -100%;
+      width: 100%;
       height: 100vh;
       z-index: 1000;
       overflow-y: auto;
@@ -38,24 +38,34 @@
       border-left: 1px solid #e5e7eb;
     }
     
+    /* Desktop: fixed width sidebar */
+    @media (min-width: 768px) {
+      #notes-sidebar {
+        right: -320px;
+        width: 320px;
+      }
+    }
+    
     .sidebar-open #notes-sidebar {
       right: 0;
     }
     
-    /* Push entire page content when sidebar is open */
+    /* Push main content when sidebar is open */
     .sidebar-open {
       overflow-x: hidden;
     }
     
-    .sidebar-open body {
-      transform: translateX(-320px);
-      transition: transform 0.3s ease-in-out;
+    /* Shift the entire page content when sidebar opens */
+    .sidebar-open #page-content-wrapper {
+      margin-right: 100%;
+      transition: margin-right 0.3s ease-in-out;
     }
     
-    /* Also shift the main content for consistency */
-    .sidebar-open #main-content {
-      transform: translateX(-320px);
-      transition: transform 0.3s ease-in-out;
+    /* Desktop: use fixed margin */
+    @media (min-width: 768px) {
+      .sidebar-open #page-content-wrapper {
+        margin-right: 320px;
+      }
     }
     
     .note-item {
@@ -87,6 +97,78 @@
       font-size: 12px;
       padding: 2px 4px;
     }
+    
+    /* Mobile optimizations */
+    @media (max-width: 767px) {
+      #notes-sidebar {
+        padding: 1rem;
+      }
+      
+      .note-item {
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      
+      .note-item .delete-note {
+        font-size: 16px;
+        padding: 8px;
+        min-width: 44px;
+        min-height: 44px;
+      }
+      
+      #note-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 12px;
+      }
+      
+      #add-note {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-height: 44px;
+      }
+    }
+    
+    /* Tablet optimizations (iPad, etc.) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      #notes-sidebar {
+        width: 280px;
+        padding: 1.5rem;
+      }
+      
+      .sidebar-open #page-content-wrapper {
+        margin-right: 280px;
+      }
+      
+      .note-item {
+        padding: 14px;
+        margin-bottom: 10px;
+      }
+      
+      .note-item .delete-note {
+        font-size: 14px;
+        padding: 6px;
+        min-width: 36px;
+        min-height: 36px;
+      }
+      
+      #note-input {
+        font-size: 14px;
+        padding: 10px;
+      }
+      
+      #add-note {
+        padding: 10px 14px;
+        font-size: 14px;
+        min-height: 40px;
+      }
+      
+      /* Ensure the Notes button is easily tappable on tablets */
+      #notes-toggle {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-height: 44px;
+      }
+    }
   </style>
   <script>
     if (localStorage.getItem('mawney_logged_in') !== 'true') {
@@ -95,968 +177,987 @@
   </script>
 </head>
 <body style="background: var(--color-alabaster);" class="min-h-screen flex flex-col">
-  <!-- Header -->
-  <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
-    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
-      <div class="flex items-center gap-4 md:gap-8">
-        <a href="index.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
+  <!-- Page content wrapper -->
+  <div id="page-content-wrapper" class="transition-all duration-300 ease-in-out">
+    <!-- Header -->
+    <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
+      <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
+        <div class="flex items-center gap-4 md:gap-8">
+          <a href="index.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
+        </div>
+        <nav class="flex items-center gap-4 md:gap-8">
+          <a href="index.html" style="color: var(--color-mawney-green);" class="text-sm md:text-base font-medium hover:underline hidden sm:block">Our Clients</a>
+          <div class="relative">
+            <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-3 md:px-4 py-1 text-xs md:text-sm focus:outline-none focus:ring-2" style="min-width: 120px; max-width: 160px; color: var(--color-espresso);">
+            <svg class="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-xs md:text-sm border rounded px-2 md:px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
+          <button id="logout-btn" style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-xs md:text-sm border rounded px-2 md:px-3 py-1 hover:bg-[#e0ddd7] ml-2">Log out</button>
+        </nav>
       </div>
-      <nav class="flex items-center gap-4 md:gap-8">
-        <a href="index.html" style="color: var(--color-mawney-green);" class="text-sm md:text-base font-medium hover:underline hidden sm:block">Our Clients</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background: var(--color-mawney-green);" class="w-full py-12 md:py-16">
+      <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
+        <img src="images/axar white.png" alt="Axar" style="max-height: 48px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" class="md:max-h-64" />
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="w-full max-w-4xl mx-auto mt-8 md:mt-10 text-center px-4">
+      <p class="mb-4 text-sm md:text-base leading-relaxed" style="color: var(--color-mawney-green);">
+        Axar Capital Management is an opportunistic corporate credit investor focused on the U.S. middle market founded by Alex Axelrod and Timothy Parrott in 2015. Current AUM sits at ~$2.9bn, Axar actively invests across the capital structure in both public and private markets, with a particular emphasis on distressed credit, structured finance, and asset-heavy businesses. The firm is known for taking a hands-on approach to portfolio management, often pursuing influence or control positions to drive value creation.
+      </p>
+      
+      <!-- Filter Tags -->
+      <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-6 md:mt-8">
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Credit</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Alternative</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">New York City</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Special Situations</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">$1-3bn AUM</span>
+      </div>
+    </section>
+
+    <!-- Employees Section -->
+    <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-4" style="max-width: 100vw;">
+      <div class="flex flex-col items-center mb-6 md:mb-8">
+        <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
+        <div class="flex flex-col sm:flex-row items-center gap-2 mb-4">
+          <span class="text-xs md:text-sm mr-2">Navigate to department:</span>
+          <div class="flex flex-wrap justify-center gap-2">
+            <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment">Investment</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="trading">Trading</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="capital-formation">Capital Formation</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="c-suite">C-Suite</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <button id="notes-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14,2 14,8 20,8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10,9 9,9 8,9"></polyline>
+            </svg>
+            <span class="font-bold">Notes</span>
+          </button>
+        </div>
         <div class="relative">
-          <input type="text" placeholder="Search..." class="rounded-full border border-[#b6b1a9] bg-transparent px-3 md:px-4 py-1 text-xs md:text-sm focus:outline-none focus:ring-2" style="min-width: 120px; max-width: 160px; color: var(--color-espresso);">
-          <svg class="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4" style="color: var(--color-mawney-green);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <button style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-xs md:text-sm border rounded px-2 md:px-3 py-1 hover:bg-[#e0ddd7]">Edit mode</button>
-        <button id="logout-btn" style="color: var(--color-mawney-green); border-color: #b6b1a9;" class="text-xs md:text-sm border rounded px-2 md:px-3 py-1 hover:bg-[#e0ddd7] ml-2">Log out</button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section style="background: var(--color-mawney-green);" class="w-full py-12 md:py-16">
-    <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
-      <img src="images/axar white.png" alt="Axar" style="max-height: 48px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" class="md:max-h-64" />
-    </div>
-  </section>
-
-  <!-- Description -->
-  <section class="w-full max-w-4xl mx-auto mt-8 md:mt-10 text-center px-4">
-    <p class="mb-4 text-sm md:text-base leading-relaxed" style="color: var(--color-mawney-green);">
-      Axar Capital Management is an opportunistic corporate credit investor focused on the U.S. middle market founded by Alex Axelrod and Timothy Parrott in 2015. Current AUM sits at ~$2.9bn, Axar actively invests across the capital structure in both public and private markets, with a particular emphasis on distressed credit, structured finance, and asset-heavy businesses. The firm is known for taking a hands-on approach to portfolio management, often pursuing influence or control positions to drive value creation.
-    </p>
-    
-    <!-- Filter Tags -->
-    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-6 md:mt-8">
-      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Credit</span>
-      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Alternative</span>
-      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">New York City</span>
-      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Special Situations</span>
-      <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">$1-3bn AUM</span>
-    </div>
-  </section>
-
-  <!-- Employees Section -->
-  <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-4" style="max-width: 100vw;">
-    <div class="flex flex-col items-center mb-6 md:mb-8">
-      <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
-      <div class="flex flex-col sm:flex-row items-center gap-2 mb-4">
-        <span class="text-xs md:text-sm mr-2">Navigate to department:</span>
-        <div class="flex flex-wrap justify-center gap-2">
-          <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
-          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment">Investment</button>
-          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="trading">Trading</button>
-          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="capital-formation">Capital Formation</button>
-          <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="c-suite">C-Suite</button>
-        </div>
-      </div>
-    </div>
-    <div class="flex justify-between items-center mb-4">
-      <div>
-        <button id="notes-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14,2 14,8 20,8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10,9 9,9 8,9"></polyline>
-          </svg>
-          <span class="font-bold">Notes</span>
+          <button id="filter-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
+          Filter Specialisms
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4"><path d="M19 9l-7 7-7-7"/></svg>
         </button>
+          <div id="filter-dropdown" class="absolute right-0 top-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-3 md:p-4 z-50 hidden" style="min-width: 280px; max-width: 90vw;">
+            <div class="mb-3">
+              <label class="text-xs md:text-sm font-semibold" style="color: var(--color-mawney-green);">Select Specialisms:</label>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Accounting" class="specialism-filter">
+                <span>Accounting</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Asset Allocation" class="specialism-filter">
+                <span>Asset Allocation</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Business Development" class="specialism-filter">
+                <span>Business Development</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Capital Solutions" class="specialism-filter">
+                <span>Capital Solutions</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Client Communications" class="specialism-filter">
+                <span>Client Communications</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Client Relations" class="specialism-filter">
+                <span>Client Relations</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Compliance" class="specialism-filter">
+                <span>Compliance</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Corporate Strategy" class="specialism-filter">
+                <span>Corporate Strategy</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Credit Analysis" class="specialism-filter">
+                <span>Credit Analysis</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Credit Research" class="specialism-filter">
+                <span>Credit Research</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Data Modeling" class="specialism-filter">
+                <span>Data Modeling</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Distressed Credit" class="specialism-filter">
+                <span>Distressed Credit</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Financial Analysis" class="specialism-filter">
+                <span>Financial Analysis</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Financial Management" class="specialism-filter">
+                <span>Financial Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Fund Reporting" class="specialism-filter">
+                <span>Fund Reporting</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Insurance Asset Management" class="specialism-filter">
+                <span>Insurance Asset Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Investment Management" class="specialism-filter">
+                <span>Investment Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Investment Strategy" class="specialism-filter">
+                <span>Investment Strategy</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Investor Relations" class="specialism-filter">
+                <span>Investor Relations</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Leadership" class="specialism-filter">
+                <span>Leadership</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Market Expansion" class="specialism-filter">
+                <span>Market Expansion</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Market Research" class="specialism-filter">
+                <span>Market Research</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Operations Management" class="specialism-filter">
+                <span>Operations Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Portfolio Management" class="specialism-filter">
+                <span>Portfolio Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Portfolio Operations" class="specialism-filter">
+                <span>Portfolio Operations</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Regulatory Affairs" class="specialism-filter">
+                <span>Regulatory Affairs</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Research" class="specialism-filter">
+                <span>Research</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Risk Management" class="specialism-filter">
+                <span>Risk Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Sales Strategy" class="specialism-filter">
+                <span>Sales Strategy</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Special Situations" class="specialism-filter">
+                <span>Special Situations</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Stakeholder Management" class="specialism-filter">
+                <span>Stakeholder Management</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Strategic Planning" class="specialism-filter">
+                <span>Strategic Planning</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Trading" class="specialism-filter">
+                <span>Trading</span>
+              </label>
+              <label class="flex items-center gap-2 text-xs md:text-sm">
+                <input type="checkbox" value="Treasury" class="specialism-filter">
+                <span>Treasury</span>
+              </label>
+            </div>
+            <div class="flex gap-2 mt-3 pt-3 border-t border-gray-200">
+              <button id="clear-filters" class="px-3 py-1 text-xs md:text-sm border rounded" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green);">Clear All</button>
+              <button id="apply-filters" class="px-3 py-1 text-xs md:text-sm bg-[var(--color-mawney-green)] text-[var(--color-parchment)] rounded">Apply</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="relative">
-        <button id="filter-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
-        Filter Specialisms
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4"><path d="M19 9l-7 7-7-7"/></svg>
+      
+      <!-- Main content and sidebar container -->
+      <div class="flex gap-6 transition-all duration-300 ease-in-out" id="main-sidebar-container">
+        <!-- Main content wrapper -->
+        <div class="flex-1 transition-all duration-300 ease-in-out" id="main-content-wrapper">
+          <!-- Main content area -->
+          <div class="flex-1 transition-all duration-300 ease-in-out" id="main-content">
+            <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
+              <div id="department-grids-container">
+                <!-- Dynamic department grids will be inserted here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+        <div class="text-sm mb-4 md:mb-0">
+          37 Tanner Street<br>
+          London SE1 3LF<br>
+          <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
+          © Mawney Partners 2023 - Privacy Policy
+        </div>
+        <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+      </div>
+    </footer>
+  </div>
+  
+  <!-- Notes Sidebar -->
+  <div id="notes-sidebar" class="p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-semibold" style="color: var(--color-mawney-green);">Notes</h3>
+      <button id="close-notes" class="text-gray-500 hover:text-gray-700">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
-        <div id="filter-dropdown" class="absolute right-0 top-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-3 md:p-4 z-50 hidden" style="min-width: 280px; max-width: 90vw;">
-          <div class="mb-3">
-            <label class="text-xs md:text-sm font-semibold" style="color: var(--color-mawney-green);">Select Specialisms:</label>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Accounting" class="specialism-filter">
-              <span>Accounting</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Asset Allocation" class="specialism-filter">
-              <span>Asset Allocation</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Business Development" class="specialism-filter">
-              <span>Business Development</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Capital Solutions" class="specialism-filter">
-              <span>Capital Solutions</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Client Communications" class="specialism-filter">
-              <span>Client Communications</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Client Relations" class="specialism-filter">
-              <span>Client Relations</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Compliance" class="specialism-filter">
-              <span>Compliance</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Corporate Strategy" class="specialism-filter">
-              <span>Corporate Strategy</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Credit Analysis" class="specialism-filter">
-              <span>Credit Analysis</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Credit Research" class="specialism-filter">
-              <span>Credit Research</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Data Modeling" class="specialism-filter">
-              <span>Data Modeling</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Distressed Credit" class="specialism-filter">
-              <span>Distressed Credit</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Financial Analysis" class="specialism-filter">
-              <span>Financial Analysis</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Financial Management" class="specialism-filter">
-              <span>Financial Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Fund Reporting" class="specialism-filter">
-              <span>Fund Reporting</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Insurance Asset Management" class="specialism-filter">
-              <span>Insurance Asset Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Investment Management" class="specialism-filter">
-              <span>Investment Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Investment Strategy" class="specialism-filter">
-              <span>Investment Strategy</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Investor Relations" class="specialism-filter">
-              <span>Investor Relations</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Leadership" class="specialism-filter">
-              <span>Leadership</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Market Expansion" class="specialism-filter">
-              <span>Market Expansion</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Market Research" class="specialism-filter">
-              <span>Market Research</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Operations Management" class="specialism-filter">
-              <span>Operations Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Portfolio Management" class="specialism-filter">
-              <span>Portfolio Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Portfolio Operations" class="specialism-filter">
-              <span>Portfolio Operations</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Regulatory Affairs" class="specialism-filter">
-              <span>Regulatory Affairs</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Research" class="specialism-filter">
-              <span>Research</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Risk Management" class="specialism-filter">
-              <span>Risk Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Sales Strategy" class="specialism-filter">
-              <span>Sales Strategy</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Special Situations" class="specialism-filter">
-              <span>Special Situations</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Stakeholder Management" class="specialism-filter">
-              <span>Stakeholder Management</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Strategic Planning" class="specialism-filter">
-              <span>Strategic Planning</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Trading" class="specialism-filter">
-              <span>Trading</span>
-            </label>
-            <label class="flex items-center gap-2 text-xs md:text-sm">
-              <input type="checkbox" value="Treasury" class="specialism-filter">
-              <span>Treasury</span>
-            </label>
-          </div>
-          <div class="flex gap-2 mt-3 pt-3 border-t border-gray-200">
-            <button id="clear-filters" class="px-3 py-1 text-xs md:text-sm border rounded" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green);">Clear All</button>
-            <button id="apply-filters" class="px-3 py-1 text-xs md:text-sm bg-[var(--color-mawney-green)] text-[var(--color-parchment)] rounded">Apply</button>
-          </div>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-2" style="color: var(--color-mawney-green);">Add Note</label>
+        <textarea id="note-input" rows="4" class="w-full p-3 border border-gray-300 rounded text-sm resize-none" placeholder="Enter your notes here..." style="background: white; color: var(--color-espresso);"></textarea>
+        <button id="add-note" class="mt-2 px-4 py-2 bg-[var(--color-mawney-green)] text-[var(--color-parchment)] rounded text-sm hover:opacity-90">Add Note</button>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium mb-2" style="color: var(--color-mawney-green);">Recent Notes</h4>
+        <div id="notes-list" class="space-y-2">
+          <!-- Notes will be dynamically added here -->
         </div>
       </div>
     </div>
-    
-    <!-- Main content and sidebar container -->
-    <div class="flex gap-6 transition-all duration-300 ease-in-out" id="main-sidebar-container">
-      <!-- Main content area -->
-      <div class="flex-1 transition-all duration-300 ease-in-out" id="main-content">
-        <div class="border border-gray-400 rounded p-6 w-full overflow-x-auto relative" style="max-width: 100vw; background: var(--color-parchment);">
-          <div id="department-grids-container">
-            <!-- Dynamic department grids will be inserted here -->
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Notes Sidebar -->
-    <div id="notes-sidebar" class="p-6">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold" style="color: var(--color-mawney-green);">Notes</h3>
-        <button id="close-notes" class="text-gray-500 hover:text-gray-700">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium mb-2" style="color: var(--color-mawney-green);">Add Note</label>
-          <textarea id="note-input" rows="4" class="w-full p-3 border border-gray-300 rounded text-sm resize-none" placeholder="Enter your notes here..." style="background: white; color: var(--color-espresso);"></textarea>
-          <button id="add-note" class="mt-2 px-4 py-2 bg-[var(--color-mawney-green)] text-[var(--color-parchment)] rounded text-sm hover:opacity-90">Add Note</button>
-        </div>
-        <div>
-          <h4 class="text-sm font-medium mb-2" style="color: var(--color-mawney-green);">Recent Notes</h4>
-          <div id="notes-list" class="space-y-2">
-            <!-- Notes will be dynamically added here -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer style="background: var(--color-mawney-green); color: var(--color-parchment);" class="mt-12 py-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
-      <div class="text-sm mb-4 md:mb-0">
-        37 Tanner Street<br>
-        London SE1 3LF<br>
-        <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
-        © Mawney Partners 2023 - Privacy Policy
-      </div>
-      <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
-    </div>
-  </footer>
+  </div>
 
   <script>
-    // Employee data with departments
-    const employees = [
-      {
-        name: "Andrew Axelrod",
-        shortName: "Andrew<br>Axelrod",
-        title: "Founder/CIO",
-        profile: "profile-andrew-axelrod.html",
-        departments: ["business", "investment", "c-suite"],
-        specialisms: "Distressed Credit,Special Situations,Corporate Strategy,Investment Management"
-      },
-      {
-        name: "Matt Magnuson",
-        shortName: "Matt<br>Magunson",
-        title: "Head of Trading",
-        profile: "profile-matt-magunson.html",
-        departments: ["business", "trading"],
-        specialisms: "Trading,Capital Solutions,Special Situations,Research"
-      },
-      {
-        name: "Grant Mitchell",
-        shortName: "Grant<br>Mitchell",
-        title: "Deputy CIO",
-        profile: "profile-grant-mitchell.html",
-        departments: ["business", "investment"],
-        specialisms: "Credit Analysis,Portfolio Management,Risk Management,Investment Strategy"
-      },
-      {
-        name: "Thomas Henke",
-        shortName: "Thomas Henke",
-        title: "Head of IAM & Director, PO",
-        profile: "profile-thomas-h.html",
-        departments: ["business"],
-        specialisms: "Insurance Asset Management,Portfolio Operations,Risk Management,Asset Allocation"
-      },
-      {
-        name: "Akash Kumar",
-        shortName: "Akash<br>Kumar",
-        title: "Senior Analyst",
-        profile: "profile-akash-kumar.html",
-        departments: ["business", "investment"],
-        specialisms: "Financial Analysis,Credit Research,Data Modeling,Market Research"
-      },
-      {
-        name: "Timothy Parrott",
-        shortName: "Timothy<br>Parrott",
-        title: "Co-Founder/President",
-        profile: "profile-timothy-parrott.html",
-        departments: ["business", "capital-formation", "c-suite"],
-        specialisms: "Corporate Strategy,Business Development,Leadership,Strategic Planning"
-      },
-      {
-        name: "David Fisher",
-        shortName: "David<br>Fisher",
-        title: "Head of BD",
-        profile: "profile-david-fisher.html",
-        departments: ["business", "capital-formation"],
-        specialisms: "Business Development,Client Relations,Sales Strategy,Market Expansion"
-      },
-      {
-        name: "Lionel Benichou",
-        shortName: "Lionel<br>Benichou",
-        title: "CFO",
-        profile: "profile-lionel-benichou.html",
-        departments: ["business", "c-suite"],
-        specialisms: "Financial Management,Accounting,Treasury,Compliance"
-      },
-      {
-        name: "Ricardo Mosquera",
-        shortName: "Ricardo<br>Mosquera",
-        title: "COO/CCO",
-        profile: "profile-ricardo-mosquera.html",
-        departments: ["business", "c-suite"],
-        specialisms: "Operations Management,Compliance,Risk Management,Regulatory Affairs"
-      },
-      {
-        name: "Sean Mulrenan",
-        shortName: "Sean<br>Mulrenan",
-        title: "Director - IR",
-        profile: "profile-sean-mulrenan.html",
-        departments: ["business", "capital-formation"],
-        specialisms: "Investor Relations,Client Communications,Fund Reporting,Stakeholder Management"
-      },
-      {
-        name: "Ronald de Gier",
-        shortName: "Ronald<br>de Gier",
-        title: "Head of Portfolio Operations",
-        profile: "profile-ronald-de-gier.html",
-        departments: ["business"],
-        specialisms: "Portfolio Operations,Trade Execution,Risk Management,Operations Management"
-      }
-    ];
-
-    // Department configurations
-    const departments = {
-      "business": { name: "Business", color: "#0b4c3a" },
-      "investment": { name: "Investment", color: "#0b4c3a" },
-      "trading": { name: "Trading", color: "#0b4c3a" },
-      "capital-formation": { name: "Capital Formation", color: "#0b4c3a" },
-      "c-suite": { name: "C-Suite", color: "#0b4c3a" }
-    };
-
-    let selectedDepartments = ['business'];
-    let zoomLevels = {};
-
-    // Initialize zoom levels for all departments
-    Object.keys(departments).forEach(dept => {
-      zoomLevels[dept] = 1;
-    });
-    
-    // Initialize zoom levels for Business sub-grids
-    zoomLevels["business1"] = 1;
-    zoomLevels["business2"] = 1;
-
-    // Department button functionality
-    const deptButtons = document.querySelectorAll('.dept-btn');
-    deptButtons.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const dept = this.getAttribute('data-department');
-        // Deselect all buttons
-        deptButtons.forEach(b => {
-          b.classList.remove('filter-active');
-          b.classList.add('filter-dropdown');
-        });
-        // Select only the clicked button
-        this.classList.remove('filter-dropdown');
-        this.classList.add('filter-active');
-        // Set selectedDepartments to only the clicked department
-        selectedDepartments = [dept];
-        renderDepartmentGrids();
-      });
-    });
-
-    // Render department grids
-    function renderDepartmentGrids() {
-      const container = document.getElementById('department-grids-container');
-      container.innerHTML = '';
-      
-      if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
-        // Business view: two grids side by side
-        // Grid 1
-        const grid1Hierarchy = [
-          ["Andrew Axelrod"],
-          ["Matt Magnuson", "Grant Mitchell", "Thomas Henke"],
-          ["Akash Kumar"]
-        ];
-        // Grid 2
-        const grid2Hierarchy = [
-          ["Timothy Parrott"],
-          ["David Fisher", "Lionel Benichou", "Ricardo Mosquera"],
-          ["Sean Mulrenan", "Ronald de Gier"]
-        ];
-        const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
-        const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
-        
-        // Container for both grids side by side
-        const businessContainer = document.createElement('div');
-        businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
-        
-        // Grid 1
-        const gridDiv1 = document.createElement('div');
-        gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-        gridDiv1.innerHTML = `
-          <div class="w-full min-w-0 overflow-x-auto relative">
-            <div class="flex items-center justify-between mb-2">
-              <div></div>
-              <div class="flex items-center gap-2">
-                <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                <span class="zoom-label text-xs text-gray-600" data-dept="business1">100%</span>
-                <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
-              </div>
-            </div>
-            <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
-              <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
-                ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
-              </div>
-            </div>
-          </div>
-        `;
-        
-        businessContainer.appendChild(gridDiv1);
-        
-        // Add dashed line divider between teams
-        const divider = document.createElement('div');
-        divider.className = 'hidden lg:block w-px mx-4';
-        divider.style.borderLeft = '2px dashed var(--color-espresso)';
-        divider.style.height = '100%';
-        divider.style.minHeight = '400px';
-        businessContainer.appendChild(divider);
-        
-        // Grid 2
-        const gridDiv2 = document.createElement('div');
-        gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-        gridDiv2.innerHTML = `
-          <div class="w-full min-w-0 overflow-x-auto relative">
-            <div class="flex items-center justify-between mb-2">
-              <div></div>
-              <div class="flex items-center gap-2">
-                <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                <span class="zoom-label text-xs text-gray-600" data-dept="business2">100%</span>
-                <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
-              </div>
-            </div>
-            <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
-              <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
-                ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
-              </div>
-            </div>
-          </div>
-        `;
-        
-        businessContainer.appendChild(gridDiv2);
-        container.appendChild(businessContainer);
-        
-        // Attach zoom listeners for both grids
-        attachZoomListeners();
-        return;
-      }
-      
-      // All other departments: single grid as before
-      selectedDepartments.forEach((dept, index) => {
-        const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
-        
-        if (deptEmployees.length === 0) return;
-        
-        const gridDiv = document.createElement('div');
-        gridDiv.className = 'w-full mb-8';
-        if (index > 0) {
-          gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
+    document.addEventListener('DOMContentLoaded', function() {
+      // Employee data with departments
+      const employees = [
+        {
+          name: "Andrew Axelrod",
+          shortName: "Andrew<br>Axelrod",
+          title: "Founder/CIO",
+          profile: "profile-andrew-axelrod.html",
+          departments: ["business", "investment", "c-suite"],
+          specialisms: "Distressed Credit,Special Situations,Corporate Strategy,Investment Management"
+        },
+        {
+          name: "Matt Magnuson",
+          shortName: "Matt<br>Magunson",
+          title: "Head of Trading",
+          profile: "profile-matt-magunson.html",
+          departments: ["business", "trading"],
+          specialisms: "Trading,Capital Solutions,Special Situations,Research"
+        },
+        {
+          name: "Grant Mitchell",
+          shortName: "Grant<br>Mitchell",
+          title: "Deputy CIO",
+          profile: "profile-grant-mitchell.html",
+          departments: ["business", "investment"],
+          specialisms: "Credit Analysis,Portfolio Management,Risk Management,Investment Strategy"
+        },
+        {
+          name: "Thomas Henke",
+          shortName: "Thomas Henke",
+          title: "Head of IAM & Director, PO",
+          profile: "profile-thomas-h.html",
+          departments: ["business"],
+          specialisms: "Insurance Asset Management,Portfolio Operations,Risk Management,Asset Allocation"
+        },
+        {
+          name: "Akash Kumar",
+          shortName: "Akash<br>Kumar",
+          title: "Senior Analyst",
+          profile: "profile-akash-kumar.html",
+          departments: ["business", "investment"],
+          specialisms: "Financial Analysis,Credit Research,Data Modeling,Market Research"
+        },
+        {
+          name: "Timothy Parrott",
+          shortName: "Timothy<br>Parrott",
+          title: "Co-Founder/President",
+          profile: "profile-timothy-parrott.html",
+          departments: ["business", "capital-formation", "c-suite"],
+          specialisms: "Corporate Strategy,Business Development,Leadership,Strategic Planning"
+        },
+        {
+          name: "David Fisher",
+          shortName: "David<br>Fisher",
+          title: "Head of BD",
+          profile: "profile-david-fisher.html",
+          departments: ["business", "capital-formation"],
+          specialisms: "Business Development,Client Relations,Sales Strategy,Market Expansion"
+        },
+        {
+          name: "Lionel Benichou",
+          shortName: "Lionel<br>Benichou",
+          title: "CFO",
+          profile: "profile-lionel-benichou.html",
+          departments: ["business", "c-suite"],
+          specialisms: "Financial Management,Accounting,Treasury,Compliance"
+        },
+        {
+          name: "Ricardo Mosquera",
+          shortName: "Ricardo<br>Mosquera",
+          title: "COO/CCO",
+          profile: "profile-ricardo-mosquera.html",
+          departments: ["business", "c-suite"],
+          specialisms: "Operations Management,Compliance,Risk Management,Regulatory Affairs"
+        },
+        {
+          name: "Sean Mulrenan",
+          shortName: "Sean<br>Mulrenan",
+          title: "Director - IR",
+          profile: "profile-sean-mulrenan.html",
+          departments: ["business", "capital-formation"],
+          specialisms: "Investor Relations,Client Communications,Fund Reporting,Stakeholder Management"
+        },
+        {
+          name: "Ronald de Gier",
+          shortName: "Ronald<br>de Gier",
+          title: "Head of Portfolio Operations",
+          profile: "profile-ronald-de-gier.html",
+          departments: ["business"],
+          specialisms: "Portfolio Operations,Trade Execution,Risk Management,Operations Management"
         }
-        
-        gridDiv.innerHTML = `
-          <div class="w-full min-w-0 overflow-x-auto relative">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">${departments[dept].name}</h3>
-              <div class="flex items-center gap-2">
-                <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">100%</span>
-                <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
-              </div>
-            </div>
-            <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
-              <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
-                ${generateEmployeeRows(deptEmployees)}
-              </div>
-            </div>
-          </div>
-        `;
-        
-        container.appendChild(gridDiv);
+      ];
+
+      // Department configurations
+      const departments = {
+        "business": { name: "Business", color: "#0b4c3a" },
+        "investment": { name: "Investment", color: "#0b4c3a" },
+        "trading": { name: "Trading", color: "#0b4c3a" },
+        "capital-formation": { name: "Capital Formation", color: "#0b4c3a" },
+        "c-suite": { name: "C-Suite", color: "#0b4c3a" }
+      };
+
+      let selectedDepartments = ['business'];
+      let zoomLevels = {};
+
+      // Initialize zoom levels for all departments
+      Object.keys(departments).forEach(dept => {
+        zoomLevels[dept] = 1;
       });
       
-      // Re-attach zoom event listeners
-      attachZoomListeners();
+      // Initialize zoom levels for Business sub-grids
+      zoomLevels["business1"] = 1;
+      zoomLevels["business2"] = 1;
 
-      // After rendering, update department button selected state
+      // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
       deptButtons.forEach(btn => {
-        if (selectedDepartments.includes(btn.getAttribute('data-department'))) {
-          btn.classList.remove('filter-dropdown');
-          btn.classList.add('filter-active');
-        } else {
-          btn.classList.remove('filter-active');
-          btn.classList.add('filter-dropdown');
-        }
+        btn.addEventListener('click', function() {
+          const dept = this.getAttribute('data-department');
+          // Deselect all buttons
+          deptButtons.forEach(b => {
+            b.classList.remove('filter-active');
+            b.classList.add('filter-dropdown');
+          });
+          // Select only the clicked button
+          this.classList.remove('filter-dropdown');
+          this.classList.add('filter-active');
+          // Set selectedDepartments to only the clicked department
+          selectedDepartments = [dept];
+          renderDepartmentGrids();
+        });
       });
-    }
 
-    // Generate employee rows for a department
-    function generateEmployeeRows(employees) {
-      // Define the hierarchy structure
-      const hierarchy = [
-        ["Andrew Axelrod", "Timothy Parrott"], // Row 1: AA, TP
-        ["Matt Magnuson", "Grant Mitchell", "Thomas Henke", "David Fisher", "Lionel Benichou", "Ricardo Mosquera"], // Row 2: MM, GM, TH, DF, LB, RM
-        ["Akash Kumar", "Sean Mulrenan", "Ronald de Gier"] // Row 3: AK, SM, RDG
-      ];
-      
-      const rows = [];
-      
-      hierarchy.forEach(rowEmployees => {
-        const rowDivs = [];
+      // Render department grids
+      function renderDepartmentGrids() {
+        const container = document.getElementById('department-grids-container');
+        container.innerHTML = '';
         
-        rowEmployees.forEach(empName => {
-          const employee = employees.find(emp => emp.name === empName);
-          if (employee) {
-            rowDivs.push(`
-              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                <div class="flex-1">
-                  <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                  <div class="text-xs mt-1 break-words">${employee.title}</div>
+        if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
+          // Business view: two grids side by side
+          // Grid 1
+          const grid1Hierarchy = [
+            ["Andrew Axelrod"],
+            ["Matt Magnuson", "Grant Mitchell", "Thomas Henke"],
+            ["Akash Kumar"]
+          ];
+          // Grid 2
+          const grid2Hierarchy = [
+            ["Timothy Parrott"],
+            ["David Fisher", "Lionel Benichou", "Ricardo Mosquera"],
+            ["Sean Mulrenan", "Ronald de Gier"]
+          ];
+          const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
+          const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
+          
+          // Container for both grids side by side
+          const businessContainer = document.createElement('div');
+          businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
+          
+          // Grid 1
+          const gridDiv1 = document.createElement('div');
+          gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
+          gridDiv1.innerHTML = `
+            <div class="w-full min-w-0 overflow-x-auto relative">
+              <div class="flex items-center justify-between mb-2">
+                <div></div>
+                <div class="flex items-center gap-2">
+                  <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">100%</span>
+                  <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
-                <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-              </a>
-            `);
+              </div>
+              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
+                  ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
+                </div>
+              </div>
+            </div>
+          `;
+          
+          businessContainer.appendChild(gridDiv1);
+          
+          // Add dashed line divider between teams
+          const divider = document.createElement('div');
+          divider.className = 'hidden lg:block w-px mx-4';
+          divider.style.borderLeft = '2px dashed var(--color-espresso)';
+          divider.style.height = '100%';
+          divider.style.minHeight = '400px';
+          businessContainer.appendChild(divider);
+          
+          // Grid 2
+          const gridDiv2 = document.createElement('div');
+          gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
+          gridDiv2.innerHTML = `
+            <div class="w-full min-w-0 overflow-x-auto relative">
+              <div class="flex items-center justify-between mb-2">
+                <div></div>
+                <div class="flex items-center gap-2">
+                  <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">100%</span>
+                  <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
+                </div>
+              </div>
+              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
+                  ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
+                </div>
+              </div>
+            </div>
+          `;
+          
+          businessContainer.appendChild(gridDiv2);
+          container.appendChild(businessContainer);
+          
+          // Attach zoom listeners for both grids
+          attachZoomListeners();
+          return;
+        }
+        
+        // All other departments: single grid as before
+        selectedDepartments.forEach((dept, index) => {
+          const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
+          
+          if (deptEmployees.length === 0) return;
+          
+          const gridDiv = document.createElement('div');
+          gridDiv.className = 'w-full mb-8';
+          if (index > 0) {
+            gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
+          }
+          
+          gridDiv.innerHTML = `
+            <div class="w-full min-w-0 overflow-x-auto relative">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">${departments[dept].name}</h3>
+                <div class="flex items-center gap-2">
+                  <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">100%</span>
+                  <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
+                </div>
+              </div>
+              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
+                  ${generateEmployeeRows(deptEmployees)}
+                </div>
+              </div>
+            </div>
+          `;
+          
+          container.appendChild(gridDiv);
+        });
+        
+        // Re-attach zoom event listeners
+        attachZoomListeners();
+
+        // After rendering, update department button selected state
+        const deptButtons = document.querySelectorAll('.dept-btn');
+        deptButtons.forEach(btn => {
+          if (selectedDepartments.includes(btn.getAttribute('data-department'))) {
+            btn.classList.remove('filter-dropdown');
+            btn.classList.add('filter-active');
+          } else {
+            btn.classList.remove('filter-active');
+            btn.classList.add('filter-dropdown');
           }
         });
-        
-        if (rowDivs.length > 0) {
-          rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-        }
-      });
-      
-      return rows.join('');
-    }
-
-    // Attach zoom event listeners
-    function attachZoomListeners() {
-      // Zoom in buttons
-      document.querySelectorAll('.zoom-in-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const dept = this.getAttribute('data-dept');
-          if (zoomLevels[dept] < 2) zoomLevels[dept] += 0.1;
-          zoomLevels[dept] = Math.round(zoomLevels[dept] * 10) / 10;
-          
-          const zoomArea = document.querySelector(`[data-dept="${dept}"].zoom-area`);
-          const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
-          
-          zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
-          zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
-        });
-      });
-      
-      // Zoom out buttons
-      document.querySelectorAll('.zoom-out-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const dept = this.getAttribute('data-dept');
-          if (zoomLevels[dept] > 0.1) zoomLevels[dept] -= 0.1;
-          zoomLevels[dept] = Math.round(zoomLevels[dept] * 10) / 10;
-          
-          const zoomArea = document.querySelector(`[data-dept="${dept}"].zoom-area`);
-          const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
-          
-          zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
-          zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
-        });
-      });
-    }
-
-    // Specialism Filter Functionality
-    const filterToggle = document.getElementById('filter-toggle');
-    const filterDropdown = document.getElementById('filter-dropdown');
-    // const selectAllBtn = document.getElementById('select-all'); // No select-all button in HTML
-    const clearAllBtn = document.getElementById('clear-filters');
-    const applyFilterBtn = document.getElementById('apply-filters');
-    const specialismFilters = document.querySelectorAll('.specialism-filter');
-
-    // Toggle filter dropdown
-    filterToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      filterDropdown.classList.toggle('hidden');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
-        filterDropdown.classList.add('hidden');
       }
-    });
 
-    // Remove selectAllBtn event listener (no button in HTML)
-    // if (selectAllBtn) {
-    //   selectAllBtn.addEventListener('click', function() {
-    //     specialismFilters.forEach(checkbox => {
-    //       checkbox.checked = true;
-    //     });
-    //   });
-    // }
-
-    // Clear all specialisms
-    if (clearAllBtn) {
-      clearAllBtn.addEventListener('click', function() {
-        specialismFilters.forEach(checkbox => {
-          checkbox.checked = false;
-        });
-      });
-    }
-
-    // Apply filter
-    if (applyFilterBtn) {
-      applyFilterBtn.addEventListener('click', function() {
-        const selectedSpecialisms = Array.from(specialismFilters)
-          .filter(checkbox => checkbox.checked)
-          .map(checkbox => checkbox.value);
-
-        const employeeBoxes = document.querySelectorAll('.employee-box');
+      // Generate employee rows for a department
+      function generateEmployeeRows(employees) {
+        // Define the hierarchy structure
+        const hierarchy = [
+          ["Andrew Axelrod", "Timothy Parrott"], // Row 1: AA, TP
+          ["Matt Magnuson", "Grant Mitchell", "Thomas Henke", "David Fisher", "Lionel Benichou", "Ricardo Mosquera"], // Row 2: MM, GM, TH, DF, LB, RM
+          ["Akash Kumar", "Sean Mulrenan", "Ronald de Gier"] // Row 3: AK, SM, RDG
+        ];
         
-        employeeBoxes.forEach(box => {
-          const boxSpecialisms = box.getAttribute('data-specialisms');
-          if (!boxSpecialisms) {
-            box.style.display = 'none';
-            return;
+        const rows = [];
+        
+        hierarchy.forEach(rowEmployees => {
+          const rowDivs = [];
+          
+          rowEmployees.forEach(empName => {
+            const employee = employees.find(emp => emp.name === empName);
+            if (employee) {
+              rowDivs.push(`
+                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                  <div class="flex-1">
+                    <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                    <div class="text-xs mt-1 break-words">${employee.title}</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                </a>
+              `);
+            }
+          });
+          
+          if (rowDivs.length > 0) {
+            rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
           }
-
-          const boxSpecialismArray = boxSpecialisms.split(',').map(s => s.trim());
-          
-          // Show box if it has ANY of the selected specialisms, or if no specialisms are selected (show all)
-          const shouldShow = selectedSpecialisms.length === 0 || 
-                            selectedSpecialisms.some(specialism => boxSpecialismArray.includes(specialism));
-          
-          box.style.display = shouldShow ? 'flex' : 'none';
         });
+        
+        return rows.join('');
+      }
 
-        // Close dropdown after applying filter
-        filterDropdown.classList.add('hidden');
+      // Attach zoom event listeners
+      function attachZoomListeners() {
+        // Zoom in buttons
+        document.querySelectorAll('.zoom-in-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const dept = this.getAttribute('data-dept');
+            if (zoomLevels[dept] < 2) zoomLevels[dept] += 0.1;
+            zoomLevels[dept] = Math.round(zoomLevels[dept] * 10) / 10;
+            
+            const zoomArea = document.querySelector(`[data-dept="${dept}"].zoom-area`);
+            const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
+            
+            zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
+            zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
+          });
+        });
+        
+        // Zoom out buttons
+        document.querySelectorAll('.zoom-out-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const dept = this.getAttribute('data-dept');
+            if (zoomLevels[dept] > 0.1) zoomLevels[dept] -= 0.1;
+            zoomLevels[dept] = Math.round(zoomLevels[dept] * 10) / 10;
+            
+            const zoomArea = document.querySelector(`[data-dept="${dept}"].zoom-area`);
+            const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
+            
+            zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
+            zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
+          });
+        });
+      }
+
+      // Specialism Filter Functionality
+      const filterToggle = document.getElementById('filter-toggle');
+      const filterDropdown = document.getElementById('filter-dropdown');
+      const clearAllBtn = document.getElementById('clear-filters');
+      const applyFilterBtn = document.getElementById('apply-filters');
+      const specialismFilters = document.querySelectorAll('.specialism-filter');
+
+      // Toggle filter dropdown
+      filterToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        filterDropdown.classList.toggle('hidden');
       });
-    }
 
-    // Generate custom employee rows for a given hierarchy
-    function generateCustomEmployeeRows(hierarchy, employees) {
-      const rows = [];
-      hierarchy.forEach(rowEmployees => {
-        const rowDivs = [];
-        rowEmployees.forEach(empName => {
-          const employee = employees.find(emp => emp.name === empName);
-          if (employee) {
-            rowDivs.push(`
-              <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                <div class="flex-1">
-                  <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                  <div class="text-xs mt-1 break-words">${employee.title}</div>
-                </div>
-                <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-              </a>
-            `);
-          }
-        });
-        if (rowDivs.length > 0) {
-          rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
+          filterDropdown.classList.add('hidden');
         }
       });
-      return rows.join('');
-    }
 
-    // At the end of the script, add:
-    selectedDepartments = ['business'];
-    renderDepartmentGrids();
+      // Clear all specialisms
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', function() {
+          specialismFilters.forEach(checkbox => {
+            checkbox.checked = false;
+          });
+        });
+      }
 
-    // Logout logic
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-      logoutBtn.onclick = function() {
-        localStorage.removeItem('mawney_logged_in');
-        window.location.href = 'login.html';
-      };
-    }
+      // Apply filter
+      if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', function() {
+          const selectedSpecialisms = Array.from(specialismFilters)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
 
-    // Notes Sidebar Functionality
-    const notesToggle = document.getElementById('notes-toggle');
-    const closeNotes = document.getElementById('close-notes');
-    const notesSidebar = document.getElementById('notes-sidebar');
-    const mainSidebarContainer = document.getElementById('main-sidebar-container');
-    const noteInput = document.getElementById('note-input');
-    const addNoteBtn = document.getElementById('add-note');
-    const notesList = document.getElementById('notes-list');
+          const employeeBoxes = document.querySelectorAll('.employee-box');
+          
+          employeeBoxes.forEach(box => {
+            const boxSpecialisms = box.getAttribute('data-specialisms');
+            if (!boxSpecialisms) {
+              box.style.display = 'none';
+              return;
+            }
 
-    // Debug: Check if elements are found
-    console.log('Notes toggle element:', notesToggle);
-    console.log('Notes sidebar element:', notesSidebar);
-    console.log('Close notes element:', closeNotes);
-    console.log('Note input element:', noteInput);
-    console.log('Add note button element:', addNoteBtn);
-    console.log('Notes list element:', notesList);
+            const boxSpecialismArray = boxSpecialisms.split(',').map(s => s.trim());
+            
+            // Show box if it has ANY of the selected specialisms, or if no specialisms are selected (show all)
+            const shouldShow = selectedSpecialisms.length === 0 || 
+                              selectedSpecialisms.some(specialism => boxSpecialismArray.includes(specialism));
+            
+            box.style.display = shouldShow ? 'flex' : 'none';
+          });
 
-    // Only add event listeners if elements exist
-    if (notesToggle) {
-      // Toggle sidebar
-      notesToggle.addEventListener('click', function() {
-        console.log('Notes button clicked!');
-        console.log('Current body classes:', document.body.classList.toString());
-        console.log('Notes sidebar element:', notesSidebar);
-        
-        if (document.body.classList.contains('sidebar-open')) {
-          console.log('Closing sidebar');
-          // Close sidebar
+          // Close dropdown after applying filter
+          filterDropdown.classList.add('hidden');
+        });
+      }
+
+      // Generate custom employee rows for a given hierarchy
+      function generateCustomEmployeeRows(hierarchy, employees) {
+        const rows = [];
+        hierarchy.forEach(rowEmployees => {
+          const rowDivs = [];
+          rowEmployees.forEach(empName => {
+            const employee = employees.find(emp => emp.name === empName);
+            if (employee) {
+              rowDivs.push(`
+                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                  <div class="flex-1">
+                    <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                    <div class="text-xs mt-1 break-words">${employee.title}</div>
+                  </div>
+                  <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                </a>
+              `);
+            }
+          });
+          if (rowDivs.length > 0) {
+            rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+          }
+        });
+        return rows.join('');
+      }
+
+      // At the end of the script, add:
+      selectedDepartments = ['business'];
+      renderDepartmentGrids();
+
+      // Logout logic
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.onclick = function() {
+          localStorage.removeItem('mawney_logged_in');
+          window.location.href = 'login.html';
+        };
+      }
+
+      // Notes Sidebar Functionality
+      const notesToggle = document.getElementById('notes-toggle');
+      const closeNotes = document.getElementById('close-notes');
+      const notesSidebar = document.getElementById('notes-sidebar');
+      const mainSidebarContainer = document.getElementById('main-sidebar-container');
+      const noteInput = document.getElementById('note-input');
+      const addNoteBtn = document.getElementById('add-note');
+      const notesList = document.getElementById('notes-list');
+
+      // Debug: Check if elements are found
+      console.log('Notes toggle element:', notesToggle);
+      console.log('Notes sidebar element:', notesSidebar);
+      console.log('Close notes element:', closeNotes);
+      console.log('Note input element:', noteInput);
+      console.log('Add note button element:', addNoteBtn);
+      console.log('Notes list element:', notesList);
+
+      // Only add event listeners if elements exist
+      if (notesToggle) {
+        // Toggle sidebar
+        notesToggle.addEventListener('click', function() {
+          console.log('Notes button clicked!');
+          console.log('Current body classes:', document.body.classList.toString());
+          console.log('Notes sidebar element:', notesSidebar);
+          
+          if (document.body.classList.contains('sidebar-open')) {
+            console.log('Closing sidebar');
+            // Close sidebar
+            document.body.classList.remove('sidebar-open');
+            // Reset button to default styling
+            this.style.borderColor = 'var(--color-mawney-green)';
+            this.style.color = 'var(--color-mawney-green)';
+            this.style.background = 'var(--color-parchment)';
+          } else {
+            console.log('Opening sidebar');
+            // Open sidebar
+            document.body.classList.add('sidebar-open');
+            // Set button to active styling (green background)
+            this.style.borderColor = 'var(--color-mawney-green)';
+            this.style.color = 'var(--color-parchment)';
+            this.style.background = 'var(--color-mawney-green)';
+            if (typeof renderNotes === 'function') {
+              renderNotes();
+            }
+          }
+          
+          console.log('After toggle - body classes:', document.body.classList.toString());
+        });
+      } else {
+        console.error('Notes toggle button not found!');
+      }
+
+      if (closeNotes) {
+        closeNotes.addEventListener('click', function() {
           document.body.classList.remove('sidebar-open');
           // Reset button to default styling
-          this.style.borderColor = 'var(--color-mawney-green)';
-          this.style.color = 'var(--color-mawney-green)';
-          this.style.background = 'var(--color-parchment)';
-        } else {
-          console.log('Opening sidebar');
-          // Open sidebar
-          document.body.classList.add('sidebar-open');
-          // Set button to active styling (green background)
-          this.style.borderColor = 'var(--color-mawney-green)';
-          this.style.color = 'var(--color-parchment)';
-          this.style.background = 'var(--color-mawney-green)';
-          if (typeof renderNotes === 'function') {
-            renderNotes();
+          if (notesToggle) {
+            notesToggle.style.borderColor = 'var(--color-mawney-green)';
+            notesToggle.style.color = 'var(--color-mawney-green)';
+            notesToggle.style.background = 'var(--color-parchment)';
           }
-        }
-        
-        console.log('After toggle - body classes:', document.body.classList.toString());
-      });
-    } else {
-      console.error('Notes toggle button not found!');
-    }
+        });
+      }
 
-    if (closeNotes) {
-      closeNotes.addEventListener('click', function() {
-        document.body.classList.remove('sidebar-open');
-        // Reset button to default styling
-        if (notesToggle) {
-          notesToggle.style.borderColor = 'var(--color-mawney-green)';
-          notesToggle.style.color = 'var(--color-mawney-green)';
-          notesToggle.style.background = 'var(--color-parchment)';
-        }
-      });
-    }
+      if (addNoteBtn && noteInput) {
+        // Add note
+        addNoteBtn.addEventListener('click', async function() {
+          const noteText = noteInput.value.trim();
+          if (noteText) {
+            const newNote = await addNote(noteText);
+            if (newNote) {
+              noteInput.value = '';
+              if (typeof renderNotes === 'function') {
+                renderNotes();
+              }
+            }
+          }
+        });
 
-    if (addNoteBtn && noteInput) {
-      // Add note
-      addNoteBtn.addEventListener('click', async function() {
-        const noteText = noteInput.value.trim();
-        if (noteText) {
-          const newNote = await addNote(noteText);
-          if (newNote) {
-            noteInput.value = '';
-            if (typeof renderNotes === 'function') {
+        // Enter key to add note
+        noteInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            addNoteBtn.click();
+          }
+        });
+      }
+
+      // Supabase configuration - REPLACE WITH YOUR ACTUAL VALUES
+      // Go to your Supabase project → Settings → API to get these values
+      const SUPABASE_URL = 'https://ihkmboslfmokgavjnmkc.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imloa21ib3NsZm1va2dhdmpubWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2MzMxNzEsImV4cCI6MjA2NzIwOTE3MX0.hQQpgK8I9WCMpIWZv9dcQNB2lzo7MeYe-4bpFL99Fpk';
+      
+      // Initialize Supabase client only if configuration is provided
+      let supabase = null;
+      if (SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY_HERE') {
+        try {
+          supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          console.log('Supabase client initialized successfully');
+        } catch (error) {
+          console.error('Error initializing Supabase client:', error);
+        }
+      } else {
+        console.log('Supabase not configured - using local storage fallback');
+      }
+
+      // Load notes from Supabase or localStorage
+      async function loadNotes() {
+        if (supabase) {
+          try {
+            const { data, error } = await supabase
+              .from('notes')
+              .select('*')
+              .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            return data || [];
+          } catch (error) {
+            console.error('Error loading notes from Supabase:', error);
+            return loadNotesFromLocalStorage();
+          }
+        } else {
+          return loadNotesFromLocalStorage();
+        }
+      }
+
+      // Load notes from localStorage
+      function loadNotesFromLocalStorage() {
+        try {
+          const notes = localStorage.getItem('employee-map-notes');
+          return notes ? JSON.parse(notes) : [];
+        } catch (error) {
+          console.error('Error loading notes from localStorage:', error);
+          return [];
+        }
+      }
+
+      // Add note via Supabase or localStorage
+      async function addNote(noteText) {
+        const newNote = {
+          id: Date.now(),
+          text: noteText,
+          created_at: new Date().toISOString()
+        };
+
+        if (supabase) {
+          try {
+            const { data, error } = await supabase
+              .from('notes')
+              .insert([newNote])
+              .select();
+            
+            if (error) throw error;
+            return data[0];
+          } catch (error) {
+            console.error('Error adding note to Supabase:', error);
+            return addNoteToLocalStorage(newNote);
+          }
+        } else {
+          return addNoteToLocalStorage(newNote);
+        }
+      }
+
+      // Add note to localStorage
+      function addNoteToLocalStorage(note) {
+        try {
+          const notes = loadNotesFromLocalStorage();
+          notes.unshift(note);
+          localStorage.setItem('employee-map-notes', JSON.stringify(notes));
+          return note;
+        } catch (error) {
+          console.error('Error adding note to localStorage:', error);
+          return null;
+        }
+      }
+
+      // Update deleteNote to log errors
+      window.deleteNote = async function(noteId) {
+        console.log('deleteNote called with ID:', noteId, 'Type:', typeof noteId);
+        if (supabase) {
+          try {
+            console.log('Attempting to delete from Supabase...');
+            const { error } = await supabase
+              .from('notes')
+              .delete()
+              .eq('id', noteId);
+            if (error) {
+              console.error('Supabase delete error:', error);
+              throw error;
+            }
+            console.log('Successfully deleted from Supabase');
+            return true;
+          } catch (error) {
+            console.error('Error deleting note from Supabase:', error);
+            console.log('Falling back to localStorage...');
+            return deleteNoteFromLocalStorage(noteId);
+          }
+        } else {
+          console.log('Supabase not available, using localStorage...');
+          return deleteNoteFromLocalStorage(noteId);
+        }
+      }
+
+      // Render notes
+      async function renderNotes() {
+        const notes = await loadNotes();
+        notesList.innerHTML = '';
+        notes.forEach(note => {
+          const noteElement = document.createElement('div');
+          noteElement.className = 'note-item';
+          const date = new Date(note.created_at).toLocaleString();
+          noteElement.innerHTML = `
+            <button class="delete-note" data-note-id="${note.id}">×</button>
+            <div class="note-date">${date}</div>
+            <div class="note-text">${note.text.replace(/\n/g, '<br>')}</div>
+          `;
+          notesList.appendChild(noteElement);
+        });
+      }
+
+      // Event delegation for delete note buttons
+      notesList.addEventListener('click', async function(e) {
+        console.log('Click event on notesList:', e.target);
+        if (e.target.classList.contains('delete-note')) {
+          console.log('Delete button clicked!');
+          const noteId = e.target.getAttribute('data-note-id');
+          console.log('Note ID to delete:', noteId);
+          if (confirm('Are you sure you want to delete this note?')) {
+            console.log('User confirmed deletion');
+            const success = await deleteNote(noteId.toString());
+            console.log('Delete result:', success);
+            if (success) {
               renderNotes();
             }
           }
         }
       });
 
-      // Enter key to add note
-      noteInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          addNoteBtn.click();
+      // Close sidebar when clicking outside
+      document.addEventListener('click', function(e) {
+        if (notesSidebar && notesToggle && !notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && document.body.classList.contains('sidebar-open')) {
+          document.body.classList.remove('sidebar-open');
         }
       });
-    }
 
-    // Supabase configuration - REPLACE WITH YOUR ACTUAL VALUES
-    // Go to your Supabase project → Settings → API to get these values
-    const SUPABASE_URL = 'https://ihkmboslfmokgavjnmkc.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imloa21ib3NsZm1va2dhdmpubWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2MzMxNzEsImV4cCI6MjA2NzIwOTE3MX0.hQQpgK8I9WCMpIWZv9dcQNB2lzo7MeYe-4bpFL99Fpk';
-    
-    // Initialize Supabase client only if configuration is provided
-    let supabase = null;
-    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY_HERE') {
-      try {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        console.log('Supabase client initialized successfully');
-      } catch (error) {
-        console.error('Error initializing Supabase client:', error);
-      }
-    } else {
-      console.log('Supabase not configured - using local storage fallback');
-    }
-
-    // Load notes from Supabase or localStorage
-    async function loadNotes() {
-      if (supabase) {
+      // Delete note from localStorage
+      function deleteNoteFromLocalStorage(noteId) {
         try {
-          const { data, error } = await supabase
-            .from('notes')
-            .select('*')
-            .order('created_at', { ascending: false });
-          
-          if (error) throw error;
-          return data || [];
-        } catch (error) {
-          console.error('Error loading notes from Supabase:', error);
-          return loadNotesFromLocalStorage();
-        }
-      } else {
-        return loadNotesFromLocalStorage();
-      }
-    }
-
-    // Load notes from localStorage
-    function loadNotesFromLocalStorage() {
-      try {
-        const notes = localStorage.getItem('employee-map-notes');
-        return notes ? JSON.parse(notes) : [];
-      } catch (error) {
-        console.error('Error loading notes from localStorage:', error);
-        return [];
-      }
-    }
-
-    // Add note via Supabase or localStorage
-    async function addNote(noteText) {
-      const newNote = {
-        id: Date.now(),
-        text: noteText,
-        created_at: new Date().toISOString()
-      };
-
-      if (supabase) {
-        try {
-          const { data, error } = await supabase
-            .from('notes')
-            .insert([newNote])
-            .select();
-          
-          if (error) throw error;
-          return data[0];
-        } catch (error) {
-          console.error('Error adding note to Supabase:', error);
-          return addNoteToLocalStorage(newNote);
-        }
-      } else {
-        return addNoteToLocalStorage(newNote);
-      }
-    }
-
-    // Add note to localStorage
-    function addNoteToLocalStorage(note) {
-      try {
-        const notes = loadNotesFromLocalStorage();
-        notes.unshift(note);
-        localStorage.setItem('employee-map-notes', JSON.stringify(notes));
-        return note;
-      } catch (error) {
-        console.error('Error adding note to localStorage:', error);
-        return null;
-      }
-    }
-
-    // Delete note via Supabase or localStorage
-    async function deleteNote(noteId) {
-      if (supabase) {
-        try {
-          const { error } = await supabase
-            .from('notes')
-            .delete()
-            .eq('id', noteId);
-          
-          if (error) throw error;
+          console.log('Deleting from localStorage with ID:', noteId);
+          const notes = loadNotesFromLocalStorage();
+          console.log('Current notes in localStorage:', notes);
+          const filteredNotes = notes.filter(note => note.id != noteId); // Use != for type coercion
+          console.log('Filtered notes:', filteredNotes);
+          localStorage.setItem('employee-map-notes', JSON.stringify(filteredNotes));
+          console.log('Successfully deleted from localStorage');
           return true;
         } catch (error) {
-          console.error('Error deleting note from Supabase:', error);
-          return deleteNoteFromLocalStorage(noteId);
+          console.error('Error deleting note from localStorage:', error);
+          return false;
         }
-      } else {
-        return deleteNoteFromLocalStorage(noteId);
       }
-    }
-
-    // Delete note from localStorage
-    function deleteNoteFromLocalStorage(noteId) {
-      try {
-        const notes = loadNotesFromLocalStorage();
-        const filteredNotes = notes.filter(note => note.id !== noteId);
-        localStorage.setItem('employee-map-notes', JSON.stringify(filteredNotes));
-        return true;
-      } catch (error) {
-        console.error('Error deleting note from localStorage:', error);
-        return false;
-      }
-    }
-
-    // Render notes
-    async function renderNotes() {
-      const notes = await loadNotes();
-      notesList.innerHTML = '';
-      notes.forEach(note => {
-        const noteElement = document.createElement('div');
-        noteElement.className = 'note-item';
-        const date = new Date(note.created_at).toLocaleString();
-        noteElement.innerHTML = `
-          <button class="delete-note" onclick="deleteNoteFromUI(${note.id})">×</button>
-          <div class="note-date">${date}</div>
-          <div class="note-text">${note.text.replace(/\n/g, '<br>')}</div>
-        `;
-        notesList.appendChild(noteElement);
-      });
-    }
-
-    // Delete note from UI
-    window.deleteNoteFromUI = async function(noteId) {
-      const success = await deleteNote(noteId);
-      if (success) {
-        renderNotes();
-      }
-    };
-
-    // Close sidebar when clicking outside
-    document.addEventListener('click', function(e) {
-      if (notesSidebar && notesToggle && !notesSidebar.contains(e.target) && !notesToggle.contains(e.target) && document.body.classList.contains('sidebar-open')) {
-        document.body.classList.remove('sidebar-open');
-      }
-    });
+    }); // End DOMContentLoaded
   </script>
 </body>
 </html> 
