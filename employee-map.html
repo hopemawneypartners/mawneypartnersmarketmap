@@ -44,8 +44,13 @@
     
     /* Push main content when sidebar is open */
     .sidebar-open #main-content {
-      margin-right: 320px;
-      transition: margin-right 0.3s ease-in-out;
+      transform: translateX(-320px);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Also shift the entire page content */
+    .sidebar-open {
+      overflow-x: hidden;
     }
     
     .note-item {
