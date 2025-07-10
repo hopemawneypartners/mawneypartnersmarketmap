@@ -1158,6 +1158,7 @@
           console.log(`Creating note element ${index}:`, note);
           const noteElement = document.createElement('div');
           noteElement.className = 'note-item';
+          noteElement.setAttribute('data-note-id', note.id); // Add data attribute to the container
           const date = new Date(note.created_at).toLocaleString();
           noteElement.innerHTML = `
             <button class="delete-note" data-note-id="${note.id}" title="Delete note">×</button>
@@ -1177,11 +1178,22 @@
               
               if (confirm('Are you sure you want to delete this note?')) {
                 console.log('User confirmed deletion');
+                
+                // Remove the note element from DOM immediately
+                const noteContainer = this.closest('.note-item');
+                if (noteContainer) {
+                  console.log('Removing note element from DOM');
+                  noteContainer.remove();
+                }
+                
+                // Delete from storage
                 const success = await deleteNote(noteId);
                 console.log('Delete result:', success);
-                if (success) {
-                  console.log('Deletion successful, re-rendering notes...');
-                  await renderNotes(); // Re-render the notes
+                
+                if (!success) {
+                  // If deletion failed, re-render to restore the note
+                  console.log('Deletion failed, re-rendering notes');
+                  renderNotes();
                 }
               }
             });
@@ -1247,6 +1259,31 @@
           console.log('No notes to test deletion with');
         }
         console.log('=== END DELETION TEST ===');
+      };
+
+      // Simple localStorage test
+      window.testLocalStorage = function() {
+        console.log('=== TESTING LOCALSTORAGE ===');
+        const testKey = 'test-notes-key';
+        const testData = [{ id: 'test1', text: 'test note', created_at: new Date().toISOString() }];
+        
+        try {
+          localStorage.setItem(testKey, JSON.stringify(testData));
+          console.log('✅ Write to localStorage successful');
+          
+          const retrieved = JSON.parse(localStorage.getItem(testKey));
+          console.log('✅ Read from localStorage successful:', retrieved);
+          
+          localStorage.removeItem(testKey);
+          console.log('✅ Delete from localStorage successful');
+          
+          const afterDelete = localStorage.getItem(testKey);
+          console.log('After delete:', afterDelete);
+          
+        } catch (error) {
+          console.error('❌ localStorage test failed:', error);
+        }
+        console.log('=== END LOCALSTORAGE TEST ===');
       };
     }); // End DOMContentLoaded
   </script>
