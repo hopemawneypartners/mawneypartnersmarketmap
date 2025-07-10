@@ -1202,13 +1202,11 @@
                 console.log('Delete result:', success);
                 
                 if (success) {
-                  // Add a small delay to ensure deletion is processed
-                  console.log('Waiting for deletion to be processed...');
-                  await new Promise(resolve => setTimeout(resolve, 1000));
-                  
-                  // Force refresh the notes to ensure we get the latest data
-                  console.log('Forcing refresh of notes...');
-                  await renderNotes();
+                  // Force a complete page refresh to bypass any caching issues
+                  console.log('Deletion successful, forcing page refresh...');
+                  setTimeout(() => {
+                    window.location.reload(true);
+                  }, 500);
                 } else {
                   // If deletion failed, re-render to restore the note
                   console.log('Deletion failed, re-rendering notes');
@@ -1358,6 +1356,43 @@
           }
         }
         console.log('=== END SUPABASE CACHE CLEAR ===');
+      };
+
+      // Nuclear option: Clear all notes from both storage locations
+      window.clearAllNotes = async function() {
+        console.log('=== NUCLEAR OPTION: CLEARING ALL NOTES ===');
+        
+        if (supabase) {
+          try {
+            console.log('Deleting all notes from Supabase...');
+            const { error } = await supabase
+              .from('notes')
+              .delete()
+              .neq('id', '0'); // Delete all notes (this will delete everything)
+            
+            if (error) {
+              console.error('Supabase clear error:', error);
+            } else {
+              console.log('✅ All notes deleted from Supabase');
+            }
+          } catch (error) {
+            console.error('Error clearing Supabase notes:', error);
+          }
+        }
+        
+        try {
+          console.log('Clearing localStorage...');
+          localStorage.removeItem('employee-map-notes');
+          console.log('✅ localStorage cleared');
+        } catch (error) {
+          console.error('Error clearing localStorage:', error);
+        }
+        
+        console.log('=== END NUCLEAR CLEAR ===');
+        // Force page refresh
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 1000);
       };
 
       // Simple localStorage test
