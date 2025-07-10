@@ -1143,10 +1143,19 @@
         }
         
         const notes = await loadNotes();
-        console.log('Loaded notes:', notes);
+        console.log('Loaded notes for rendering:', notes);
         
+        // Clear the list completely
         notesList.innerHTML = '';
-        notes.forEach(note => {
+        console.log('Cleared notesList innerHTML');
+        
+        if (notes.length === 0) {
+          console.log('No notes to display');
+          return;
+        }
+        
+        notes.forEach((note, index) => {
+          console.log(`Creating note element ${index}:`, note);
           const noteElement = document.createElement('div');
           noteElement.className = 'note-item';
           const date = new Date(note.created_at).toLocaleString();
@@ -1171,7 +1180,8 @@
                 const success = await deleteNote(noteId);
                 console.log('Delete result:', success);
                 if (success) {
-                  renderNotes();
+                  console.log('Deletion successful, re-rendering notes...');
+                  await renderNotes(); // Re-render the notes
                 }
               }
             });
@@ -1211,6 +1221,32 @@
           });
         }
         console.log('=== END DEBUG INFO ===');
+      };
+
+      // Test function to verify deletion
+      window.testDeletion = async function() {
+        console.log('=== TESTING DELETION ===');
+        const notes = await loadNotes();
+        console.log('Current notes before test:', notes);
+        
+        if (notes.length > 0) {
+          const firstNote = notes[0];
+          console.log('Attempting to delete first note:', firstNote);
+          const success = await deleteNote(firstNote.id);
+          console.log('Delete success:', success);
+          
+          const notesAfter = await loadNotes();
+          console.log('Notes after deletion:', notesAfter);
+          
+          if (notesAfter.length < notes.length) {
+            console.log('✅ Deletion successful - note count reduced');
+          } else {
+            console.log('❌ Deletion failed - note count unchanged');
+          }
+        } else {
+          console.log('No notes to test deletion with');
+        }
+        console.log('=== END DELETION TEST ===');
       };
     }); // End DOMContentLoaded
   </script>
