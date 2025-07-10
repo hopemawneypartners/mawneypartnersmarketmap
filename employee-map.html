@@ -90,30 +90,30 @@
     
     .note-item .delete-note {
       float: right;
-      background: #6b7280;
+      background: none;
       border: none;
-      color: white;
+      color: #dc2626;
       cursor: default;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 4px;
-      min-width: 24px;
-      min-height: 24px;
-      display: flex;
+      padding: 0;
+      min-width: auto;
+      min-height: auto;
+      display: inline;
       align-items: center;
       justify-content: center;
       transition: none;
       margin-left: 8px;
       line-height: 1;
-      opacity: 0.6;
+      opacity: 0.8;
       pointer-events: none;
     }
     
     .note-item .delete-note:hover {
-      background: #6b7280;
+      background: none;
       transform: none;
       box-shadow: none;
+      color: #dc2626;
     }
     
     .note-item .delete-note:active {
@@ -935,11 +935,29 @@
       console.log('Add note button element:', addNoteBtn);
       console.log('Notes list element:', notesList);
 
+      // Additional debugging for the notes toggle button
+      if (notesToggle) {
+        console.log('Notes toggle button details:');
+        console.log('- Element:', notesToggle);
+        console.log('- Computed style:', window.getComputedStyle(notesToggle));
+        console.log('- Offset dimensions:', notesToggle.offsetWidth, 'x', notesToggle.offsetHeight);
+        console.log('- Position:', notesToggle.offsetLeft, notesToggle.offsetTop);
+        console.log('- Visible:', notesToggle.offsetWidth > 0 && notesToggle.offsetHeight > 0);
+      }
+
       // Only add event listeners if elements exist
       if (notesToggle) {
+        console.log('Notes toggle button found, adding event listener');
+        
+        // Add a simple test to verify the button is working
+        notesToggle.addEventListener('mouseover', function() {
+          console.log('Mouse over notes button');
+        });
+        
         // Toggle sidebar
-        notesToggle.addEventListener('click', function() {
+        notesToggle.addEventListener('click', function(e) {
           console.log('Notes button clicked!');
+          console.log('Event:', e);
           console.log('Current body classes:', document.body.classList.toString());
           console.log('Notes sidebar element:', notesSidebar);
           
@@ -1178,6 +1196,24 @@
           });
         }
         console.log('=== END DEBUG INFO ===');
+      };
+
+      // Test function to manually trigger sidebar
+      window.testSidebar = function() {
+        console.log('=== TESTING SIDEBAR ===');
+        console.log('Current body classes:', document.body.classList.toString());
+        
+        if (document.body.classList.contains('sidebar-open')) {
+          console.log('Closing sidebar...');
+          document.body.classList.remove('sidebar-open');
+        } else {
+          console.log('Opening sidebar...');
+          document.body.classList.add('sidebar-open');
+          renderNotes();
+        }
+        
+        console.log('New body classes:', document.body.classList.toString());
+        console.log('=== END SIDEBAR TEST ===');
       };
 
       // Test function to verify deletion
