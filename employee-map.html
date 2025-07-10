@@ -90,32 +90,34 @@
     
     .note-item .delete-note {
       float: right;
-      background: #ef4444;
+      background: #6b7280;
       border: none;
       color: white;
-      cursor: pointer;
-      font-size: 18px;
+      cursor: default;
+      font-size: 16px;
       font-weight: bold;
-      padding: 6px 10px;
-      border-radius: 6px;
-      min-width: 32px;
-      min-height: 32px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      min-width: 24px;
+      min-height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
+      transition: none;
       margin-left: 8px;
       line-height: 1;
+      opacity: 0.6;
+      pointer-events: none;
     }
     
     .note-item .delete-note:hover {
-      background: #dc2626;
-      transform: scale(1.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      background: #6b7280;
+      transform: none;
+      box-shadow: none;
     }
     
     .note-item .delete-note:active {
-      transform: scale(0.95);
+      transform: none;
     }
     
     /* Mobile optimizations */
@@ -1102,49 +1104,6 @@
         }
       }
 
-      // Delete note function
-      async function deleteNote(noteId) {
-        console.log('deleteNote called with ID:', noteId, 'Type:', typeof noteId);
-        
-        let success = false;
-        
-        if (supabase) {
-          try {
-            console.log('Attempting to delete from Supabase...');
-            const { error } = await supabase
-              .from('notes')
-              .delete()
-              .eq('id', noteId);
-            if (error) {
-              console.error('Supabase delete error:', error);
-              throw error;
-            }
-            console.log('Successfully deleted from Supabase');
-            success = true;
-          } catch (error) {
-            console.error('Error deleting note from Supabase:', error);
-            console.log('Falling back to localStorage...');
-          }
-        }
-        
-        // Always try localStorage as backup or primary
-        try {
-          console.log('Deleting from localStorage with ID:', noteId);
-          const notes = loadNotesFromLocalStorage();
-          console.log('Current notes in localStorage:', notes);
-          const filteredNotes = notes.filter(note => note.id.toString() !== noteId.toString());
-          console.log('Filtered notes:', filteredNotes);
-          localStorage.setItem('employee-map-notes', JSON.stringify(filteredNotes));
-          console.log('Successfully deleted from localStorage');
-          success = true;
-        } catch (error) {
-          console.error('Error deleting note from localStorage:', error);
-        }
-        
-        console.log('Final delete result:', success);
-        return success;
-      }
-
       // Render notes
       async function renderNotes() {
         console.log('renderNotes called');
@@ -1180,40 +1139,9 @@
           // Add direct event listener to the delete button
           const deleteBtn = noteElement.querySelector('.delete-note');
           if (deleteBtn) {
-            deleteBtn.addEventListener('click', async function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log('Delete button clicked directly!');
-              const noteId = this.getAttribute('data-note-id');
-              console.log('Note ID to delete:', noteId);
-              
-              if (confirm('Are you sure you want to delete this note?')) {
-                console.log('User confirmed deletion');
-                
-                // Remove the note element from DOM immediately
-                const noteContainer = this.closest('.note-item');
-                if (noteContainer) {
-                  console.log('Removing note element from DOM');
-                  noteContainer.remove();
-                }
-                
-                // Delete from storage
-                const success = await deleteNote(noteId);
-                console.log('Delete result:', success);
-                
-                if (success) {
-                  // Force a complete page refresh to bypass any caching issues
-                  console.log('Deletion successful, forcing page refresh...');
-                  setTimeout(() => {
-                    window.location.reload(true);
-                  }, 500);
-                } else {
-                  // If deletion failed, re-render to restore the note
-                  console.log('Deletion failed, re-rendering notes');
-                  renderNotes();
-                }
-              }
-            });
+            // Remove click event listener - make button decorative only
+            deleteBtn.style.pointerEvents = 'none';
+            deleteBtn.style.opacity = '0.6';
           }
           
           notesList.appendChild(noteElement);
@@ -1255,26 +1183,8 @@
       // Test function to verify deletion
       window.testDeletion = async function() {
         console.log('=== TESTING DELETION ===');
-        const notes = await loadNotes();
-        console.log('Current notes before test:', notes);
-        
-        if (notes.length > 0) {
-          const firstNote = notes[0];
-          console.log('Attempting to delete first note:', firstNote);
-          const success = await deleteNote(firstNote.id);
-          console.log('Delete success:', success);
-          
-          const notesAfter = await loadNotes();
-          console.log('Notes after deletion:', notesAfter);
-          
-          if (notesAfter.length < notes.length) {
-            console.log('✅ Deletion successful - note count reduced');
-          } else {
-            console.log('❌ Deletion failed - note count unchanged');
-          }
-        } else {
-          console.log('No notes to test deletion with');
-        }
+        console.log('Delete functionality has been removed - × button is now decorative only');
+        console.log('To delete notes, you can manually clear localStorage or use the nuclear option');
         console.log('=== END DELETION TEST ===');
       };
 
