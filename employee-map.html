@@ -1021,20 +1021,31 @@
 
       // Load notes from Supabase or localStorage
       async function loadNotes() {
+        console.log('loadNotes called');
+        console.log('Supabase available:', !!supabase);
+        
         if (supabase) {
           try {
+            console.log('Loading from Supabase...');
             const { data, error } = await supabase
               .from('notes')
               .select('*')
               .order('created_at', { ascending: false });
             
-            if (error) throw error;
+            if (error) {
+              console.error('Supabase load error:', error);
+              throw error;
+            }
+            
+            console.log('Supabase returned data:', data);
             return data || [];
           } catch (error) {
             console.error('Error loading notes from Supabase:', error);
+            console.log('Falling back to localStorage...');
             return loadNotesFromLocalStorage();
           }
         } else {
+          console.log('Supabase not available, loading from localStorage...');
           return loadNotesFromLocalStorage();
         }
       }
@@ -1284,6 +1295,35 @@
           }
         }
         console.log('=== END STORAGE TEST ===');
+      };
+
+      // Function to clear cache and force fresh load
+      window.clearNotesCache = function() {
+        console.log('=== CLEARING NOTES CACHE ===');
+        try {
+          localStorage.removeItem('employee-map-notes');
+          console.log('✅ localStorage cleared');
+        } catch (error) {
+          console.error('❌ Error clearing localStorage:', error);
+        }
+        
+        // Force browser cache refresh
+        if (window.location.reload) {
+          console.log('🔄 Reloading page to clear cache...');
+          window.location.reload(true);
+        }
+        console.log('=== END CACHE CLEAR ===');
+      };
+
+      // Function to force refresh notes
+      window.refreshNotes = async function() {
+        console.log('=== FORCING NOTES REFRESH ===');
+        if (notesList) {
+          notesList.innerHTML = '';
+          console.log('✅ Cleared notes list');
+        }
+        await renderNotes();
+        console.log('=== END NOTES REFRESH ===');
       };
 
       // Simple localStorage test
