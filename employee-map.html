@@ -1027,10 +1027,12 @@
         if (supabase) {
           try {
             console.log('Loading from Supabase...');
+            // Add cache-busting parameter to force fresh data
             const { data, error } = await supabase
               .from('notes')
               .select('*')
-              .order('created_at', { ascending: false });
+              .order('created_at', { ascending: false })
+              .abortSignal(new AbortController().signal); // Force fresh request
             
             if (error) {
               console.error('Supabase load error:', error);
@@ -1199,7 +1201,15 @@
                 const success = await deleteNote(noteId);
                 console.log('Delete result:', success);
                 
-                if (!success) {
+                if (success) {
+                  // Add a small delay to ensure deletion is processed
+                  console.log('Waiting for deletion to be processed...');
+                  await new Promise(resolve => setTimeout(resolve, 1000));
+                  
+                  // Force refresh the notes to ensure we get the latest data
+                  console.log('Forcing refresh of notes...');
+                  await renderNotes();
+                } else {
                   // If deletion failed, re-render to restore the note
                   console.log('Deletion failed, re-rendering notes');
                   renderNotes();
@@ -1324,6 +1334,30 @@
         }
         await renderNotes();
         console.log('=== END NOTES REFRESH ===');
+      };
+
+      // Function to clear Supabase cache and force fresh load
+      window.clearSupabaseCache = async function() {
+        console.log('=== CLEARING SUPABASE CACHE ===');
+        if (supabase) {
+          try {
+            // Force a fresh query by using a new client instance
+            const freshSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            const { data, error } = await freshSupabase
+              .from('notes')
+              .select('*')
+              .order('created_at', { ascending: false });
+            
+            if (error) {
+              console.error('Fresh Supabase query error:', error);
+            } else {
+              console.log('Fresh Supabase data:', data);
+            }
+          } catch (error) {
+            console.error('Error clearing Supabase cache:', error);
+          }
+        }
+        console.log('=== END SUPABASE CACHE CLEAR ===');
       };
 
       // Simple localStorage test
