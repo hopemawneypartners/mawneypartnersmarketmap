@@ -491,68 +491,84 @@
       // Employee data with departments
       const employees = [
         {
-          name: "John Smith",
-          shortName: "John<br>Smith",
-          title: "Managing Partner",
-          profile: "profile-john-smith.html",
+          name: "Tyler Wallace",
+          shortName: "Tyler<br>Wallace",
+          title: "Managing Director, Portfolio Manager",
+          profile: "profile-tyler-wallace.html",
           departments: ["business", "investment", "c-suite"],
-          specialisms: "Distressed Credit,Special Situations,Corporate Strategy,Investment Management"
+          specialisms: "Portfolio Management,Investment Management,CLOs,Secured Loans"
         },
         {
-          name: "Sarah Johnson",
-          shortName: "Sarah<br>Johnson",
-          title: "Chief Investment Officer",
-          profile: "profile-sarah-johnson.html",
+          name: "Abdulkadir Nasir",
+          shortName: "Abdulkadir<br>Nasir",
+          title: "Vice President, Credit Research Analyst",
+          profile: "profile-abdulkadir-nasir.html",
+          departments: ["business", "investment"],
+          specialisms: "Credit Research,Credit Analysis,CLOs,European Markets"
+        },
+        {
+          name: "Matilda Makitalo",
+          shortName: "Matilda<br>Makitalo",
+          title: "Leveraged Finance Credit Analyst",
+          profile: "profile-matilda-makitalo.html",
+          departments: ["business", "investment"],
+          specialisms: "Leveraged Finance,Credit Analysis,European Markets,CLOs"
+        },
+        {
+          name: "Alex Liu",
+          shortName: "Alex<br>Liu",
+          title: "Vice President",
+          profile: "profile-alex-liu.html",
+          departments: ["business", "investment"],
+          specialisms: "Investment Management,Portfolio Management,CLOs,Secured Loans"
+        },
+        {
+          name: "Rémi Nedelec",
+          shortName: "Rémi<br>Nedelec",
+          title: "Vice President",
+          profile: "profile-remi-nedelec.html",
+          departments: ["business", "investment"],
+          specialisms: "Investment Management,Portfolio Management,CLOs,European Markets"
+        },
+        {
+          name: "Philip Ryan",
+          shortName: "Philip<br>Ryan",
+          title: "Vice President, Credit Analyst",
+          profile: "profile-philip-ryan.html",
+          departments: ["business", "investment"],
+          specialisms: "Credit Analysis,Credit Research,CLOs,Secured Loans"
+        },
+        {
+          name: "Luke Streeter",
+          shortName: "Luke<br>Streeter",
+          title: "Associate",
+          profile: "profile-luke-streeter.html",
+          departments: ["business", "investment"],
+          specialisms: "Credit Analysis,Investment Research,CLOs,Portfolio Management"
+        },
+        {
+          name: "Roger Coyle",
+          shortName: "Roger<br>Coyle",
+          title: "Partner",
+          profile: "profile-roger-coyle.html",
           departments: ["business", "investment", "c-suite"],
-          specialisms: "Credit Analysis,Portfolio Management,Risk Management,Investment Strategy"
+          specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
         },
         {
-          name: "Michael Brown",
-          shortName: "Michael<br>Brown",
-          title: "Head of European Credit",
-          profile: "profile-michael-brown.html",
-          departments: ["business", "investment"],
-          specialisms: "Credit Research,European Markets,Distressed Credit,Portfolio Management"
+          name: "Miguel Ramos Fuentenebro",
+          shortName: "Miguel Ramos<br>Fuentenebro",
+          title: "Partner",
+          profile: "profile-miguel-ramos-fuentenebro.html",
+          departments: ["business", "investment", "c-suite"],
+          specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
         },
         {
-          name: "Emma Wilson",
-          shortName: "Emma<br>Wilson",
-          title: "Head of Trading",
-          profile: "profile-emma-wilson.html",
-          departments: ["business", "trading"],
-          specialisms: "Trading,Capital Solutions,Special Situations,Research"
-        },
-        {
-          name: "David Thompson",
-          shortName: "David<br>Thompson",
-          title: "CFO",
-          profile: "profile-david-thompson.html",
-          departments: ["business", "c-suite"],
-          specialisms: "Financial Management,Accounting,Treasury,Compliance"
-        },
-        {
-          name: "Lisa Anderson",
-          shortName: "Lisa<br>Anderson",
-          title: "Head of Investor Relations",
-          profile: "profile-lisa-anderson.html",
-          departments: ["business", "capital-formation"],
-          specialisms: "Investor Relations,Client Communications,Fund Reporting,Stakeholder Management"
-        },
-        {
-          name: "Robert Chen",
-          shortName: "Robert<br>Chen",
-          title: "Senior Analyst",
-          profile: "profile-robert-chen.html",
-          departments: ["business", "investment"],
-          specialisms: "Financial Analysis,Credit Research,Data Modeling,Market Research"
-        },
-        {
-          name: "Amanda Davis",
-          shortName: "Amanda<br>Davis",
-          title: "Head of Operations",
-          profile: "profile-amanda-davis.html",
-          departments: ["business", "c-suite"],
-          specialisms: "Operations Management,Compliance,Risk Management,Regulatory Affairs"
+          name: "William Sheoris",
+          shortName: "William<br>Sheoris",
+          title: "Partner",
+          profile: "profile-william-sheoris.html",
+          departments: ["business", "investment", "c-suite"],
+          specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
         }
       ];
 
@@ -605,14 +621,14 @@
           // Business view: two grids side by side
           // Grid 1
           const grid1Hierarchy = [
-            ["John Smith"],
-            ["Sarah Johnson", "Michael Brown", "Emma Wilson"],
-            ["Robert Chen"]
+            ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"],
+            ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu"],
+            ["Philip Ryan", "Luke Streeter"]
           ];
           // Grid 2
           const grid2Hierarchy = [
-            ["David Thompson"],
-            ["Lisa Anderson", "Amanda Davis"],
+            ["Rémi Nedelec"],
+            ["Matilda Makitalo"],
             []
           ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
@@ -735,9 +751,9 @@
       function generateEmployeeRows(employees) {
         // Define the hierarchy structure
         const hierarchy = [
-          ["John Smith", "David Thompson"], // Row 1: JS, DT
-          ["Sarah Johnson", "Michael Brown", "Emma Wilson", "Lisa Anderson", "Amanda Davis"], // Row 2: SJ, MB, EW, LA, AD
-          ["Robert Chen"] // Row 3: RC
+          ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"], // Row 1: Partners
+          ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec", "Philip Ryan"], // Row 2: VPs and MD
+          ["Matilda Makitalo", "Luke Streeter"] // Row 3: Analysts and Associates
         ];
         
         const rows = [];
