@@ -698,6 +698,7 @@
       // Initialize zoom levels for Business sub-grids
       zoomLevels["business1"] = 1;
       zoomLevels["business2"] = 1;
+      zoomLevels["business3"] = 1;
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -730,7 +731,7 @@
             ["Roger Coyle", "Miguel Ramos Fuentenebro", "Barry Povey"],
             ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu", "David Spence"],
             ["Philip Ryan", "Luke Streeter", "Rémi Nedelec", "Matilda Makitalo", "Firas Joumblat", "Bradley Pearman"],
-            ["Archie Hancock", "Aisha Fowosire", "Ilze Petersone", "Prakash P.", "Charles C.", "Morten Simonsen", "Miguel Arraya"]
+            ["Archie Hancock", "Aisha Fowosire", "Ilze Petersone", "Prakash P.", "Charles C."]
           ];
           // Grid 2 (New York)
           const grid2Hierarchy = [
@@ -738,16 +739,23 @@
             ["Alfonso Aceves", "Jason S."],
             []
           ];
+          // Grid 3 (Europe)
+          const grid3Hierarchy = [
+            ["Morten Simonsen", "Miguel Arraya"],
+            [],
+            []
+          ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
           const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
+          const grid3Employees = employees.filter(emp => grid3Hierarchy.flat().includes(emp.name));
           
-          // Container for both grids side by side
+          // Container for three grids side by side
           const businessContainer = document.createElement('div');
           businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
           
-          // Grid 1
+          // Grid 1 (London)
           const gridDiv1 = document.createElement('div');
-          gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
+          gridDiv1.className = 'w-full lg:w-1/3 min-w-0 overflow-x-auto relative';
           gridDiv1.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
@@ -768,17 +776,17 @@
           
           businessContainer.appendChild(gridDiv1);
           
-          // Add dashed line divider between teams
-          const divider = document.createElement('div');
-          divider.className = 'hidden lg:block w-px mx-4';
-          divider.style.borderLeft = '2px dashed var(--color-espresso)';
-          divider.style.height = '100%';
-          divider.style.minHeight = '400px';
-          businessContainer.appendChild(divider);
+          // Add dashed line divider between London and New York
+          const divider1 = document.createElement('div');
+          divider1.className = 'hidden lg:block w-px mx-4';
+          divider1.style.borderLeft = '2px dashed var(--color-espresso)';
+          divider1.style.height = '100%';
+          divider1.style.minHeight = '400px';
+          businessContainer.appendChild(divider1);
           
-          // Grid 2
+          // Grid 2 (New York)
           const gridDiv2 = document.createElement('div');
-          gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
+          gridDiv2.className = 'w-full lg:w-1/3 min-w-0 overflow-x-auto relative';
           gridDiv2.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
@@ -798,6 +806,37 @@
           `;
           
           businessContainer.appendChild(gridDiv2);
+          
+          // Add dashed line divider between New York and Europe
+          const divider2 = document.createElement('div');
+          divider2.className = 'hidden lg:block w-px mx-4';
+          divider2.style.borderLeft = '2px dashed var(--color-espresso)';
+          divider2.style.height = '100%';
+          divider2.style.minHeight = '400px';
+          businessContainer.appendChild(divider2);
+          
+          // Grid 3 (Europe)
+          const gridDiv3 = document.createElement('div');
+          gridDiv3.className = 'w-full lg:w-1/3 min-w-0 overflow-x-auto relative';
+          gridDiv3.innerHTML = `
+            <div class="w-full min-w-0 overflow-x-auto relative">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">Europe</h3>
+                <div class="flex items-center gap-2">
+                  <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business3" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business3">100%</span>
+                  <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business3" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
+                </div>
+              </div>
+              <div class="zoom-area" data-dept="business3" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
+                  ${generateCustomEmployeeRows(grid3Hierarchy, grid3Employees)}
+                </div>
+              </div>
+            </div>
+          `;
+          
+          businessContainer.appendChild(gridDiv3);
           container.appendChild(businessContainer);
           
           // Attach zoom listeners for both grids
