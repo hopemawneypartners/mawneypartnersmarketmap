@@ -11,6 +11,13 @@
     .employee-box {
       transition: all 0.2s ease-in-out;
       transform: scale(1);
+      height: 72px;
+    }
+    
+    @media (min-width: 768px) {
+      .employee-box {
+        height: 80px;
+      }
     }
     
     .employee-box:hover {
@@ -765,7 +772,7 @@
             const employee = employees.find(emp => emp.name === empName);
             if (employee) {
               rowDivs.push(`
-                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
                   <div class="flex-1">
                     <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
                     <div class="text-xs mt-1 break-words">${employee.title}</div>
@@ -885,7 +892,7 @@
             const employee = employees.find(emp => emp.name === empName);
             if (employee) {
               rowDivs.push(`
-                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
                   <div class="flex-1">
                     <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
                     <div class="text-xs mt-1 break-words">${employee.title}</div>
