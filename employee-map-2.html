@@ -1053,7 +1053,7 @@
             console.log('Loading from Supabase...');
             // Add cache-busting parameter to force fresh data
             const { data, error } = await supabase
-              .from('notes')
+              .from('fair_oaks_notes')
               .select('*')
               .order('created_at', { ascending: false })
               .abortSignal(new AbortController().signal); // Force fresh request
@@ -1079,7 +1079,7 @@
       // Load notes from localStorage
       function loadNotesFromLocalStorage() {
         try {
-          const notes = localStorage.getItem('employee-map-notes');
+          const notes = localStorage.getItem('fair-oaks-employee-map-notes');
           return notes ? JSON.parse(notes) : [];
         } catch (error) {
           console.error('Error loading notes from localStorage:', error);
@@ -1098,7 +1098,7 @@
         if (supabase) {
           try {
             const { data, error } = await supabase
-              .from('notes')
+              .from('fair_oaks_notes')
               .insert([newNote])
               .select();
             
@@ -1118,7 +1118,7 @@
         try {
           const notes = loadNotesFromLocalStorage();
           notes.unshift(note);
-          localStorage.setItem('employee-map-notes', JSON.stringify(notes));
+          localStorage.setItem('fair-oaks-employee-map-notes', JSON.stringify(notes));
           return note;
         } catch (error) {
           console.error('Error adding note to localStorage:', error);
@@ -1241,7 +1241,7 @@
         if (supabase) {
           try {
             const { data, error } = await supabase
-              .from('notes')
+              .from('fair_oaks_notes')
               .select('*');
             if (error) {
               console.error('Supabase query error:', error);
@@ -1259,7 +1259,7 @@
       window.clearNotesCache = function() {
         console.log('=== CLEARING NOTES CACHE ===');
         try {
-          localStorage.removeItem('employee-map-notes');
+          localStorage.removeItem('fair-oaks-employee-map-notes');
           console.log('✅ localStorage cleared');
         } catch (error) {
           console.error('❌ Error clearing localStorage:', error);
@@ -1292,7 +1292,7 @@
             // Force a fresh query by using a new client instance
             const freshSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             const { data, error } = await freshSupabase
-              .from('notes')
+              .from('fair_oaks_notes')
               .select('*')
               .order('created_at', { ascending: false });
             
@@ -1316,7 +1316,7 @@
           try {
             console.log('Deleting all notes from Supabase...');
             const { error } = await supabase
-              .from('notes')
+              .from('fair_oaks_notes')
               .delete()
               .neq('id', '0'); // Delete all notes (this will delete everything)
             
@@ -1332,7 +1332,7 @@
         
         try {
           console.log('Clearing localStorage...');
-          localStorage.removeItem('employee-map-notes');
+          localStorage.removeItem('fair-oaks-employee-map-notes');
           console.log('✅ localStorage cleared');
         } catch (error) {
           console.error('Error clearing localStorage:', error);
