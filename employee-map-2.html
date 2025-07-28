@@ -577,7 +577,7 @@
           name: "Firas Joumblat",
           shortName: "Firas<br>Joumblat",
           title: "Investment Analyst",
-          profile: "#",
+          profile: "profile-firas-joumblat.html",
           departments: ["business"],
           specialisms: "Investment Analysis,Credit Research,CLOs,European Markets"
         },
@@ -585,15 +585,15 @@
           name: "Bradley Pearman",
           shortName: "Bradley<br>Pearman",
           title: "Associate",
-          profile: "#",
-          departments: ["business"],
+          profile: "profile-bradley-pearman.html",
+          departments: ["business", "investment-structured"],
           specialisms: "Investment Management,Portfolio Management,CLOs,Secured Loans"
         },
         {
           name: "David Spence",
           shortName: "David<br>Spence",
           title: "Business Development",
-          profile: "#",
+          profile: "profile-david-spence.html",
           departments: ["business", "bd-capital"],
           specialisms: "Business Development,Client Relations,Fund Raising,Strategic Planning"
         },
@@ -601,7 +601,7 @@
           name: "Barry Povey",
           shortName: "Barry<br>Povey",
           title: "Principal, PM",
-          profile: "#",
+          profile: "profile-barry-povey.html",
           departments: ["business", "investment-structured"],
           specialisms: "Portfolio Management,Investment Management,CLOs,Leadership"
         },
@@ -609,7 +609,7 @@
           name: "Archie Hancock",
           shortName: "Archie<br>Hancock",
           title: "Investor Relations Analyst",
-          profile: "#",
+          profile: "profile-archie-hancock.html",
           departments: ["business", "bd-capital"],
           specialisms: "Investor Relations,Client Relations,Fund Raising,Stakeholder Management"
         },
@@ -617,7 +617,7 @@
           name: "Alfonso Aceves",
           shortName: "Alfonso<br>Aceves",
           title: "CLO Investment Associate",
-          profile: "#",
+          profile: "profile-alfonso-aceves.html",
           departments: ["business", "investment-structured"],
           specialisms: "CLOs,Investment Management,Structured Products,Portfolio Management"
         },
@@ -625,7 +625,7 @@
           name: "Aisha Fowosire",
           shortName: "Aisha<br>Fowosire",
           title: "Operations",
-          profile: "#",
+          profile: "profile-aisha-fowosire.html",
           departments: ["business", "legal-compliance"],
           specialisms: "Operations Management,Process Improvement,Compliance,Risk Management"
         },
@@ -633,7 +633,7 @@
           name: "Ilze Petersone",
           shortName: "Ilze<br>Petersone",
           title: "Compliance Manager",
-          profile: "#",
+          profile: "profile-ilze-petersone.html",
           departments: ["business", "legal-compliance"],
           specialisms: "Compliance,Risk Management,Regulatory Affairs,Operations"
         },
@@ -641,7 +641,7 @@
           name: "Prakash P.",
           shortName: "Prakash<br>P.",
           title: "Head of Finance and Operations",
-          profile: "#",
+          profile: "profile-prakash-p.html",
           departments: ["business", "legal-compliance"],
           specialisms: "Finance,Operations Management,Strategic Planning,Leadership"
         },
@@ -649,7 +649,7 @@
           name: "Charles C.",
           shortName: "Charles<br>C.",
           title: "General Counsel",
-          profile: "#",
+          profile: "profile-charles-c.html",
           departments: ["business", "legal-compliance", "c-suite"],
           specialisms: "Legal,Compliance,Risk Management,Corporate Governance"
         },
@@ -657,7 +657,7 @@
           name: "Morten Simonsen",
           shortName: "Morten<br>Simonsen",
           title: "BD/Fund Raising",
-          profile: "#",
+          profile: "profile-morten-simonsen.html",
           departments: ["business", "bd-capital"],
           specialisms: "Business Development,Fund Raising,Client Relations,Strategic Planning"
         },
@@ -665,7 +665,7 @@
           name: "Jason S.",
           shortName: "Jason<br>S.",
           title: "CLO Structured Products",
-          profile: "#",
+          profile: "profile-jason-s.html",
           departments: ["business", "investment-structured"],
           specialisms: "CLOs,Structured Products,Investment Management,Portfolio Management"
         },
@@ -673,50 +673,11 @@
           name: "Miguel Arraya",
           shortName: "Miguel<br>Arraya",
           title: "Non Executive Director",
-          profile: "#",
+          profile: "profile-miguel-arraya.html",
           departments: ["business", "legal-compliance"],
           specialisms: "Corporate Governance,Strategic Planning,Leadership,Board Management"
         },
-        {
-          name: "Barry",
-          shortName: "Barry",
-          title: "Principal",
-          profile: "#",
-          departments: ["business", "investment-structured"],
-          specialisms: "Structured Credit,Investment Management,CLOs,Portfolio Management"
-        },
-        {
-          name: "Jason",
-          shortName: "Jason",
-          title: "Associate",
-          profile: "#",
-          departments: ["business", "investment-structured"],
-          specialisms: "Structured Credit,CLOs,Investment Management,Portfolio Management"
-        },
-        {
-          name: "Bradley",
-          shortName: "Bradley",
-          title: "Associate",
-          profile: "#",
-          departments: ["business", "investment-structured"],
-          specialisms: "Structured Credit,Investment Management,CLOs,Portfolio Management"
-        },
-        {
-          name: "David",
-          shortName: "David",
-          title: "Director",
-          profile: "#",
-          departments: ["business", "bd-capital"],
-          specialisms: "Capital Formation,Business Development,Fund Raising,Client Relations"
-        },
-        {
-          name: "Archie",
-          shortName: "Archie",
-          title: "Associate",
-          profile: "#",
-          departments: ["business", "bd-capital"],
-          specialisms: "Capital Formation,Investor Relations,Fund Raising,Client Relations"
-        }
+       
       ];
 
       // Department configurations
@@ -892,6 +853,7 @@
         selectedDepartments.forEach((dept, index) => {
           const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
           
+          
           if (deptEmployees.length === 0) return;
           
           const gridDiv = document.createElement('div');
@@ -912,7 +874,7 @@
               </div>
               <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-4 w-[350px] max-w-full" style="padding: 8px;">
-                  ${generateEmployeeRows(deptEmployees)}
+                  ${generateEmployeeRows(deptEmployees, dept)}
                 </div>
               </div>
             </div>
@@ -937,41 +899,228 @@
         });
       }
 
-      // Generate employee rows for a department
-      function generateEmployeeRows(employees) {
-        // Define the hierarchy structure
-        const hierarchy = [
-          ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"], // Row 1: Partners
-          ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec", "Philip Ryan"], // Row 2: VPs and MD
-          ["Matilda Makitalo", "Luke Streeter"] // Row 3: Analysts and Associates
-        ];
+            // Generate employee rows for a department
+      function generateEmployeeRows(employees, currentDepartment) {
+        // Check if this is the investment-structured department
+        const isStructuredCredit = currentDepartment === 'investment-structured';
         
-        const rows = [];
+        // Check if this is the investment-liquid department
+        const isLiquidCredit = currentDepartment === 'investment-liquid';
         
-        hierarchy.forEach(rowEmployees => {
-          const rowDivs = [];
+        // Check if this is the bd-capital department
+        const isBdCapital = currentDepartment === 'bd-capital';
+        
+        // Check if this is the legal-compliance department
+        const isLegalCompliance = currentDepartment === 'legal-compliance';
+        
+        // Check if this is the c-suite department
+        const isCSuite = currentDepartment === 'c-suite';
+
+        
+        if (isCSuite) {
+          // Special handling for C-Suite department
+          const cSuiteHierarchy = [
+            ["William Sheoris", "Miguel Ramos Fuentenebro", "Roger Coyle"], // Row 1: Partners
+            ["Charles C."] // Row 2: General Counsel
+          ];
           
-          rowEmployees.forEach(empName => {
-            const employee = employees.find(emp => emp.name === empName);
-            if (employee) {
-              rowDivs.push(`
-                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                  <div class="flex-1">
-                    <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                    <div class="text-xs mt-1 break-words">${employee.title}</div>
-                  </div>
-                  <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                </a>
-              `);
+          const rows = [];
+          
+          cSuiteHierarchy.forEach((rowEmployees, index) => {
+            const rowDivs = [];
+            
+            rowEmployees.forEach(empName => {
+              const employee = employees.find(emp => emp.name === empName);
+              
+              if (employee) {
+                rowDivs.push(`
+                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                    <div class="flex-1">
+                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                      <div class="text-xs mt-1 break-words">${employee.title}</div>
+                    </div>
+                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  </a>
+                `);
+              }
+            });
+            
+            if (rowDivs.length > 0) {
+              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
             }
           });
           
-          if (rowDivs.length > 0) {
-            rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-          }
-        });
-        
-        return rows.join('');
+          return rows.join('');
+        } else if (isStructuredCredit) {
+          // Special handling for Investment - Structured Credit department
+          const structuredCreditHierarchy = [
+            ["Barry Povey", "Jason S."], // Row 1: Principal and CLO Structured Products
+            ["Alfonso Aceves", "Bradley Pearman"] // Row 2: CLO Investment Associate and Associate
+          ];
+          
+          const rows = [];
+          
+          structuredCreditHierarchy.forEach(rowEmployees => {
+            const rowDivs = [];
+            
+            rowEmployees.forEach(empName => {
+              const employee = employees.find(emp => emp.name === empName);
+              if (employee) {
+                rowDivs.push(`
+                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                    <div class="flex-1">
+                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                      <div class="text-xs mt-1 break-words">${employee.title}</div>
+                    </div>
+                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  </a>
+                `);
+              }
+            });
+            
+            if (rowDivs.length > 0) {
+              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+            }
+          });
+          
+          return rows.join('');
+                 } else if (isLiquidCredit) {
+           // Special handling for Investment - Liquid Credit department
+           const liquidCreditHierarchy = [
+             ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"], // Row 1: Partners
+             ["Tyler Wallace"], // Row 2: MD, PM - on his own row
+             ["Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec"], // Row 3: VPs
+             ["Philip Ryan", "Matilda Makitalo", "Luke Streeter"] // Row 4: Analysts and Associates
+           ];
+          
+          const rows = [];
+          
+          liquidCreditHierarchy.forEach(rowEmployees => {
+            const rowDivs = [];
+            
+            rowEmployees.forEach(empName => {
+              const employee = employees.find(emp => emp.name === empName);
+              if (employee) {
+                rowDivs.push(`
+                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                    <div class="flex-1">
+                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                      <div class="text-xs mt-1 break-words">${employee.title}</div>
+                    </div>
+                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  </a>
+                `);
+              }
+            });
+            
+            if (rowDivs.length > 0) {
+              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+            }
+          });
+          
+          return rows.join('');
+        } else if (isBdCapital) {
+          // Special handling for BD - Capital Formation department
+          const bdCapitalHierarchy = [
+            ["David Spence", "Morten Simonsen"], // Row 1: Business Development and BD/Fund Raising
+            ["Archie Hancock"] // Row 2: Investor Relations Analyst
+          ];
+          
+          const rows = [];
+          
+          bdCapitalHierarchy.forEach(rowEmployees => {
+            const rowDivs = [];
+            
+            rowEmployees.forEach(empName => {
+              const employee = employees.find(emp => emp.name === empName);
+              if (employee) {
+                rowDivs.push(`
+                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                    <div class="flex-1">
+                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                      <div class="text-xs mt-1 break-words">${employee.title}</div>
+                    </div>
+                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  </a>
+                `);
+              }
+            });
+            
+            if (rowDivs.length > 0) {
+              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+            }
+          });
+          
+          return rows.join('');
+        } else if (isLegalCompliance) {
+          // Special handling for Legal/Compliance/Operations department
+          const legalComplianceHierarchy = [
+            ["Charles C.", "Prakash P."], // Row 1: General Counsel and Head of Finance and Operations
+            ["Aisha Fowosire", "Ilze Petersone"] // Row 2: Operations and Compliance Manager
+          ];
+          
+          const rows = [];
+          
+          legalComplianceHierarchy.forEach(rowEmployees => {
+            const rowDivs = [];
+            
+            rowEmployees.forEach(empName => {
+              const employee = employees.find(emp => emp.name === empName);
+              if (employee) {
+                rowDivs.push(`
+                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                    <div class="flex-1">
+                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                      <div class="text-xs mt-1 break-words">${employee.title}</div>
+                    </div>
+                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  </a>
+                `);
+              }
+            });
+            
+            if (rowDivs.length > 0) {
+              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+            }
+          });
+          
+          return rows.join('');
+
+        } else {
+          // Default hierarchy structure for other departments
+          const hierarchy = [
+            ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"], // Row 1: Partners
+            ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec", "Philip Ryan"], // Row 2: VPs and MD
+            ["Matilda Makitalo", "Luke Streeter"] // Row 3: Analysts and Associates
+          ];
+          
+          const rows = [];
+          
+          hierarchy.forEach(rowEmployees => {
+            const rowDivs = [];
+            
+            rowEmployees.forEach(empName => {
+              const employee = employees.find(emp => emp.name === empName);
+              if (employee) {
+                rowDivs.push(`
+                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                    <div class="flex-1">
+                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                      <div class="text-xs mt-1 break-words">${employee.title}</div>
+                    </div>
+                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  </a>
+                `);
+              }
+            });
+            
+            if (rowDivs.length > 0) {
+              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+            }
+          });
+          
+          return rows.join('');
+        }
       }
 
       // Attach zoom event listeners
