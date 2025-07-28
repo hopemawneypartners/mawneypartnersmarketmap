@@ -1055,9 +1055,8 @@
               `);
             }
           });
-          if (rowDivs.length > 0) {
-            rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-          }
+          // Always create a row div, even if empty, to maintain consistent spacing
+          rows.push(`<div class="flex flex-row gap-2 md:gap-4" style="min-height: 80px;">${rowDivs.join('')}</div>`);
         });
         return rows.join('');
       }
