@@ -571,6 +571,110 @@
           profile: "profile-william-sheoris.html",
           departments: ["business", "investment", "c-suite"],
           specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
+        },
+        {
+          name: "Firas Joumblat",
+          shortName: "Firas<br>Joumblat",
+          title: "Investment Analyst",
+          profile: "#",
+          departments: ["business", "investment"],
+          specialisms: "Investment Analysis,Credit Research,CLOs,European Markets"
+        },
+        {
+          name: "Bradley Pearman",
+          shortName: "Bradley<br>Pearman",
+          title: "Associate",
+          profile: "#",
+          departments: ["business", "investment"],
+          specialisms: "Investment Management,Portfolio Management,CLOs,Secured Loans"
+        },
+        {
+          name: "David Spence",
+          shortName: "David<br>Spence",
+          title: "Business Development",
+          profile: "#",
+          departments: ["business", "capital-formation"],
+          specialisms: "Business Development,Client Relations,Fund Raising,Strategic Planning"
+        },
+        {
+          name: "Barry Povey",
+          shortName: "Barry<br>Povey",
+          title: "Principal, PM",
+          profile: "#",
+          departments: ["business", "investment", "c-suite"],
+          specialisms: "Portfolio Management,Investment Management,CLOs,Leadership"
+        },
+        {
+          name: "Archie Hancock",
+          shortName: "Archie<br>Hancock",
+          title: "Investor Relations Analyst",
+          profile: "#",
+          departments: ["business", "capital-formation"],
+          specialisms: "Investor Relations,Client Relations,Fund Raising,Stakeholder Management"
+        },
+        {
+          name: "Alfonso Aceves",
+          shortName: "Alfonso<br>Aceves",
+          title: "CLO Investment Associate",
+          profile: "#",
+          departments: ["business", "investment"],
+          specialisms: "CLOs,Investment Management,Structured Products,Portfolio Management"
+        },
+        {
+          name: "Aisha Fowosire",
+          shortName: "Aisha<br>Fowosire",
+          title: "Operations",
+          profile: "#",
+          departments: ["business"],
+          specialisms: "Operations Management,Process Improvement,Compliance,Risk Management"
+        },
+        {
+          name: "Ilze Petersone",
+          shortName: "Ilze<br>Petersone",
+          title: "Compliance Manager",
+          profile: "#",
+          departments: ["business"],
+          specialisms: "Compliance,Risk Management,Regulatory Affairs,Operations"
+        },
+        {
+          name: "Prakash P.",
+          shortName: "Prakash<br>P.",
+          title: "Head of Finance and Operations",
+          profile: "#",
+          departments: ["business", "c-suite"],
+          specialisms: "Finance,Operations Management,Strategic Planning,Leadership"
+        },
+        {
+          name: "Charles C.",
+          shortName: "Charles<br>C.",
+          title: "General Counsel",
+          profile: "#",
+          departments: ["business", "c-suite"],
+          specialisms: "Legal,Compliance,Risk Management,Corporate Governance"
+        },
+        {
+          name: "Morten Simonsen",
+          shortName: "Morten<br>Simonsen",
+          title: "Business Development / Fund Raising",
+          profile: "#",
+          departments: ["business", "capital-formation"],
+          specialisms: "Business Development,Fund Raising,Client Relations,Strategic Planning"
+        },
+        {
+          name: "Jason S.",
+          shortName: "Jason<br>S.",
+          title: "CLO Structured Products",
+          profile: "#",
+          departments: ["business", "investment"],
+          specialisms: "CLOs,Structured Products,Investment Management,Portfolio Management"
+        },
+        {
+          name: "Miguel Arraya",
+          shortName: "Miguel<br>Arraya",
+          title: "Non Executive Director",
+          profile: "#",
+          departments: ["business", "c-suite"],
+          specialisms: "Corporate Governance,Strategic Planning,Leadership,Board Management"
         }
       ];
 
@@ -623,14 +727,15 @@
           // Business view: two grids side by side
           // Grid 1 (London)
           const grid1Hierarchy = [
-            ["Roger Coyle", "Miguel Ramos Fuentenebro"],
-            ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu"],
-            ["Philip Ryan", "Luke Streeter", "Rémi Nedelec", "Matilda Makitalo"]
+            ["Roger Coyle", "Miguel Ramos Fuentenebro", "Barry Povey"],
+            ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu", "David Spence"],
+            ["Philip Ryan", "Luke Streeter", "Rémi Nedelec", "Matilda Makitalo", "Firas Joumblat", "Bradley Pearman"],
+            ["Archie Hancock", "Aisha Fowosire", "Ilze Petersone", "Prakash P.", "Charles C.", "Morten Simonsen", "Miguel Arraya"]
           ];
           // Grid 2 (New York)
           const grid2Hierarchy = [
             ["William Sheoris"],
-            [],
+            ["Alfonso Aceves", "Jason S."],
             []
           ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
