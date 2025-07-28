@@ -621,16 +621,16 @@
         
         if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
           // Business view: two grids side by side
-          // Grid 1
+          // Grid 1 (London)
           const grid1Hierarchy = [
-            ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"],
+            ["Roger Coyle", "Miguel Ramos Fuentenebro"],
             ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu"],
-            ["Philip Ryan", "Luke Streeter"]
+            ["Philip Ryan", "Luke Streeter", "Rémi Nedelec", "Matilda Makitalo"]
           ];
-          // Grid 2
+          // Grid 2 (New York)
           const grid2Hierarchy = [
-            ["Rémi Nedelec"],
-            ["Matilda Makitalo"],
+            ["William Sheoris"],
+            [],
             []
           ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
