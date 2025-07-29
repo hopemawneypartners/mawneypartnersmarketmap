@@ -107,13 +107,22 @@
       min-width: auto;
       min-height: auto;
       display: inline;
-      align-items: center;
-      justify-content: center;
-      transition: none;
-      margin-left: 8px;
-      line-height: 1;
-      opacity: 0.8;
-      pointer-events: none;
+    }
+    
+    /* Tablet-specific navigation layout */
+    @media (max-width: 1024px) {
+      .tablet-above-buttons {
+        margin-bottom: 0.5rem !important;
+        margin-right: 0 !important;
+      }
+    }
+    
+    /* Samsung Galaxy S8 specific (2560x1600) */
+    @media (min-width: 1500px) and (max-width: 3000px) and (min-height: 800px) and (max-height: 2000px) {
+      .tablet-above-buttons {
+        margin-bottom: 0.5rem !important;
+        margin-right: 0 !important;
+      }
     }
     
     .note-item .delete-note:hover {
@@ -198,6 +207,22 @@
         min-height: 44px;
       }
     }
+    
+    /* Tablet-specific navigation layout */
+    @media (max-width: 1024px) {
+      .tablet-above-buttons {
+        margin-bottom: 0.5rem !important;
+        margin-right: 0 !important;
+      }
+    }
+    
+    /* Samsung Galaxy S8 specific (2560x1600) */
+    @media (min-width: 1500px) and (max-width: 3000px) and (min-height: 800px) and (max-height: 2000px) {
+      .tablet-above-buttons {
+        margin-bottom: 0.5rem !important;
+        margin-right: 0 !important;
+      }
+    }
   </style>
   <script>
     if (localStorage.getItem('mawney_logged_in') !== 'true') {
@@ -254,7 +279,7 @@
       <div class="flex flex-col items-center mb-6 md:mb-8">
         <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
         <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 lg:gap-4 mb-4">
-          <span class="text-xs md:text-sm mb-2 sm:mb-0 sm:mr-2" id="nav-text">Navigate to department:</span>
+          <span class="text-xs md:text-sm mb-2 sm:mb-0 sm:mr-2 tablet-above-buttons" id="nav-text">Navigate to department:</span>
           <div class="flex flex-wrap justify-center gap-2">
             <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
             <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment-liquid">Investment - Liquid Credit</button>
@@ -746,11 +771,18 @@
       function adjustNavigationLayout() {
         const navText = document.getElementById('nav-text');
         if (navText) {
-          if (isTablet()) {
+          const isTabletDevice = isTablet();
+          console.log('Navigation layout adjustment - isTablet:', isTabletDevice);
+          
+          if (isTabletDevice) {
             navText.className = 'text-xs md:text-sm mb-2'; // Above buttons on tablet
+            console.log('Applied tablet layout: mb-2 (above buttons)');
           } else {
             navText.className = 'text-xs md:text-sm mr-2'; // To the left on desktop
+            console.log('Applied desktop layout: mr-2 (to the left)');
           }
+        } else {
+          console.log('Navigation text element not found');
         }
       }
 
