@@ -512,7 +512,7 @@
         {
           name: "Matilda Makitalo",
           shortName: "Matilda<br>Makitalo",
-          title: "LevFin Credit Analyst",
+          title: "Analyst",
           profile: "profile-matilda-makitalo.html",
           departments: ["business", "investment-liquid"],
           specialisms: "LevFin,Credit Analysis,European Markets,CLOs"
@@ -742,13 +742,15 @@
       zoomLevels["business1"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
       zoomLevels["business2"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
       
-      // Adjust navigation text layout based on device type
-      const navText = document.getElementById('nav-text');
-      if (navText) {
-        if (isTablet()) {
-          navText.className = 'text-xs md:text-sm mb-2'; // Above buttons on tablet
-        } else {
-          navText.className = 'text-xs md:text-sm mr-2'; // To the left on desktop
+      // Adjust navigation text layout based on device type - will be called after DOM loads
+      function adjustNavigationLayout() {
+        const navText = document.getElementById('nav-text');
+        if (navText) {
+          if (isTablet()) {
+            navText.className = 'text-xs md:text-sm mb-2'; // Above buttons on tablet
+          } else {
+            navText.className = 'text-xs md:text-sm mr-2'; // To the left on desktop
+          }
         }
       }
 
@@ -973,6 +975,9 @@
         
         // Re-attach zoom event listeners
         attachZoomListeners();
+        
+        // Adjust navigation layout based on device type
+        adjustNavigationLayout();
 
         // After rendering, update department button selected state
         const deptButtons = document.querySelectorAll('.dept-btn');
@@ -1333,6 +1338,11 @@
       // At the end of the script, add:
       selectedDepartments = ['business'];
       renderDepartmentGrids();
+      
+      // Initial navigation layout adjustment
+      setTimeout(() => {
+        adjustNavigationLayout();
+      }, 100);
 
       // Logout logic
       const logoutBtn = document.getElementById('logout-btn');
