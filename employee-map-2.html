@@ -576,7 +576,7 @@
         {
           name: "Firas Joumblat",
           shortName: "Firas<br>Joumblat",
-          title: "Investment Analyst - Credit Analyst",
+          title: "Analyst",
           profile: "profile-firas-joumblat.html",
           departments: ["business"],
           specialisms: "Investment Analysis,Credit Research,CLOs,European Markets"
@@ -608,7 +608,7 @@
         {
           name: "Archie Hancock",
           shortName: "Archie<br>Hancock",
-          title: "Investor Relations Analyst",
+          title: "Analyst",
           profile: "profile-archie-hancock.html",
           departments: ["business", "bd-capital"],
           specialisms: "Investor Relations,Client Relations,Fundraising,Stakeholder Management"
@@ -693,14 +693,19 @@
       let selectedDepartments = ['business'];
       let zoomLevels = {};
 
+      // Detect tablet screen size (768px to 1024px)
+      const isTablet = () => {
+        return window.innerWidth >= 768 && window.innerWidth <= 1024;
+      };
+
       // Initialize zoom levels for all departments
       Object.keys(departments).forEach(dept => {
-        zoomLevels[dept] = 0.7;
+        zoomLevels[dept] = isTablet() ? 0.7 : 1.0; // 70% for tablet, 100% for others
       });
       
       // Initialize zoom levels for Business sub-grids
-      zoomLevels["business1"] = 0.7;
-      zoomLevels["business2"] = 0.7;
+      zoomLevels["business1"] = isTablet() ? 0.7 : 1.0; // 70% for tablet, 100% for others
+      zoomLevels["business2"] = isTablet() ? 0.7 : 1.0; // 70% for tablet, 100% for others
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -762,11 +767,11 @@
                 <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">London</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">100%</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">${isTablet() ? '70%' : '100%'}</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.7 : 1.0}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
                 </div>
@@ -792,12 +797,23 @@
           
           // Add dashed line divider between London and New York
           const divider1 = document.createElement('div');
-          divider1.className = 'hidden lg:block w-px mx-4';
-          divider1.style.borderLeft = '2px dashed var(--color-espresso)';
+          divider1.className = 'block w-1 mx-4 flex-shrink-0';
+          divider1.style.background = 'repeating-linear-gradient(to bottom, #2d2926 0px, #2d2926 3px, transparent 3px, transparent 8px)';
           divider1.style.height = '100%';
-          divider1.style.marginTop = '-50px';
-          divider1.style.marginBottom = '-50px';
+          divider1.style.minHeight = '300px';
+          divider1.style.opacity = '1';
+          divider1.style.zIndex = '10';
+          divider1.style.borderRadius = '1px';
+          divider1.style.position = 'relative';
           businessContainer.appendChild(divider1);
+          
+          // Set divider height to match grid container after rendering
+          setTimeout(() => {
+            const gridHeight = gridDiv1.style.height;
+            if (gridHeight) {
+              divider1.style.height = gridHeight;
+            }
+          }, 300);
           
           // Grid 2 (New York)
           const gridDiv2 = document.createElement('div');
@@ -810,11 +826,11 @@
                 <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">New York</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">100%</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">${isTablet() ? '70%' : '100%'}</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.7 : 1.0}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
                 </div>
@@ -827,14 +843,24 @@
             const zoomArea = gridDiv2.querySelector('.zoom-area');
             const contentDiv = zoomArea.querySelector('.flex.flex-col');
             if (contentDiv) {
-              const contentHeight = contentDiv.scrollHeight;
-              console.log('Business2 - Content height:', contentHeight);
-              const scaledHeight = contentHeight * 0.7; // Account for scale transform
-              console.log('Business2 - Scaled height:', scaledHeight);
-              zoomArea.style.height = scaledHeight + 'px';
-              gridDiv2.style.height = (scaledHeight + 60) + 'px'; // Add space for header
+              // Mirror the London business section height
+              const londonZoomArea = gridDiv1.querySelector('.zoom-area');
+              if (londonZoomArea) {
+                const londonHeight = londonZoomArea.style.height;
+                console.log('Business2 - Mirroring London height:', londonHeight);
+                zoomArea.style.height = londonHeight;
+                gridDiv2.style.height = gridDiv1.style.height;
+              } else {
+                // Fallback to own content height if London not found
+                const contentHeight = contentDiv.scrollHeight;
+                console.log('Business2 - Content height:', contentHeight);
+                const scaledHeight = contentHeight * 0.7; // Account for scale transform
+                console.log('Business2 - Scaled height:', scaledHeight);
+                zoomArea.style.height = scaledHeight + 'px';
+                gridDiv2.style.height = (scaledHeight + 60) + 'px'; // Add space for header
+              }
             }
-          }, 100);
+          }, 200); // Increased delay to ensure London is calculated first
           
           businessContainer.appendChild(gridDiv2);
           container.appendChild(businessContainer);
@@ -865,11 +891,11 @@
                 <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">${departments[dept].name}</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">100%</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">${isTablet() ? '70%' : '100%'}</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
+              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.7 : 1.0}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateEmployeeRows(deptEmployees, dept)}
                 </div>
