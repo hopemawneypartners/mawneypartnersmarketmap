@@ -697,8 +697,17 @@
       const isTablet = () => {
         const width = window.innerWidth;
         const height = window.innerHeight;
+        const userAgent = navigator.userAgent.toLowerCase();
         
         console.log('Screen dimensions:', width, 'x', height);
+        console.log('User agent:', userAgent);
+        
+        // Check if it's a mobile/tablet device via user agent
+        const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+        const isSamsung = userAgent.includes('samsung');
+        const isTabletUA = userAgent.includes('tablet') || userAgent.includes('ipad');
+        
+        console.log('Mobile device:', isMobileDevice, 'Samsung:', isSamsung, 'Tablet UA:', isTabletUA);
         
         // Standard tablet detection
         const isStandardTablet = width >= 768 && width <= 1024;
@@ -709,8 +718,13 @@
                                (width >= 800 && width <= 2000 && height >= 1500 && height <= 3000) || // Portrait mode
                                (width >= 1200 && width <= 3000 && height >= 800 && height <= 2000); // Ultra broad range
         
-        const result = isStandardTablet || isHighResTablet;
-        console.log('Is tablet detected:', result, 'Standard:', isStandardTablet, 'High-res:', isHighResTablet);
+        // If it's a Samsung device or mobile device with high resolution, treat as tablet
+        const isSamsungTablet = isSamsung && (width >= 1000 || height >= 1000);
+        const isMobileHighRes = isMobileDevice && (width >= 1000 || height >= 1000);
+        
+        // Only detect as tablet if it's actually a mobile device or has mobile characteristics
+        const result = isStandardTablet || isHighResTablet || isSamsungTablet || (isMobileHighRes && isMobileDevice);
+        console.log('Is tablet detected:', result, 'Standard:', isStandardTablet, 'High-res:', isHighResTablet, 'Samsung:', isSamsungTablet, 'Mobile high-res:', isMobileHighRes);
         
         return result;
       };
