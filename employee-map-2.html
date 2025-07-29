@@ -504,7 +504,7 @@
         {
           name: "Abdulkadir Nasir",
           shortName: "Abdulkadir<br>Nasir",
-          title: "VP, Credit Research Analyst",
+          title: "VP",
           profile: "profile-abdulkadir-nasir.html",
           departments: ["business", "investment-liquid"],
           specialisms: "Credit Research,Credit Analysis,CLOs,European Markets"
@@ -536,7 +536,7 @@
         {
           name: "Philip Ryan",
           shortName: "Philip<br>Ryan",
-          title: "VP, Credit Analyst",
+          title: "VP",
           profile: "profile-philip-ryan.html",
           departments: ["business"],
           specialisms: "Credit Analysis,Credit Research,CLOs,Secured Loans"
@@ -592,7 +592,7 @@
         {
           name: "David Spence",
           shortName: "David<br>Spence",
-          title: "Business Development",
+          title: "BD",
           profile: "profile-david-spence.html",
           departments: ["business", "bd-capital"],
           specialisms: "Business Development,Client Relations,Fundraising,Strategic Planning"
@@ -638,16 +638,16 @@
           specialisms: "Compliance,Risk Management,Regulatory Affairs,Operations"
         },
         {
-          name: "Prakash P.",
-          shortName: "Prakash<br>P.",
+          name: "Prakash Panikker",
+          shortName: "Prakash<br>Panikker",
           title: "Head of Finance and Operations",
           profile: "profile-prakash-p.html",
           departments: ["business", "legal-compliance"],
           specialisms: "Finance,Operations Management,Strategic Planning,Leadership"
         },
         {
-          name: "Charles C.",
-          shortName: "Charles<br>C.",
+          name: "Charles Carvell",
+          shortName: "Charles<br>Carvell",
           title: "General Counsel",
           profile: "profile-charles-c.html",
           departments: ["business", "legal-compliance", "c-suite"],
@@ -662,8 +662,8 @@
           specialisms: "Business Development,Fundraising,Client Relations,Strategic Planning"
         },
         {
-          name: "Jason S.",
-          shortName: "Jason<br>S.",
+          name: "Jason So",
+          shortName: "Jason<br>So",
           title: "CLO Structured Products",
           profile: "profile-jason-s.html",
           departments: ["business", "investment-structured"],
@@ -695,12 +695,12 @@
 
       // Initialize zoom levels for all departments
       Object.keys(departments).forEach(dept => {
-        zoomLevels[dept] = 1;
+        zoomLevels[dept] = 0.7;
       });
       
       // Initialize zoom levels for Business sub-grids
-      zoomLevels["business1"] = 1;
-      zoomLevels["business2"] = 1;
+      zoomLevels["business1"] = 0.7;
+      zoomLevels["business2"] = 0.7;
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -731,7 +731,7 @@
           // Grid 1 (London)
           const grid1Hierarchy = [
             ["Roger Coyle", "Miguel Ramos Fuentenebro"],
-            ["Charles C.", "Tyler Wallace", "Barry Povey", "Prakash P.", "David Spence", "Morten Simonsen"],
+            ["Charles Carvell", "Tyler Wallace", "Barry Povey", "Prakash Panikker", "David Spence", "Morten Simonsen"],
             ["Philip Ryan", "Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec"],
             ["Luke Streeter", "Matilda Makitalo", "Bradley Pearman", "Aisha Fowosire", "Ilze Petersone"],
             ["Archie Hancock", "Firas Joumblat", "Miguel Arraya"]
@@ -739,7 +739,7 @@
           // Grid 2 (New York)
           const grid2Hierarchy = [
             ["William Sheoris"],
-            ["Jason S."],
+            ["Jason So"],
             ["Alfonso Aceves"],
             [],
             []
@@ -764,7 +764,7 @@
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-4 w-[350px] max-w-full" style="padding: 8px;">
                   ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
                 </div>
@@ -797,7 +797,7 @@
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-4 w-[350px] max-w-full" style="padding: 8px;">
                   ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
                 </div>
@@ -836,7 +836,7 @@
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-4 w-[350px] max-w-full" style="padding: 8px;">
                   ${generateEmployeeRows(deptEmployees, dept)}
                 </div>
@@ -885,7 +885,7 @@
           // Special handling for C-Suite department
           const cSuiteHierarchy = [
             ["William Sheoris", "Miguel Ramos Fuentenebro", "Roger Coyle"], // Row 1: Partners
-            ["Charles C."] // Row 2: General Counsel
+            ["Charles Carvell"] // Row 2: General Counsel
           ];
           
           const rows = [];
@@ -918,7 +918,7 @@
         } else if (isStructuredCredit) {
           // Special handling for Investment - Structured Credit department
           const structuredCreditHierarchy = [
-            ["Barry Povey", "Jason S."], // Row 1: Principal and CLO Structured Products
+            ["Barry Povey", "Jason So"], // Row 1: Principal and CLO Structured Products
             ["Alfonso Aceves", "Bradley Pearman"] // Row 2: CLO Investment Associate and Associate
           ];
           
@@ -1019,7 +1019,7 @@
         } else if (isLegalCompliance) {
           // Special handling for Legal/Compliance/Operations department
           const legalComplianceHierarchy = [
-            ["Charles C.", "Prakash P."], // Row 1: General Counsel and Head of Finance and Operations
+            ["Charles Carvell", "Prakash Panikker"], // Row 1: General Counsel and Head of Finance and Operations
             ["Aisha Fowosire", "Ilze Petersone"] // Row 2: Operations and Compliance Manager
           ];
           
@@ -1100,7 +1100,7 @@
             const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
             
             zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
-            zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
+            zoomLabel.textContent = Math.round((zoomLevels[dept] / 0.7) * 100) + '%';
           });
         });
         
@@ -1115,7 +1115,7 @@
             const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
             
             zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
-            zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
+            zoomLabel.textContent = Math.round((zoomLevels[dept] / 0.7) * 100) + '%';
           });
         });
       }
