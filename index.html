@@ -274,17 +274,26 @@
                 
                 // Location filter
                 if (activeFilters.location && activeFilters.location !== '' && shouldShow) {
-                    if (location !== activeFilters.location) {
+                    const cardLocations = location.split(',');
+                    if (!cardLocations.includes(activeFilters.location)) {
                         shouldShow = false;
-                        reason = `Location mismatch: card has "${location}", filter wants "${activeFilters.location}"`;
+                        reason = `Location mismatch: card has [${cardLocations.join(',')}], filter wants "${activeFilters.location}"`;
                     }
                 }
                 
                 // AUM filter
                 if (activeFilters.aum && activeFilters.aum !== '' && shouldShow) {
-                    if (aum !== activeFilters.aum) {
+                    // Normalize AUM values for comparison
+                    const normalizeAUM = (aumValue) => {
+                        return aumValue.replace(/[\$bn]/g, '').toLowerCase();
+                    };
+                    
+                    const normalizedCardAUM = normalizeAUM(aum);
+                    const normalizedFilterAUM = normalizeAUM(activeFilters.aum);
+                    
+                    if (normalizedCardAUM !== normalizedFilterAUM) {
                         shouldShow = false;
-                        reason = `AUM mismatch: card has "${aum}", filter wants "${activeFilters.aum}"`;
+                        reason = `AUM mismatch: card has "${aum}" (normalized: "${normalizedCardAUM}"), filter wants "${activeFilters.aum}" (normalized: "${normalizedFilterAUM}")`;
                     }
                 }
                 
