@@ -253,8 +253,8 @@
     <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-4" style="max-width: 100vw;">
       <div class="flex flex-col items-center mb-6 md:mb-8">
         <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
-        <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 lg:gap-4 mb-4">
-          <span class="text-xs md:text-sm">Navigate to department:</span>
+        <div class="flex flex-col items-center gap-1 sm:gap-2 lg:gap-4 mb-4">
+          <span class="text-xs md:text-sm mb-2 sm:mb-0">Navigate to department:</span>
           <div class="flex flex-wrap justify-center gap-2">
             <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
             <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment-liquid">Investment - Liquid Credit</button>
@@ -700,12 +700,12 @@
 
       // Initialize zoom levels for all departments
       Object.keys(departments).forEach(dept => {
-        zoomLevels[dept] = isTablet() ? 0.7 : 0.7; // 70% for tablet, 70% for others (keeping original)
+        zoomLevels[dept] = isTablet() ? 0.5 : 0.7; // 50% for tablet, 70% for others
       });
       
       // Initialize zoom levels for Business sub-grids
-      zoomLevels["business1"] = isTablet() ? 0.7 : 0.7; // 70% for tablet, 70% for others (keeping original)
-      zoomLevels["business2"] = isTablet() ? 0.7 : 0.7; // 70% for tablet, 70% for others (keeping original)
+      zoomLevels["business1"] = isTablet() ? 0.5 : 0.7; // 50% for tablet, 70% for others
+      zoomLevels["business2"] = isTablet() ? 0.5 : 0.7; // 50% for tablet, 70% for others)
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -767,11 +767,11 @@
                 <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">London</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">70%</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">${isTablet() ? '50%' : '70%'}</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
                 </div>
@@ -826,11 +826,11 @@
                 <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">New York</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">70%</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">${isTablet() ? '50%' : '70%'}</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
                 </div>
@@ -891,11 +891,11 @@
                 <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">${departments[dept].name}</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">70%</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">${isTablet() ? '50%' : '70%'}</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(0.7); transform-origin: left top;">
+              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateEmployeeRows(deptEmployees, dept)}
                 </div>
