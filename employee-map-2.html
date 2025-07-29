@@ -254,7 +254,7 @@
       <div class="flex flex-col items-center mb-6 md:mb-8">
         <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
         <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 lg:gap-4 mb-4">
-          <span class="text-xs md:text-sm mb-2 sm:mb-0 sm:mr-2">Navigate to department:</span>
+          <span class="text-xs md:text-sm mb-2 sm:mb-0 sm:mr-2" id="nav-text">Navigate to department:</span>
           <div class="flex flex-wrap justify-center gap-2">
             <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
             <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment-liquid">Investment - Liquid Credit</button>
@@ -708,6 +708,7 @@
         const isTabletUA = userAgent.includes('tablet') || userAgent.includes('ipad');
         
         console.log('Mobile device:', isMobileDevice, 'Samsung:', isSamsung, 'Tablet UA:', isTabletUA);
+        console.log('User agent contains mobile keywords:', userAgent.includes('mobile'), userAgent.includes('android'), userAgent.includes('tablet'));
         
         // Standard tablet detection
         const isStandardTablet = width >= 768 && width <= 1024;
@@ -718,12 +719,15 @@
                                (width >= 800 && width <= 2000 && height >= 1500 && height <= 3000) || // Portrait mode
                                (width >= 1200 && width <= 3000 && height >= 800 && height <= 2000); // Ultra broad range
         
-        // If it's a Samsung device or mobile device with high resolution, treat as tablet
-        const isSamsungTablet = isSamsung && (width >= 1000 || height >= 1000);
+        // Only detect as tablet if it's actually a mobile device with specific characteristics
+        const isSamsungTablet = isSamsung && isMobileDevice && (width >= 1000 || height >= 1000);
         const isMobileHighRes = isMobileDevice && (width >= 1000 || height >= 1000);
         
-        // Only detect as tablet if it's actually a mobile device or has mobile characteristics
-        const result = isStandardTablet || isHighResTablet || isSamsungTablet || (isMobileHighRes && isMobileDevice);
+        // Much more restrictive - only detect as tablet if it's clearly a mobile device
+        // AND has a smaller screen size (not desktop-like)
+        const isDesktopLike = width > 1920 || height > 1080; // Desktop-like dimensions
+        const isActuallyMobile = isMobileDevice && (width < 1920 || height < 1080); // Must be mobile AND smaller screen
+        const result = isStandardTablet || (isActuallyMobile && (isHighResTablet || isSamsungTablet || isMobileHighRes));
         console.log('Is tablet detected:', result, 'Standard:', isStandardTablet, 'High-res:', isHighResTablet, 'Samsung:', isSamsungTablet, 'Mobile high-res:', isMobileHighRes);
         
         return result;
@@ -736,7 +740,17 @@
       
       // Initialize zoom levels for Business sub-grids
       zoomLevels["business1"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
-      zoomLevels["business2"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop)
+      zoomLevels["business2"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
+      
+      // Adjust navigation text layout based on device type
+      const navText = document.getElementById('nav-text');
+      if (navText) {
+        if (isTablet()) {
+          navText.className = 'text-xs md:text-sm mb-2'; // Above buttons on tablet
+        } else {
+          navText.className = 'text-xs md:text-sm mr-2'; // To the left on desktop
+        }
+      }
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -817,7 +831,8 @@
             if (contentDiv) {
               const contentHeight = contentDiv.scrollHeight;
               console.log('Business1 - Content height:', contentHeight);
-              const scaledHeight = contentHeight * 0.7; // Account for scale transform
+              const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
+              const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
               console.log('Business1 - Scaled height:', scaledHeight);
               zoomArea.style.height = scaledHeight + 'px';
               gridDiv1.style.height = (scaledHeight + 60) + 'px'; // Add space for header
@@ -888,7 +903,8 @@
                 // Fallback to own content height if London not found
                 const contentHeight = contentDiv.scrollHeight;
                 console.log('Business2 - Content height:', contentHeight);
-                const scaledHeight = contentHeight * 0.7; // Account for scale transform
+                const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
+                const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
                 console.log('Business2 - Scaled height:', scaledHeight);
                 zoomArea.style.height = scaledHeight + 'px';
                 gridDiv2.style.height = (scaledHeight + 60) + 'px'; // Add space for header
@@ -944,7 +960,8 @@
             if (contentDiv) {
               const contentHeight = contentDiv.scrollHeight;
               console.log('Department - Content height:', contentHeight);
-              const scaledHeight = contentHeight * 0.7; // Account for scale transform
+              const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
+              const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
               console.log('Department - Scaled height:', scaledHeight);
               zoomArea.style.height = scaledHeight + 'px';
               gridDiv.style.height = (scaledHeight + 40) + 'px'; // Reduced space for header (was 60px)
