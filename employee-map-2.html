@@ -693,19 +693,30 @@
       let selectedDepartments = ['business'];
       let zoomLevels = {};
 
-      // Detect tablet screen size (768px to 1024px)
+      // Detect tablet screen size (768px to 1024px) and specific high-res tablet (2560x1600)
       const isTablet = () => {
-        return window.innerWidth >= 768 && window.innerWidth <= 1024;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        // Standard tablet detection
+        const isStandardTablet = width >= 768 && width <= 1024;
+        
+        // Specific detection for 2560x1600 tablet
+        const isHighResTablet = (width === 2560 && height === 1600) || 
+                               (width === 1600 && height === 2560) || // Portrait mode
+                               (width >= 2000 && width <= 3000 && height >= 1200 && height <= 1800); // Approximate range
+        
+        return isStandardTablet || isHighResTablet;
       };
 
       // Initialize zoom levels for all departments
       Object.keys(departments).forEach(dept => {
-        zoomLevels[dept] = isTablet() ? 0.7 : 1.0; // 70% for tablet, 100% for desktop
+        zoomLevels[dept] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
       });
       
       // Initialize zoom levels for Business sub-grids
-      zoomLevels["business1"] = isTablet() ? 0.7 : 1.0; // 70% for tablet, 100% for desktop
-      zoomLevels["business2"] = isTablet() ? 0.7 : 1.0; // 70% for tablet, 100% for desktop)
+      zoomLevels["business1"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
+      zoomLevels["business2"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop)
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -771,7 +782,7 @@
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.7 : 1.0}); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
                 </div>
@@ -830,7 +841,7 @@
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.7 : 1.0}); transform-origin: left top;">
+              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
                 </div>
@@ -895,7 +906,7 @@
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.7 : 1.0}); transform-origin: left top;">
+              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-1" style="padding: 4px;">
                   ${generateEmployeeRows(deptEmployees, dept)}
                 </div>
