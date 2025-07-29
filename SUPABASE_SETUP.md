@@ -28,7 +28,7 @@ CREATE POLICY "Allow all operations" ON notes
 ## Step 3: Get Your API Keys
 1. Go to **Settings** → **API** in your Supabase dashboard
 2. Copy your **Project URL** and **anon public** key
-3. Replace the placeholders in `employee-map.html`:
+3. Replace the placeholders in `axar/axar-map.html`:
 
 ```javascript
 const SUPABASE_URL = 'https://your-project-id.supabase.co';
@@ -36,7 +36,7 @@ const SUPABASE_ANON_KEY = 'your-anon-key-here';
 ```
 
 ## Step 4: Test the Setup
-1. Open `employee-map.html` in your browser
+1. Open `axar/axar-map.html` in your browser
 2. Click the **Notes** button
 3. Try adding a note - it should work!
 

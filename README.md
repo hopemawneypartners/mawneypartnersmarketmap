@@ -57,9 +57,9 @@ The application currently showcases Axar Capital Management's organizational str
 
 ```
 Market-Map/
-├── index.html              # Main landing page
-├── employee-map.html       # Interactive employee map
-├── client.html            # Client overview page
+├── funds.html              # Main landing page
+├── axar/axar-map.html      # Interactive employee map for Axar
+├── axar/axar.html         # Axar client page
 ├── profile-*.html         # Individual employee profiles
 ├── style.css              # Main stylesheet with responsive design
 ├── images/                # Image assets

@@ -3,21 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Map - Fair Oaks</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Employee Map - Axar</title>
+  <link rel="stylesheet" href="../style.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <style>
     .employee-box {
       transition: all 0.2s ease-in-out;
       transform: scale(1);
-      height: 72px;
-    }
-    
-    @media (min-width: 768px) {
-      .employee-box {
-        height: 80px;
-      }
     }
     
     .employee-box:hover {
@@ -107,22 +100,13 @@
       min-width: auto;
       min-height: auto;
       display: inline;
-    }
-    
-    /* Tablet-specific navigation layout */
-    @media (max-width: 1024px) {
-      .tablet-above-buttons {
-        margin-bottom: 0.5rem !important;
-        margin-right: 0 !important;
-      }
-    }
-    
-    /* Samsung Galaxy S8 specific (2560x1600) */
-    @media (min-width: 1500px) and (max-width: 3000px) and (min-height: 800px) and (max-height: 2000px) {
-      .tablet-above-buttons {
-        margin-bottom: 0.5rem !important;
-        margin-right: 0 !important;
-      }
+      align-items: center;
+      justify-content: center;
+      transition: none;
+      margin-left: 8px;
+      line-height: 1;
+      opacity: 0.8;
+      pointer-events: none;
     }
     
     .note-item .delete-note:hover {
@@ -207,22 +191,6 @@
         min-height: 44px;
       }
     }
-    
-    /* Tablet-specific navigation layout */
-    @media (max-width: 1024px) {
-      .tablet-above-buttons {
-        margin-bottom: 0.5rem !important;
-        margin-right: 0 !important;
-      }
-    }
-    
-    /* Samsung Galaxy S8 specific (2560x1600) */
-    @media (min-width: 1500px) and (max-width: 3000px) and (min-height: 800px) and (max-height: 2000px) {
-      .tablet-above-buttons {
-        margin-bottom: 0.5rem !important;
-        margin-right: 0 !important;
-      }
-    }
   </style>
   <script>
     if (localStorage.getItem('mawney_logged_in') !== 'true') {
@@ -237,7 +205,7 @@
     <header style="background: var(--color-alabaster); border-bottom: 1px solid #e0ddd7;" class="w-full">
       <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
         <div class="flex items-center gap-4 md:gap-8">
-          <a href="funds.html"><img src="images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
+          <a href="../funds.html"><img src="../images/MP Logo Espresso.png" alt="Mawney Partners Logo" style="height: 40px; object-fit: contain;" class="block" /></a>
         </div>
         <nav class="flex items-center gap-4 md:gap-8">
                       <a href="funds.html#clients" style="color: var(--color-mawney-green);" class="text-sm md:text-base font-medium hover:underline hidden sm:block">Funds</a>
@@ -254,37 +222,38 @@
     <!-- Hero Section -->
     <section style="background: var(--color-mawney-green);" class="w-full py-12 md:py-16">
       <div class="max-w-5xl mx-auto px-4 flex items-center justify-center">
-        <img src="images/fair oaks white.png" alt="Fair Oaks" style="max-height: 48px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" class="md:max-h-64" />
+        <img src="../images/axar white.png" alt="Axar" style="max-height: 48px; max-width: 100%; object-fit: contain; margin: 0 auto; display: block;" class="md:max-h-64" />
       </div>
     </section>
 
     <!-- Description -->
     <section class="w-full max-w-4xl mx-auto mt-8 md:mt-10 text-center px-4">
       <p class="mb-4 text-sm md:text-base leading-relaxed" style="color: var(--color-mawney-green);">
-        Fair Oaks Capital is a European specialist corporate credit investment manager and advisor, launched in 2013, with offices in both London and New York. The firm's core expertise is in CLOs (Collateralised Loan Obligations) and secured loans. Current AUM of the Firm stands at $3.0 billion. Successfully launched its fifth European CLO in mid‑2025 with an ESG-compliant framework and strong early investor interest. A lean team of approximately 22 professionals, with 13 experienced investment staff.
+        Axar Capital Management is an opportunistic corporate credit investor focused on the U.S. middle market founded by Alex Axelrod and Timothy Parrott in 2015. Current AUM sits at ~$2.9bn, Axar actively invests across the capital structure in both public and private markets, with a particular emphasis on distressed credit, structured finance, and asset-heavy businesses. The firm is known for taking a hands-on approach to portfolio management, often pursuing influence or control positions to drive value creation.
       </p>
       
       <!-- Filter Tags -->
       <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-6 md:mt-8">
-        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Liquid Credit</span>
-        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Structured Finance</span>
-        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">London</span>
-        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">New York</span>
-        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">$3-10bn</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Distressed</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Direct Lending</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Private Credit</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Capital Solutions</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">Structured/Specialty Finance</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">New York City</span>
+        <span class="px-3 py-1 rounded-full text-xs md:text-sm font-medium" style="background: var(--color-mawney-green); color: var(--color-parchment);">$1-3bn AUM</span>
       </div>
     </section>
 
     <!-- Employees Section -->
-    <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-6 md:px-8 lg:px-12" style="max-width: 100vw;">
+    <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-4" style="max-width: 100vw;">
       <div class="flex flex-col items-center mb-6 md:mb-8">
         <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
         <div class="text-xs md:text-sm mb-2" style="color: var(--color-mawney-green);">Navigate to department:</div>
         <div class="flex flex-wrap justify-center gap-2 mb-4">
             <button class="dept-btn filter-active px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="business">Business</button>
-            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment-liquid">Investment - Liquid Credit</button>
-            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment-structured">Investment - Structured Credit</button>
-            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="bd-capital">BD - Capital Formation</button>
-            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="legal-compliance">Legal/Compliance/Operations</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="investment">Investment</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="trading">Trading</button>
+            <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="capital-formation">Capital Formation</button>
             <button class="dept-btn filter-dropdown px-3 md:px-4 py-2 rounded text-xs md:text-sm text-center" data-department="c-suite">C-Suite</button>
           </div>
         </div>
@@ -309,7 +278,7 @@
           </div>
         </div>
         <div class="flex-shrink-0">
-          <a href="fair-oaks.html" class="px-2 py-1 rounded text-xs border flex items-center gap-1 text-center justify-center" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment); text-decoration: none;">
+          <a href="axar.html" class="px-2 py-1 rounded text-xs border flex items-center gap-1 text-center justify-center" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment); text-decoration: none;">
             <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
@@ -491,7 +460,7 @@
           <a href="mailto:info@mawneypartners.com" style="color: var(--color-parchment); text-decoration: underline;">info@mawneypartners.com</a><br>
           © Mawney Partners 2023 - Privacy Policy
         </div>
-        <img src="images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
+        <img src="../images/long logo white.png" alt="Mawney Partners Long Logo" style="height: 36px; object-fit: contain;" class="block" />
       </div>
     </footer>
   </div>
@@ -527,272 +496,115 @@
       // Employee data with departments
       const employees = [
         {
-          name: "Tyler Wallace",
-          shortName: "Tyler<br>Wallace",
-          title: "MD, PM",
-          profile: "profile-tyler-wallace.html",
-          departments: ["business", "investment-liquid"],
-          specialisms: "Portfolio Management,Investment Management,CLOs,Secured Loans"
+          name: "Andrew Axelrod",
+          shortName: "Andrew<br>Axelrod",
+          title: "Founder/CIO",
+          profile: "axar employees/profile-andrew-axelrod.html",
+          departments: ["business", "investment", "c-suite"],
+          specialisms: "Distressed Credit,Special Situations,Corporate Strategy,Investment Management"
         },
         {
-          name: "Abdulkadir Nasir",
-          shortName: "Abdulkadir<br>Nasir",
-          title: "VP",
-          profile: "profile-abdulkadir-nasir.html",
-          departments: ["business", "investment-liquid"],
-          specialisms: "Credit Research,Credit Analysis,CLOs,European Markets"
+          name: "Matt Magnuson",
+          shortName: "Matt<br>Magunson",
+          title: "Head of Trading",
+          profile: "axar employees/profile-matt-magunson.html",
+          departments: ["business", "trading"],
+          specialisms: "Trading,Capital Solutions,Special Situations,Research"
         },
         {
-          name: "Matilda Makitalo",
-          shortName: "Matilda<br>Makitalo",
-          title: "Associate",
-          profile: "profile-matilda-makitalo.html",
-          departments: ["business", "investment-liquid"],
-          specialisms: "LevFin,Credit Analysis,European Markets,CLOs"
+          name: "Grant Mitchell",
+          shortName: "Grant<br>Mitchell",
+          title: "Deputy CIO",
+          profile: "axar employees/profile-grant-mitchell.html",
+          departments: ["business", "investment"],
+          specialisms: "Credit Analysis,Portfolio Management,Risk Management,Investment Strategy"
         },
         {
-          name: "Alex Liu",
-          shortName: "Alex<br>Liu",
-          title: "VP",
-          profile: "profile-alex-liu.html",
-          departments: ["business", "investment-liquid"],
-          specialisms: "Investment Management,Portfolio Management,CLOs,Secured Loans"
-        },
-        {
-          name: "Rémi Nedelec",
-          shortName: "Rémi<br>Nedelec",
-          title: "VP",
-          profile: "profile-remi-nedelec.html",
-          departments: ["business", "investment-liquid"],
-          specialisms: "Investment Management,Portfolio Management,CLOs,European Markets"
-        },
-        {
-          name: "Philip Ryan",
-          shortName: "Philip<br>Ryan",
-          title: "VP",
-          profile: "profile-philip-ryan.html",
+          name: "Thomas Henke",
+          shortName: "Thomas Henke",
+          title: "Head of IAM & Director, PO",
+          profile: "axar employees/profile-thomas-h.html",
           departments: ["business"],
-          specialisms: "Credit Analysis,Credit Research,CLOs,Secured Loans"
+          specialisms: "Insurance Asset Management,Portfolio Operations,Risk Management,Asset Allocation"
         },
         {
-          name: "Luke Streeter",
-          shortName: "Luke<br>Streeter",
-          title: "Associate",
-          profile: "profile-luke-streeter.html",
-          departments: ["business", "investment-liquid"],
-          specialisms: "Credit Analysis,Investment Research,CLOs,Portfolio Management"
+          name: "Akash Kumar",
+          shortName: "Akash<br>Kumar",
+          title: "Senior Analyst",
+          profile: "axar employees/profile-akash-kumar.html",
+          departments: ["business", "investment"],
+          specialisms: "Financial Analysis,Credit Research,Data Modeling,Market Research"
         },
         {
-          name: "Roger Coyle",
-          shortName: "Roger<br>Coyle",
-          title: "Partner",
-          profile: "profile-roger-coyle.html",
-          departments: ["business", "investment-liquid", "c-suite"],
-          specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
+          name: "Timothy Parrott",
+          shortName: "Timothy<br>Parrott",
+          title: "Co-Founder/President",
+          profile: "axar employees/profile-timothy-parrott.html",
+          departments: ["business", "capital-formation", "c-suite"],
+          specialisms: "Corporate Strategy,Business Development,Leadership,Strategic Planning"
         },
         {
-          name: "Miguel Ramos Fuentenebro",
-          shortName: "Miguel Ramos<br>Fuentenebro",
-          title: "Partner",
-          profile: "profile-miguel-ramos-fuentenebro.html",
-          departments: ["business", "investment-liquid", "c-suite"],
-          specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
+          name: "David Fisher",
+          shortName: "David<br>Fisher",
+          title: "Head of BD",
+          profile: "axar employees/profile-david-fisher.html",
+          departments: ["business", "capital-formation"],
+          specialisms: "Business Development,Client Relations,Sales Strategy,Market Expansion"
         },
         {
-          name: "William Sheoris",
-          shortName: "William<br>Sheoris",
-          title: "Partner",
-          profile: "profile-william-sheoris.html",
+          name: "Lionel Benichou",
+          shortName: "Lionel<br>Benichou",
+          title: "CFO",
+          profile: "axar employees/profile-lionel-benichou.html",
           departments: ["business", "c-suite"],
-          specialisms: "Investment Management,Corporate Strategy,CLOs,Leadership"
+          specialisms: "Financial Management,Accounting,Treasury,Compliance"
         },
         {
-          name: "Firas Joumblat",
-          shortName: "Firas<br>Joumblat",
-          title: "Analyst",
-          profile: "profile-firas-joumblat.html",
+          name: "Ricardo Mosquera",
+          shortName: "Ricardo<br>Mosquera",
+          title: "COO/CCO",
+          profile: "axar employees/profile-ricardo-mosquera.html",
+          departments: ["business", "c-suite"],
+          specialisms: "Operations Management,Compliance,Risk Management,Regulatory Affairs"
+        },
+        {
+          name: "Sean Mulrenan",
+          shortName: "Sean<br>Mulrenan",
+          title: "Director - IR",
+          profile: "axar employees/profile-sean-mulrenan.html",
+          departments: ["business", "capital-formation"],
+          specialisms: "Investor Relations,Client Communications,Fund Reporting,Stakeholder Management"
+        },
+        {
+          name: "Ronald de Gier",
+          shortName: "Ronald<br>de Gier",
+          title: "Head of Portfolio Operations",
+          profile: "axar employees/profile-ronald-de-gier.html",
           departments: ["business"],
-          specialisms: "Investment Analysis,Credit Research,CLOs,European Markets"
-        },
-        {
-          name: "Bradley Pearman",
-          shortName: "Bradley<br>Pearman",
-          title: "Associate",
-          profile: "profile-bradley-pearman.html",
-          departments: ["business", "investment-structured"],
-          specialisms: "Investment Management,Portfolio Management,CLOs,Secured Loans"
-        },
-        {
-          name: "David Spence",
-          shortName: "David<br>Spence",
-          title: "BD",
-          profile: "profile-david-spence.html",
-          departments: ["business", "bd-capital"],
-          specialisms: "Business Development,Client Relations,Fundraising,Strategic Planning"
-        },
-        {
-          name: "Barry Povey",
-          shortName: "Barry<br>Povey",
-          title: "Principal, PM",
-          profile: "profile-barry-povey.html",
-          departments: ["business", "investment-structured"],
-          specialisms: "Portfolio Management,Investment Management,CLOs,Leadership"
-        },
-        {
-          name: "Archie Hancock",
-          shortName: "Archie<br>Hancock",
-          title: "Analyst",
-          profile: "profile-archie-hancock.html",
-          departments: ["business", "bd-capital"],
-          specialisms: "Investor Relations,Client Relations,Fundraising,Stakeholder Management"
-        },
-        {
-          name: "Alfonso Aceves",
-          shortName: "Alfonso<br>Aceves",
-          title: "CLO Investment Associate",
-          profile: "profile-alfonso-aceves.html",
-          departments: ["business", "investment-structured"],
-          specialisms: "CLOs,Investment Management,Structured Products,Portfolio Management"
-        },
-        {
-          name: "Aisha Fowosire",
-          shortName: "Aisha<br>Fowosire",
-          title: "Operations",
-          profile: "profile-aisha-fowosire.html",
-          departments: ["business", "legal-compliance"],
-          specialisms: "Operations Management,Process Improvement,Compliance,Risk Management"
-        },
-        {
-          name: "Ilze Petersone",
-          shortName: "Ilze<br>Petersone",
-          title: "Compliance Manager",
-          profile: "profile-ilze-petersone.html",
-          departments: ["business", "legal-compliance"],
-          specialisms: "Compliance,Risk Management,Regulatory Affairs,Operations"
-        },
-        {
-          name: "Prakash Panikker",
-          shortName: "Prakash<br>Panikker",
-          title: "Head of Finance and Operations",
-          profile: "profile-prakash-p.html",
-          departments: ["business", "legal-compliance"],
-          specialisms: "Finance,Operations Management,Strategic Planning,Leadership"
-        },
-        {
-          name: "Charles Carvell",
-          shortName: "Charles<br>Carvell",
-          title: "General Counsel",
-          profile: "profile-charles-c.html",
-          departments: ["business", "legal-compliance", "c-suite"],
-          specialisms: "Legal,Compliance,Risk Management,Corporate Governance"
-        },
-        {
-          name: "Morten Simonsen",
-          shortName: "Morten<br>Simonsen",
-          title: "BD/Fundraising",
-          profile: "profile-morten-simonsen.html",
-          departments: ["business", "bd-capital"],
-          specialisms: "Business Development,Fundraising,Client Relations,Strategic Planning"
-        },
-        {
-          name: "Jason So",
-          shortName: "Jason<br>So",
-          title: "CLO Structured Products",
-          profile: "profile-jason-s.html",
-          departments: ["business", "investment-structured"],
-          specialisms: "CLOs,Structured Products,Investment Management,Portfolio Management"
-        },
-        {
-          name: "Miguel Arraya",
-          shortName: "Miguel<br>Arraya",
-          title: "Non Executive Director",
-          profile: "profile-miguel-arraya.html",
-          departments: ["business"],
-          specialisms: "Corporate Governance,Strategic Planning,Leadership,Board Management"
-        },
-       
+          specialisms: "Portfolio Operations,Trade Execution,Risk Management,Operations Management"
+        }
       ];
 
       // Department configurations
       const departments = {
         "business": { name: "Business", color: "#0b4c3a" },
-        "investment-liquid": { name: "Investment - Liquid Credit", color: "#0b4c3a" },
-        "investment-structured": { name: "Investment - Structured Credit", color: "#0b4c3a" },
-        "bd-capital": { name: "BD - Capital Formation", color: "#0b4c3a" },
-        "legal-compliance": { name: "Legal/Compliance/Operations", color: "#0b4c3a" },
+        "investment": { name: "Investment", color: "#0b4c3a" },
+        "trading": { name: "Trading", color: "#0b4c3a" },
+        "capital-formation": { name: "Capital Formation", color: "#0b4c3a" },
         "c-suite": { name: "C-Suite", color: "#0b4c3a" }
       };
 
       let selectedDepartments = ['business'];
       let zoomLevels = {};
 
-      // Detect tablet screen size (768px to 1024px) and specific high-res tablet (2560x1600)
-      const isTablet = () => {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const userAgent = navigator.userAgent.toLowerCase();
-        
-        console.log('Screen dimensions:', width, 'x', height);
-        console.log('User agent:', userAgent);
-        
-        // Check if it's a mobile/tablet device via user agent
-        const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-        const isSamsung = userAgent.includes('samsung');
-        const isTabletUA = userAgent.includes('tablet') || userAgent.includes('ipad');
-        
-        console.log('Mobile device:', isMobileDevice, 'Samsung:', isSamsung, 'Tablet UA:', isTabletUA);
-        console.log('User agent contains mobile keywords:', userAgent.includes('mobile'), userAgent.includes('android'), userAgent.includes('tablet'));
-        
-        // Standard tablet detection
-        const isStandardTablet = width >= 768 && width <= 1024;
-        
-        // Specific detection for 2560x1600 tablet (accounting for browser UI)
-        // Browser UI typically takes ~100-200px from height and some width
-        const isHighResTablet = (width >= 1500 && width <= 3000 && height >= 800 && height <= 2000) || // Very broad range for high-res tablets
-                               (width >= 800 && width <= 2000 && height >= 1500 && height <= 3000) || // Portrait mode
-                               (width >= 1200 && width <= 3000 && height >= 800 && height <= 2000); // Ultra broad range
-        
-        // Only detect as tablet if it's actually a mobile device with specific characteristics
-        const isSamsungTablet = isSamsung && isMobileDevice && (width >= 1000 || height >= 1000);
-        const isMobileHighRes = isMobileDevice && (width >= 1000 || height >= 1000);
-        
-        // Much more restrictive - only detect as tablet if it's clearly a mobile device
-        // AND has a smaller screen size (not desktop-like)
-        const isDesktopLike = width > 1920 || height > 1080; // Desktop-like dimensions
-        const isActuallyMobile = isMobileDevice && (width < 1920 || height < 1080); // Must be mobile AND smaller screen
-        const result = isStandardTablet || (isActuallyMobile && (isHighResTablet || isSamsungTablet || isMobileHighRes));
-        console.log('Is tablet detected:', result, 'Standard:', isStandardTablet, 'High-res:', isHighResTablet, 'Samsung:', isSamsungTablet, 'Mobile high-res:', isMobileHighRes);
-        
-        return result;
-      };
-
       // Initialize zoom levels for all departments
       Object.keys(departments).forEach(dept => {
-        zoomLevels[dept] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
+        zoomLevels[dept] = 1;
       });
       
       // Initialize zoom levels for Business sub-grids
-      zoomLevels["business1"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
-      zoomLevels["business2"] = isTablet() ? 0.5 : 0.7; // 70% for tablet, 100% for desktop
-      
-      // Adjust navigation text layout based on device type - will be called after DOM loads
-      function adjustNavigationLayout() {
-        const navText = document.getElementById('nav-text');
-        if (navText) {
-          const isTabletDevice = isTablet();
-          console.log('Navigation layout adjustment - isTablet:', isTabletDevice);
-          
-          if (isTabletDevice) {
-            navText.className = 'text-xs md:text-sm mb-2'; // Above buttons on tablet
-            console.log('Applied tablet layout: mb-2 (above buttons)');
-          } else {
-            navText.className = 'text-xs md:text-sm mr-2'; // To the left on desktop
-            console.log('Applied desktop layout: mr-2 (to the left)');
-          }
-        } else {
-          console.log('Navigation text element not found');
-        }
-      }
+      zoomLevels["business1"] = 1;
+      zoomLevels["business2"] = 1;
 
       // Department button functionality
       const deptButtons = document.querySelectorAll('.dept-btn');
@@ -820,139 +632,76 @@
         
         if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
           // Business view: two grids side by side
-          // Grid 1 (London)
+          // Grid 1
           const grid1Hierarchy = [
-            ["Roger Coyle", "Miguel Ramos Fuentenebro"],
-            ["Charles Carvell", "Tyler Wallace", "Barry Povey", "Prakash Panikker", "David Spence", "Morten Simonsen"],
-            ["Philip Ryan", "Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec"],
-            ["Luke Streeter", "Matilda Makitalo", "Bradley Pearman", "Aisha Fowosire", "Ilze Petersone"],
-            ["Archie Hancock", "Firas Joumblat", "Miguel Arraya"]
+            ["Andrew Axelrod"],
+            ["Matt Magnuson", "Grant Mitchell", "Thomas Henke"],
+            ["Akash Kumar"]
           ];
-          // Grid 2 (New York)
+          // Grid 2
           const grid2Hierarchy = [
-            ["William Sheoris"],
-            ["Jason So"],
-            ["Alfonso Aceves"],
-            [],
-            []
+            ["Timothy Parrott"],
+            ["David Fisher", "Lionel Benichou", "Ricardo Mosquera"],
+            ["Sean Mulrenan", "Ronald de Gier"]
           ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
           const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
           
-          // Container for two grids side by side
+          // Container for both grids side by side
           const businessContainer = document.createElement('div');
           businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
           
-          // Grid 1 (London)
+          // Grid 1
           const gridDiv1 = document.createElement('div');
           gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-          gridDiv1.style.height = 'auto';
-          gridDiv1.style.minHeight = 'auto';
           gridDiv1.innerHTML = `
-            <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
+            <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
-                <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">London</h3>
+                <div></div>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">${isTablet() ? '70%' : '100%'}</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business1">100%</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
-                <div class="flex flex-col items-start gap-1" style="padding: 4px;">
+              <div class="zoom-area" data-dept="business1" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
                   ${generateCustomEmployeeRows(grid1Hierarchy, grid1Employees)}
                 </div>
               </div>
             </div>
           `;
           
-          // Calculate and set height after content is rendered
-          setTimeout(() => {
-            const zoomArea = gridDiv1.querySelector('.zoom-area');
-            const contentDiv = zoomArea.querySelector('.flex.flex-col');
-            if (contentDiv) {
-              const contentHeight = contentDiv.scrollHeight;
-              console.log('Business1 - Content height:', contentHeight);
-              const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
-              const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
-              console.log('Business1 - Scaled height:', scaledHeight);
-              zoomArea.style.height = scaledHeight + 'px';
-              gridDiv1.style.height = (scaledHeight + 60) + 'px'; // Add space for header
-            }
-          }, 100);
-          
           businessContainer.appendChild(gridDiv1);
           
-          // Add dashed line divider between London and New York
-          const divider1 = document.createElement('div');
-          divider1.className = 'hidden lg:block w-px mx-4';
-          divider1.style.borderLeft = '2px dashed var(--color-espresso)';
-          divider1.style.height = '100%';
-          businessContainer.appendChild(divider1);
+          // Add dashed line divider between teams
+          const divider = document.createElement('div');
+          divider.className = 'hidden lg:block w-px mx-4';
+          divider.style.borderLeft = '2px dashed var(--color-espresso)';
+          divider.style.height = '100%';
+          divider.style.minHeight = '400px';
+          businessContainer.appendChild(divider);
           
-          // Set divider height to match grid container after rendering
-          setTimeout(() => {
-            const gridHeight = gridDiv1.style.height;
-            if (gridHeight) {
-              divider1.style.height = gridHeight;
-            }
-          }, 50);
-          
-          // Update divider height when grid height changes
-          setTimeout(() => {
-            const gridHeight = gridDiv1.style.height;
-            if (gridHeight) {
-              divider1.style.height = gridHeight;
-            }
-          }, 150);
-          
-          // Grid 2 (New York)
+          // Grid 2
           const gridDiv2 = document.createElement('div');
           gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-          gridDiv2.style.height = 'auto';
-          gridDiv2.style.minHeight = 'auto';
           gridDiv2.innerHTML = `
-            <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
+            <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
-                <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">New York</h3>
+                <div></div>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">${isTablet() ? '70%' : '100%'}</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="business2">100%</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
-                <div class="flex flex-col items-start gap-1" style="padding: 4px;">
+              <div class="zoom-area" data-dept="business2" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
                   ${generateCustomEmployeeRows(grid2Hierarchy, grid2Employees)}
                 </div>
               </div>
             </div>
           `;
-          
-          // Calculate and set height after content is rendered
-          setTimeout(() => {
-            const zoomArea = gridDiv2.querySelector('.zoom-area');
-            const contentDiv = zoomArea.querySelector('.flex.flex-col');
-            if (contentDiv) {
-              // Mirror the London business section height
-              const londonZoomArea = gridDiv1.querySelector('.zoom-area');
-              if (londonZoomArea) {
-                const londonHeight = londonZoomArea.style.height;
-                console.log('Business2 - Mirroring London height:', londonHeight);
-                zoomArea.style.height = londonHeight;
-                gridDiv2.style.height = gridDiv1.style.height;
-              } else {
-                // Fallback to own content height if London not found
-                const contentHeight = contentDiv.scrollHeight;
-                console.log('Business2 - Content height:', contentHeight);
-                const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
-                const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
-                console.log('Business2 - Scaled height:', scaledHeight);
-                zoomArea.style.height = scaledHeight + 'px';
-                gridDiv2.style.height = (scaledHeight + 60) + 'px'; // Add space for header
-              }
-            }
-          }, 200); // Increased delay to ensure London is calculated first
           
           businessContainer.appendChild(gridDiv2);
           container.appendChild(businessContainer);
@@ -966,58 +715,37 @@
         selectedDepartments.forEach((dept, index) => {
           const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
           
-          
           if (deptEmployees.length === 0) return;
           
           const gridDiv = document.createElement('div');
           gridDiv.className = 'w-full mb-8';
-          gridDiv.style.height = 'auto';
-          gridDiv.style.minHeight = 'auto';
           if (index > 0) {
             gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
           }
           
           gridDiv.innerHTML = `
-            <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
+            <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
                 <h3 class="text-xl font-serif font-semibold" style="color: var(--color-mawney-green);">${departments[dept].name}</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
-                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">${isTablet() ? '70%' : '100%'}</span>
+                  <span class="zoom-label text-xs text-gray-600" data-dept="${dept}">100%</span>
                   <button class="zoom-in-btn px-2 py-1 border rounded text-sm" data-dept="${dept}" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">+</button>
                 </div>
               </div>
-              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(${isTablet() ? 0.5 : 0.7}); transform-origin: left top;">
-                <div class="flex flex-col items-start gap-1" style="padding: 2px;">
-                  ${generateEmployeeRows(deptEmployees, dept)}
+              <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
+                <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
+                  ${generateEmployeeRows(deptEmployees)}
                 </div>
               </div>
             </div>
           `;
-          
-          // Calculate and set height after content is rendered
-          setTimeout(() => {
-            const zoomArea = gridDiv.querySelector('.zoom-area');
-            const contentDiv = zoomArea.querySelector('.flex.flex-col');
-            if (contentDiv) {
-              const contentHeight = contentDiv.scrollHeight;
-              console.log('Department - Content height:', contentHeight);
-              const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
-              const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
-              console.log('Department - Scaled height:', scaledHeight);
-              zoomArea.style.height = scaledHeight + 'px';
-              gridDiv.style.height = (scaledHeight + 40) + 'px'; // Reduced space for header (was 60px)
-            }
-          }, 100);
           
           container.appendChild(gridDiv);
         });
         
         // Re-attach zoom event listeners
         attachZoomListeners();
-        
-        // Adjust navigation layout based on device type
-        adjustNavigationLayout();
 
         // After rendering, update department button selected state
         const deptButtons = document.querySelectorAll('.dept-btn');
@@ -1032,228 +760,41 @@
         });
       }
 
-            // Generate employee rows for a department
-      function generateEmployeeRows(employees, currentDepartment) {
-        // Check if this is the investment-structured department
-        const isStructuredCredit = currentDepartment === 'investment-structured';
+      // Generate employee rows for a department
+      function generateEmployeeRows(employees) {
+        // Define the hierarchy structure
+        const hierarchy = [
+          ["Andrew Axelrod", "Timothy Parrott"], // Row 1: AA, TP
+          ["Matt Magnuson", "Grant Mitchell", "Thomas Henke", "David Fisher", "Lionel Benichou", "Ricardo Mosquera"], // Row 2: MM, GM, TH, DF, LB, RM
+          ["Akash Kumar", "Sean Mulrenan", "Ronald de Gier"] // Row 3: AK, SM, RDG
+        ];
         
-        // Check if this is the investment-liquid department
-        const isLiquidCredit = currentDepartment === 'investment-liquid';
+        const rows = [];
         
-        // Check if this is the bd-capital department
-        const isBdCapital = currentDepartment === 'bd-capital';
+        hierarchy.forEach(rowEmployees => {
+          const rowDivs = [];
+          
+          rowEmployees.forEach(empName => {
+            const employee = employees.find(emp => emp.name === empName);
+            if (employee) {
+              rowDivs.push(`
+                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                  <div class="flex-1">
+                    <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
+                    <div class="text-xs mt-1 break-words">${employee.title}</div>
+                  </div>
+                  <img src="../images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                </a>
+              `);
+            }
+          });
+          
+          if (rowDivs.length > 0) {
+            rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
+          }
+        });
         
-        // Check if this is the legal-compliance department
-        const isLegalCompliance = currentDepartment === 'legal-compliance';
-        
-        // Check if this is the c-suite department
-        const isCSuite = currentDepartment === 'c-suite';
-
-        
-        if (isCSuite) {
-          // Special handling for C-Suite department
-          const cSuiteHierarchy = [
-            ["William Sheoris", "Miguel Ramos Fuentenebro", "Roger Coyle"], // Row 1: Partners
-            ["Charles Carvell"] // Row 2: General Counsel
-          ];
-          
-          const rows = [];
-          
-          cSuiteHierarchy.forEach((rowEmployees, index) => {
-            const rowDivs = [];
-            
-            rowEmployees.forEach(empName => {
-              const employee = employees.find(emp => emp.name === empName);
-              
-              if (employee) {
-                rowDivs.push(`
-                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                    <div class="flex-1">
-                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                      <div class="text-xs mt-1 break-words">${employee.title}</div>
-                    </div>
-                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                  </a>
-                `);
-              }
-            });
-            
-            if (rowDivs.length > 0) {
-              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-            }
-          });
-          
-          return rows.join('');
-        } else if (isStructuredCredit) {
-          // Special handling for Investment - Structured Credit department
-          const structuredCreditHierarchy = [
-            ["Barry Povey", "Jason So"], // Row 1: Principal and CLO Structured Products
-            ["Alfonso Aceves", "Bradley Pearman"] // Row 2: CLO Investment Associate and Associate
-          ];
-          
-          const rows = [];
-          
-          structuredCreditHierarchy.forEach(rowEmployees => {
-            const rowDivs = [];
-            
-            rowEmployees.forEach(empName => {
-              const employee = employees.find(emp => emp.name === empName);
-              if (employee) {
-                rowDivs.push(`
-                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                    <div class="flex-1">
-                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                      <div class="text-xs mt-1 break-words">${employee.title}</div>
-                    </div>
-                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                  </a>
-                `);
-              }
-            });
-            
-            if (rowDivs.length > 0) {
-              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-            }
-          });
-          
-          return rows.join('');
-                 } else if (isLiquidCredit) {
-           // Special handling for Investment - Liquid Credit department
-           const liquidCreditHierarchy = [
-             ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"], // Row 1: Partners
-             ["Tyler Wallace"], // Row 2: MD, PM - on his own row
-             ["Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec"], // Row 3: VPs
-             ["Philip Ryan", "Matilda Makitalo", "Luke Streeter"] // Row 4: Analysts and Associates
-           ];
-          
-          const rows = [];
-          
-          liquidCreditHierarchy.forEach(rowEmployees => {
-            const rowDivs = [];
-            
-            rowEmployees.forEach(empName => {
-              const employee = employees.find(emp => emp.name === empName);
-              if (employee) {
-                rowDivs.push(`
-                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                    <div class="flex-1">
-                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                      <div class="text-xs mt-1 break-words">${employee.title}</div>
-                    </div>
-                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                  </a>
-                `);
-              }
-            });
-            
-            if (rowDivs.length > 0) {
-              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-            }
-          });
-          
-          return rows.join('');
-        } else if (isBdCapital) {
-          // Special handling for BD - Capital Formation department
-          const bdCapitalHierarchy = [
-            ["David Spence", "Morten Simonsen"], // Row 1: Business Development and BD/Fundraising
-            ["Archie Hancock"] // Row 2: Investor Relations Analyst
-          ];
-          
-          const rows = [];
-          
-          bdCapitalHierarchy.forEach(rowEmployees => {
-            const rowDivs = [];
-            
-            rowEmployees.forEach(empName => {
-              const employee = employees.find(emp => emp.name === empName);
-              if (employee) {
-                rowDivs.push(`
-                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                    <div class="flex-1">
-                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                      <div class="text-xs mt-1 break-words">${employee.title}</div>
-                    </div>
-                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                  </a>
-                `);
-              }
-            });
-            
-            if (rowDivs.length > 0) {
-              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-            }
-          });
-          
-          return rows.join('');
-        } else if (isLegalCompliance) {
-          // Special handling for Legal/Compliance/Operations department
-          const legalComplianceHierarchy = [
-            ["Charles Carvell", "Prakash Panikker"], // Row 1: General Counsel and Head of Finance and Operations
-            ["Aisha Fowosire", "Ilze Petersone"] // Row 2: Operations and Compliance Manager
-          ];
-          
-          const rows = [];
-          
-          legalComplianceHierarchy.forEach(rowEmployees => {
-            const rowDivs = [];
-            
-            rowEmployees.forEach(empName => {
-              const employee = employees.find(emp => emp.name === empName);
-              if (employee) {
-                rowDivs.push(`
-                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                    <div class="flex-1">
-                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                      <div class="text-xs mt-1 break-words">${employee.title}</div>
-                    </div>
-                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                  </a>
-                `);
-              }
-            });
-            
-            if (rowDivs.length > 0) {
-              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-            }
-          });
-          
-          return rows.join('');
-
-        } else {
-          // Default hierarchy structure for other departments
-          const hierarchy = [
-            ["Roger Coyle", "Miguel Ramos Fuentenebro", "William Sheoris"], // Row 1: Partners
-            ["Tyler Wallace", "Abdulkadir Nasir", "Alex Liu", "Rémi Nedelec", "Philip Ryan"], // Row 2: VPs and MD
-            ["Matilda Makitalo", "Luke Streeter"] // Row 3: Analysts and Associates
-          ];
-          
-          const rows = [];
-          
-          hierarchy.forEach(rowEmployees => {
-            const rowDivs = [];
-            
-            rowEmployees.forEach(empName => {
-              const employee = employees.find(emp => emp.name === empName);
-              if (employee) {
-                rowDivs.push(`
-                  <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
-                    <div class="flex-1">
-                      <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
-                      <div class="text-xs mt-1 break-words">${employee.title}</div>
-                    </div>
-                    <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
-                  </a>
-                `);
-              }
-            });
-            
-            if (rowDivs.length > 0) {
-              rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
-            }
-          });
-          
-          return rows.join('');
-        }
+        return rows.join('');
       }
 
       // Attach zoom event listeners
@@ -1269,7 +810,7 @@
             const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
             
             zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
-            zoomLabel.textContent = Math.round((zoomLevels[dept] / 0.7) * 100 / 10) * 10 + '%';
+            zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
           });
         });
         
@@ -1284,7 +825,7 @@
             const zoomLabel = document.querySelector(`[data-dept="${dept}"].zoom-label`);
             
             zoomArea.style.transform = `scale(${zoomLevels[dept]})`;
-            zoomLabel.textContent = Math.round((zoomLevels[dept] / 0.7) * 100 / 10) * 10 + '%';
+            zoomLabel.textContent = Math.round(zoomLevels[dept] * 100) + '%';
           });
         });
       }
@@ -1357,17 +898,16 @@
             const employee = employees.find(emp => emp.name === empName);
             if (employee) {
               rowDivs.push(`
-                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 h-[72px] md:h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
+                <a href="${employee.profile}" class="employee-box bg-[#0b4c3a] text-white rounded p-2 w-32 md:w-40 min-h-[72px] md:min-h-[80px] text-left flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-0 justify-between" style="text-decoration: none;" data-specialisms="${employee.specialisms}">
                   <div class="flex-1">
                     <div class="font-semibold text-xs md:text-sm leading-tight break-words">${employee.shortName}</div>
                     <div class="text-xs mt-1 break-words">${employee.title}</div>
                   </div>
-                  <img src="images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
+                  <img src="../images/profile.png" alt="Profile" class="hidden md:block w-8 h-8 md:w-10 md:h-10 rounded-full object-cover self-end md:self-center mt-2 md:mt-0" />
                 </a>
               `);
             }
           });
-          // Only create a row div if there are employees in it
           if (rowDivs.length > 0) {
             rows.push(`<div class="flex flex-row gap-2 md:gap-4">${rowDivs.join('')}</div>`);
           }
@@ -1378,11 +918,6 @@
       // At the end of the script, add:
       selectedDepartments = ['business'];
       renderDepartmentGrids();
-      
-      // Initial navigation layout adjustment
-      setTimeout(() => {
-        adjustNavigationLayout();
-      }, 100);
 
       // Logout logic
       const logoutBtn = document.getElementById('logout-btn');
@@ -1524,7 +1059,7 @@
             console.log('Loading from Supabase...');
             // Add cache-busting parameter to force fresh data
             const { data, error } = await supabase
-              .from('fair_oaks_notes')
+              .from('notes')
               .select('*')
               .order('created_at', { ascending: false })
               .abortSignal(new AbortController().signal); // Force fresh request
@@ -1550,7 +1085,7 @@
       // Load notes from localStorage
       function loadNotesFromLocalStorage() {
         try {
-          const notes = localStorage.getItem('fair-oaks-employee-map-notes');
+          const notes = localStorage.getItem('employee-map-notes');
           return notes ? JSON.parse(notes) : [];
         } catch (error) {
           console.error('Error loading notes from localStorage:', error);
@@ -1569,7 +1104,7 @@
         if (supabase) {
           try {
             const { data, error } = await supabase
-              .from('fair_oaks_notes')
+              .from('notes')
               .insert([newNote])
               .select();
             
@@ -1589,7 +1124,7 @@
         try {
           const notes = loadNotesFromLocalStorage();
           notes.unshift(note);
-          localStorage.setItem('fair-oaks-employee-map-notes', JSON.stringify(notes));
+          localStorage.setItem('employee-map-notes', JSON.stringify(notes));
           return note;
         } catch (error) {
           console.error('Error adding note to localStorage:', error);
@@ -1712,7 +1247,7 @@
         if (supabase) {
           try {
             const { data, error } = await supabase
-              .from('fair_oaks_notes')
+              .from('notes')
               .select('*');
             if (error) {
               console.error('Supabase query error:', error);
@@ -1730,7 +1265,7 @@
       window.clearNotesCache = function() {
         console.log('=== CLEARING NOTES CACHE ===');
         try {
-          localStorage.removeItem('fair-oaks-employee-map-notes');
+          localStorage.removeItem('employee-map-notes');
           console.log('✅ localStorage cleared');
         } catch (error) {
           console.error('❌ Error clearing localStorage:', error);
@@ -1763,7 +1298,7 @@
             // Force a fresh query by using a new client instance
             const freshSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             const { data, error } = await freshSupabase
-              .from('fair_oaks_notes')
+              .from('notes')
               .select('*')
               .order('created_at', { ascending: false });
             
@@ -1787,7 +1322,7 @@
           try {
             console.log('Deleting all notes from Supabase...');
             const { error } = await supabase
-              .from('fair_oaks_notes')
+              .from('notes')
               .delete()
               .neq('id', '0'); // Delete all notes (this will delete everything)
             
@@ -1803,7 +1338,7 @@
         
         try {
           console.log('Clearing localStorage...');
-          localStorage.removeItem('fair-oaks-employee-map-notes');
+          localStorage.removeItem('employee-map-notes');
           console.log('✅ localStorage cleared');
         } catch (error) {
           console.error('Error clearing localStorage:', error);

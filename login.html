@@ -65,7 +65,7 @@
       const validPassword = 'partners2024';
       if (email.toLowerCase() === validEmail && password === validPassword) {
         localStorage.setItem('mawney_logged_in', 'true');
-        window.location.href = 'index.html';
+        window.location.href = 'funds.html';
       } else {
         if (!document.getElementById('login-error')) {
           const err = document.createElement('div');
