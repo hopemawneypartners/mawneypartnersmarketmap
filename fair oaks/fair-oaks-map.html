@@ -880,7 +880,8 @@
         const gridsWrapper = container.parentElement;
         if (gridsWrapper) {
           gridsWrapper.style.paddingLeft = '16px';
-          gridsWrapper.style.paddingRight = '32px';
+          gridsWrapper.style.paddingRight = '0';
+          gridsWrapper.style.marginRight = '32px';
         }
         const showBusiness = selectedDepartments.includes('business');
 
@@ -1104,12 +1105,6 @@
             layout.appendChild(mobileDivider);
           }
         });
-
-        const trailingSpacer = document.createElement('div');
-        trailingSpacer.style.width = '32px';
-        trailingSpacer.style.minWidth = '32px';
-        trailingSpacer.style.flexShrink = '0';
-        layout.appendChild(trailingSpacer);
 
         container.appendChild(layout);
 
