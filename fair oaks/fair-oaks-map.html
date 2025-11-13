@@ -875,8 +875,13 @@
       function renderDepartmentGrids() {
         const container = document.getElementById('department-grids-container');
         container.innerHTML = '';
-        container.style.paddingLeft = '16px';
-        container.style.paddingRight = '32px';
+        container.style.paddingLeft = '0';
+        container.style.paddingRight = '0';
+        const gridsWrapper = container.parentElement;
+        if (gridsWrapper) {
+          gridsWrapper.style.paddingLeft = '16px';
+          gridsWrapper.style.paddingRight = '32px';
+        }
         const showBusiness = selectedDepartments.includes('business');
 
         if (businessLocationFilterContainer) {
@@ -1063,6 +1068,8 @@
 
         const layout = document.createElement('div');
         layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full';
+        layout.style.paddingLeft = '0';
+        layout.style.paddingRight = '0';
 
         const matchSectionHeights = () => {
           const baseSection = londonSection || sections[0];
@@ -1097,11 +1104,6 @@
             layout.appendChild(mobileDivider);
           }
         });
-
-        const trailingSpacer = document.createElement('div');
-        trailingSpacer.style.minWidth = '32px';
-        trailingSpacer.style.flexShrink = '0';
-        layout.appendChild(trailingSpacer);
 
         container.appendChild(layout);
 
