@@ -1062,6 +1062,22 @@
         const layout = document.createElement('div');
         layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full';
 
+        const matchSectionHeights = () => {
+          const baseSection = londonSection || sections[0];
+          if (!baseSection) return;
+          const baseZoomArea = baseSection.querySelector('.zoom-area');
+          const baseHeight = baseSection.style.height || `${baseSection.offsetHeight}px`;
+          const baseZoomHeight = baseZoomArea ? (baseZoomArea.style.height || `${baseZoomArea.offsetHeight}px`) : null;
+
+          sections.forEach(section => {
+            section.style.height = baseHeight;
+            const zoomArea = section.querySelector('.zoom-area');
+            if (zoomArea && baseZoomHeight) {
+              zoomArea.style.height = baseZoomHeight;
+            }
+          });
+        };
+
         sections.forEach((section, index) => {
           layout.appendChild(section);
 
@@ -1081,6 +1097,9 @@
         });
 
         container.appendChild(layout);
+
+        setTimeout(matchSectionHeights, 200);
+        setTimeout(matchSectionHeights, 400);
 
         attachZoomListeners();
         adjustNavigationLayout();
