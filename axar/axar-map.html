@@ -245,7 +245,7 @@
     </section>
 
     <!-- Employees Section -->
-    <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-4" style="max-width: 100vw;">
+    <section class="w-full mx-auto mt-6 md:mt-8 mb-12 md:mb-16 px-6 md:px-8 lg:px-12" style="max-width: 100vw;">
       <div class="flex flex-col items-center mb-6 md:mb-8">
         <h2 class="text-xl md:text-2xl font-serif font-semibold mb-4" style="color: var(--color-mawney-green);">Employees</h2>
         <div class="text-xs md:text-sm mb-2" style="color: var(--color-mawney-green);">Navigate to department:</div>
@@ -440,8 +440,8 @@
         <!-- Main content wrapper -->
         <div class="flex-1 transition-all duration-300 ease-in-out" id="main-content-wrapper">
           <!-- Main content area -->
-          <div class="flex-1 transition-all duration-300 ease-in-out px-3 md:px-4 lg:px-6" id="main-content">
-            <div class="border border-gray-400 rounded p-4 w-full overflow-x-auto relative pr-8" style="max-width: 100vw; background: var(--color-parchment);">
+          <div class="flex-1 transition-all duration-300 ease-in-out px-3 md:px-4 lg:px-6" id="main-content" style="padding-left: 16px; padding-right: 48px;">
+            <div class="border border-gray-400 rounded p-4 w-full overflow-x-auto relative" style="max-width: calc(100vw - 64px); background: var(--color-parchment); margin-right: auto; margin-left: 16px;">
               <div id="department-grids-container">
                 <!-- Dynamic department grids will be inserted here -->
               </div>
@@ -594,7 +594,8 @@
         "c-suite": { name: "C-Suite", color: "#0b4c3a" }
       };
 
-      let selectedDepartments = ['business'];
+      const departmentOrder = Object.keys(departments);
+      let selectedDepartments = [...departmentOrder];
       let zoomLevels = {};
 
       // Initialize zoom levels for all departments
@@ -611,16 +612,21 @@
       deptButtons.forEach(btn => {
         btn.addEventListener('click', function() {
           const dept = this.getAttribute('data-department');
-          // Deselect all buttons
-          deptButtons.forEach(b => {
-            b.classList.remove('filter-active');
-            b.classList.add('filter-dropdown');
-          });
-          // Select only the clicked button
-          this.classList.remove('filter-dropdown');
-          this.classList.add('filter-active');
-          // Set selectedDepartments to only the clicked department
-          selectedDepartments = [dept];
+          const isActive = selectedDepartments.includes(dept);
+
+          if (isActive && selectedDepartments.length === 1) {
+            return;
+          }
+
+          const updatedSelection = new Set(selectedDepartments);
+
+          if (isActive) {
+            updatedSelection.delete(dept);
+          } else {
+            updatedSelection.add(dept);
+          }
+
+          selectedDepartments = departmentOrder.filter(d => updatedSelection.has(d));
           renderDepartmentGrids();
         });
       });
@@ -629,16 +635,23 @@
       function renderDepartmentGrids() {
         const container = document.getElementById('department-grids-container');
         container.innerHTML = '';
-        
-        if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
-          // Business view: two grids side by side
-          // Grid 1
+        container.style.paddingLeft = '0';
+        container.style.paddingRight = '0';
+        const scrollBox = container.closest('.border');
+        if (scrollBox) {
+          scrollBox.style.padding = '16px';
+          scrollBox.style.boxSizing = 'border-box';
+        }
+
+        const sections = [];
+        let businessPrimarySection = null;
+
+        if (selectedDepartments.includes('business')) {
           const grid1Hierarchy = [
             ["Andrew Axelrod"],
             ["Matt Magnuson", "Grant Mitchell", "Thomas Henke"],
             ["Akash Kumar"]
           ];
-          // Grid 2
           const grid2Hierarchy = [
             ["Timothy Parrott"],
             ["David Fisher", "Lionel Benichou", "Ricardo Mosquera"],
@@ -646,18 +659,14 @@
           ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
           const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
-          
-          // Container for both grids side by side
-          const businessContainer = document.createElement('div');
-          businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
-          
-          // Grid 1
-          const gridDiv1 = document.createElement('div');
-          gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-          gridDiv1.innerHTML = `
+
+          const businessPrimary = document.createElement('div');
+          businessPrimary.className = 'w-full lg:flex-1 min-w-0 overflow-x-auto relative';
+          businessPrimary.style.minWidth = '260px';
+          businessPrimary.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
-                <div></div>
+                <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">Business</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business1" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
                   <span class="zoom-label text-xs text-gray-600" data-dept="business1">100%</span>
@@ -671,24 +680,14 @@
               </div>
             </div>
           `;
-          
-          businessContainer.appendChild(gridDiv1);
-          
-          // Add dashed line divider between teams
-          const divider = document.createElement('div');
-          divider.className = 'hidden lg:block w-px mx-4';
-          divider.style.borderLeft = '2px dashed var(--color-espresso)';
-          divider.style.height = '100%';
-          divider.style.minHeight = '400px';
-          businessContainer.appendChild(divider);
-          
-          // Grid 2
-          const gridDiv2 = document.createElement('div');
-          gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-          gridDiv2.innerHTML = `
+
+          const businessSecondary = document.createElement('div');
+          businessSecondary.className = 'w-full lg:flex-1 min-w-0 overflow-x-auto relative';
+          businessSecondary.style.minWidth = '260px';
+          businessSecondary.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
-                <div></div>
+                <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">Business (cont.)</h3>
                 <div class="flex items-center gap-2">
                   <button class="zoom-out-btn px-2 py-1 border rounded text-sm" data-dept="business2" style="color: var(--color-mawney-green); border-color: var(--color-mawney-green);">–</button>
                   <span class="zoom-label text-xs text-gray-600" data-dept="business2">100%</span>
@@ -702,27 +701,20 @@
               </div>
             </div>
           `;
-          
-          businessContainer.appendChild(gridDiv2);
-          container.appendChild(businessContainer);
-          
-          // Attach zoom listeners for both grids
-          attachZoomListeners();
-          return;
+
+          sections.push(businessPrimary);
+          sections.push(businessSecondary);
+          businessPrimarySection = businessPrimary;
         }
-        
-        // All other departments: single grid as before
-        selectedDepartments.forEach((dept, index) => {
+
+        selectedDepartments.forEach(dept => {
+          if (dept === 'business') return;
           const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
-          
           if (deptEmployees.length === 0) return;
-          
+
           const gridDiv = document.createElement('div');
-          gridDiv.className = 'w-full mb-8';
-          if (index > 0) {
-            gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
-          }
-          
+          gridDiv.className = 'w-full lg:flex-1 min-w-0 overflow-x-auto relative';
+          gridDiv.style.minWidth = '260px';
           gridDiv.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative">
               <div class="flex items-center justify-between mb-2">
@@ -735,20 +727,66 @@
               </div>
               <div class="zoom-area" data-dept="${dept}" style="transition: transform 0.2s; transform: scale(1); transform-origin: left top;">
                 <div class="flex flex-col items-start gap-4 w-[600px] max-w-full" style="padding: 8px;">
-                  ${generateEmployeeRows(deptEmployees)}
+                  ${generateEmployeeRows(deptEmployees, dept)}
                 </div>
               </div>
             </div>
           `;
-          
-          container.appendChild(gridDiv);
+
+          sections.push(gridDiv);
         });
-        
-        // Re-attach zoom event listeners
+
+        if (sections.length === 0) {
+          container.innerHTML = '<div class="text-center text-sm md:text-base" style="color: var(--color-mawney-green);">No departments selected.</div>';
+          return;
+        }
+
+        const layout = document.createElement('div');
+        layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full';
+        layout.style.paddingLeft = '0';
+        layout.style.paddingRight = '0';
+
+        const matchSectionHeights = () => {
+          const baseSection = businessPrimarySection || sections[0];
+          if (!baseSection) return;
+          const baseZoomArea = baseSection.querySelector('.zoom-area');
+          const baseHeight = baseSection.style.height || `${baseSection.offsetHeight}px`;
+          const baseZoomHeight = baseZoomArea ? (baseZoomArea.style.height || `${baseZoomArea.offsetHeight}px`) : null;
+
+          sections.forEach(section => {
+            section.style.height = baseHeight;
+            const zoomArea = section.querySelector('.zoom-area');
+            if (zoomArea && baseZoomHeight) {
+              zoomArea.style.height = baseZoomHeight;
+            }
+          });
+        };
+
+        sections.forEach((section, index) => {
+          layout.appendChild(section);
+
+          if (index < sections.length - 1) {
+            const divider = document.createElement('div');
+            divider.className = 'hidden lg:block w-px';
+            divider.style.borderLeft = '2px dashed var(--color-espresso)';
+            divider.style.alignSelf = 'stretch';
+            layout.appendChild(divider);
+
+            const mobileDivider = document.createElement('div');
+            mobileDivider.className = 'lg:hidden w-full';
+            mobileDivider.style.borderTop = '2px dashed var(--color-espresso)';
+            mobileDivider.style.margin = '16px 0';
+            layout.appendChild(mobileDivider);
+          }
+        });
+
+        container.appendChild(layout);
+
+        setTimeout(matchSectionHeights, 200);
+        setTimeout(matchSectionHeights, 400);
+
         attachZoomListeners();
 
-        // After rendering, update department button selected state
-        const deptButtons = document.querySelectorAll('.dept-btn');
         deptButtons.forEach(btn => {
           if (selectedDepartments.includes(btn.getAttribute('data-department'))) {
             btn.classList.remove('filter-dropdown');
@@ -916,7 +954,7 @@
       }
 
       // At the end of the script, add:
-      selectedDepartments = ['business'];
+      selectedDepartments = [...departmentOrder];
       renderDepartmentGrids();
 
       // Logout logic
