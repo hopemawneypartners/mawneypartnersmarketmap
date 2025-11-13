@@ -748,7 +748,8 @@
         "c-suite": { name: "C-Suite", color: "#0b4c3a" }
       };
 
-      let selectedDepartments = ['business'];
+      const departmentOrder = Object.keys(departments);
+      let selectedDepartments = [...departmentOrder];
       let selectedBusinessLocations = ['london', 'new-york'];
       let businessLocationToggle = null;
       let businessLocationDropdown = null;
@@ -851,16 +852,21 @@
       deptButtons.forEach(btn => {
         btn.addEventListener('click', function() {
           const dept = this.getAttribute('data-department');
-          // Deselect all buttons
-          deptButtons.forEach(b => {
-            b.classList.remove('filter-active');
-            b.classList.add('filter-dropdown');
-          });
-          // Select only the clicked button
-          this.classList.remove('filter-dropdown');
-          this.classList.add('filter-active');
-          // Set selectedDepartments to only the clicked department
-          selectedDepartments = [dept];
+          const isActive = selectedDepartments.includes(dept);
+
+          if (isActive && selectedDepartments.length === 1) {
+            return;
+          }
+
+          const updatedSelection = new Set(selectedDepartments);
+
+          if (isActive) {
+            updatedSelection.delete(dept);
+          } else {
+            updatedSelection.add(dept);
+          }
+
+          selectedDepartments = departmentOrder.filter(d => updatedSelection.has(d));
           renderDepartmentGrids();
         });
       });
@@ -869,16 +875,18 @@
       function renderDepartmentGrids() {
         const container = document.getElementById('department-grids-container');
         container.innerHTML = '';
-        const isBusinessView = selectedDepartments.length === 1 && selectedDepartments[0] === 'business';
+        const showBusiness = selectedDepartments.includes('business');
 
         if (businessLocationFilterContainer) {
-          businessLocationFilterContainer.classList.toggle('hidden', !isBusinessView);
-          if (!isBusinessView && businessLocationDropdown) {
+          businessLocationFilterContainer.classList.toggle('hidden', !showBusiness);
+          if (!showBusiness && businessLocationDropdown) {
             businessLocationDropdown.classList.add('hidden');
           }
         }
-        
-        if (isBusinessView) {
+
+        let hasPreviousSection = false;
+
+        if (showBusiness) {
           if (!selectedBusinessLocations.length) {
             selectedBusinessLocations = ['london', 'new-york'];
           }
@@ -1019,15 +1027,15 @@
 
           if (showLondon || showNewYork) {
             container.appendChild(businessContainer);
-            attachZoomListeners();
+            hasPreviousSection = true;
           }
-          return;
         }
         
         // All other departments: single grid as before
-        selectedDepartments.forEach((dept, index) => {
+        selectedDepartments.forEach((dept) => {
           const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
           
+          if (dept === 'business') return;
           
           if (deptEmployees.length === 0) return;
           
@@ -1035,7 +1043,7 @@
           gridDiv.className = 'w-full mb-8';
           gridDiv.style.height = 'auto';
           gridDiv.style.minHeight = 'auto';
-          if (index > 0) {
+          if (hasPreviousSection) {
             gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
           }
           
@@ -1073,6 +1081,7 @@
           }, 100);
           
           container.appendChild(gridDiv);
+          hasPreviousSection = true;
         });
         
         // Re-attach zoom event listeners
@@ -1474,7 +1483,7 @@
       }
 
       // At the end of the script, add:
-      selectedDepartments = ['business'];
+      selectedDepartments = [...departmentOrder];
       renderDepartmentGrids();
       
       // Initial navigation layout adjustment
