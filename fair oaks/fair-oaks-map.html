@@ -875,6 +875,8 @@
       function renderDepartmentGrids() {
         const container = document.getElementById('department-grids-container');
         container.innerHTML = '';
+        container.style.paddingLeft = '16px';
+        container.style.paddingRight = '32px';
         const showBusiness = selectedDepartments.includes('business');
 
         if (businessLocationFilterContainer) {
@@ -1061,8 +1063,6 @@
 
         const layout = document.createElement('div');
         layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full';
-        layout.style.paddingLeft = '16px';
-        layout.style.paddingRight = '32px';
 
         const matchSectionHeights = () => {
           const baseSection = londonSection || sections[0];
