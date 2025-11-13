@@ -880,9 +880,14 @@
         const gridsWrapper = container.parentElement;
         if (gridsWrapper) {
           gridsWrapper.style.paddingLeft = '16px';
-          gridsWrapper.style.paddingRight = '32px';
+          gridsWrapper.style.paddingRight = '0';
           gridsWrapper.style.boxSizing = 'border-box';
           gridsWrapper.style.marginRight = '0';
+        }
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+          mainContent.style.paddingRight = '32px';
+          mainContent.style.boxSizing = 'border-box';
         }
         const showBusiness = selectedDepartments.includes('business');
 
