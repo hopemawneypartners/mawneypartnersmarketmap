@@ -884,7 +884,8 @@
           }
         }
 
-        let hasPreviousSection = false;
+        const sections = [];
+        let londonSection = null;
 
         if (showBusiness) {
           if (!selectedBusinessLocations.length) {
@@ -912,18 +913,12 @@
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
           const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
 
-          const businessContainer = document.createElement('div');
-          businessContainer.className = showLondon && showNewYork
-            ? 'flex flex-col lg:flex-row gap-8 justify-between w-full'
-            : 'flex flex-col gap-8 w-full';
-
-          let gridDiv1 = null;
           if (showLondon) {
-            gridDiv1 = document.createElement('div');
-            const londonWidthClass = showLondon && showNewYork ? 'w-full lg:w-1/2' : 'w-full';
-            gridDiv1.className = `${londonWidthClass} min-w-0 overflow-x-auto relative`;
+            const gridDiv1 = document.createElement('div');
+            gridDiv1.className = 'w-full lg:flex-1 min-w-0 overflow-x-auto relative';
             gridDiv1.style.height = 'auto';
             gridDiv1.style.minHeight = 'auto';
+            gridDiv1.style.minWidth = '260px';
             gridDiv1.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
               <div class="flex items-center justify-between mb-2">
@@ -956,24 +951,16 @@
               }
             }, 100);
 
-            businessContainer.appendChild(gridDiv1);
-          }
-
-          let divider1 = null;
-          if (showLondon && showNewYork) {
-            divider1 = document.createElement('div');
-            divider1.className = 'hidden lg:block w-px mx-4';
-            divider1.style.borderLeft = '2px dashed var(--color-espresso)';
-            divider1.style.height = '100%';
-            businessContainer.appendChild(divider1);
+            sections.push(gridDiv1);
+            londonSection = gridDiv1;
           }
 
           if (showNewYork) {
             const gridDiv2 = document.createElement('div');
-            const newYorkWidthClass = showLondon && showNewYork ? 'w-full lg:w-1/2' : 'w-full';
-            gridDiv2.className = `${newYorkWidthClass} min-w-0 overflow-x-auto relative`;
+            gridDiv2.className = 'w-full lg:flex-1 min-w-0 overflow-x-auto relative';
             gridDiv2.style.height = 'auto';
             gridDiv2.style.minHeight = 'auto';
+            gridDiv2.style.minWidth = '260px';
             gridDiv2.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
               <div class="flex items-center justify-between mb-2">
@@ -996,13 +983,13 @@
               const zoomArea = gridDiv2.querySelector('.zoom-area');
               const contentDiv = zoomArea ? zoomArea.querySelector('.flex.flex-col') : null;
               if (contentDiv) {
-                if (gridDiv1) {
-                  const londonZoomArea = gridDiv1.querySelector('.zoom-area');
+                if (londonSection) {
+                  const londonZoomArea = londonSection.querySelector('.zoom-area');
                   if (londonZoomArea) {
                     const londonHeight = londonZoomArea.style.height;
                     console.log('Business2 - Mirroring London height:', londonHeight);
                     zoomArea.style.height = londonHeight;
-                    gridDiv2.style.height = gridDiv1.style.height;
+                    gridDiv2.style.height = londonSection.style.height;
                   }
                 } else {
                   const contentHeight = contentDiv.scrollHeight;
@@ -1014,39 +1001,24 @@
                   gridDiv2.style.height = (scaledHeight + 60) + 'px';
                 }
               }
-            }, gridDiv1 ? 200 : 100);
+            }, londonSection ? 200 : 100);
 
-            businessContainer.appendChild(gridDiv2);
-          }
-
-          if (divider1 && gridDiv1) {
-            setTimeout(() => {
-              divider1.style.height = gridDiv1.style.height;
-            }, 150);
-          }
-
-          if (showLondon || showNewYork) {
-            container.appendChild(businessContainer);
-            hasPreviousSection = true;
+            sections.push(gridDiv2);
           }
         }
-        
-        // All other departments: single grid as before
+
         selectedDepartments.forEach((dept) => {
-          const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
-          
           if (dept === 'business') return;
-          
+          const deptEmployees = employees.filter(emp => emp.departments.includes(dept));
+
           if (deptEmployees.length === 0) return;
-          
+
           const gridDiv = document.createElement('div');
-          gridDiv.className = 'w-full mb-8';
+          gridDiv.className = 'w-full lg:flex-1 min-w-0 overflow-x-auto relative';
           gridDiv.style.height = 'auto';
           gridDiv.style.minHeight = 'auto';
-          if (hasPreviousSection) {
-            gridDiv.className += ' mt-8 pt-8 border-t border-gray-300';
-          }
-          
+          gridDiv.style.minWidth = '260px';
+
           gridDiv.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
               <div class="flex items-center justify-between mb-2">
@@ -1064,33 +1036,55 @@
               </div>
             </div>
           `;
-          
-          // Calculate and set height after content is rendered
+
           setTimeout(() => {
             const zoomArea = gridDiv.querySelector('.zoom-area');
-            const contentDiv = zoomArea.querySelector('.flex.flex-col');
+            const contentDiv = zoomArea ? zoomArea.querySelector('.flex.flex-col') : null;
             if (contentDiv) {
               const contentHeight = contentDiv.scrollHeight;
               console.log('Department - Content height:', contentHeight);
-              const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
-              const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
+              const scaleFactor = isTablet() ? 0.5 : 0.7;
+              const scaledHeight = contentHeight * scaleFactor;
               console.log('Department - Scaled height:', scaledHeight);
               zoomArea.style.height = scaledHeight + 'px';
-              gridDiv.style.height = (scaledHeight + 40) + 'px'; // Reduced space for header (was 60px)
+              gridDiv.style.height = (scaledHeight + 40) + 'px';
             }
           }, 100);
-          
-          container.appendChild(gridDiv);
-          hasPreviousSection = true;
+
+          sections.push(gridDiv);
         });
-        
-        // Re-attach zoom event listeners
+
+        if (sections.length === 0) {
+          container.innerHTML = '<div class="text-center text-sm md:text-base" style="color: var(--color-mawney-green);">No departments selected.</div>';
+          return;
+        }
+
+        const layout = document.createElement('div');
+        layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full';
+
+        sections.forEach((section, index) => {
+          layout.appendChild(section);
+
+          if (index < sections.length - 1) {
+            const divider = document.createElement('div');
+            divider.className = 'hidden lg:block w-px';
+            divider.style.borderLeft = '2px dashed var(--color-espresso)';
+            divider.style.alignSelf = 'stretch';
+            layout.appendChild(divider);
+
+            const mobileDivider = document.createElement('div');
+            mobileDivider.className = 'lg:hidden w-full';
+            mobileDivider.style.borderTop = '2px dashed var(--color-espresso)';
+            mobileDivider.style.margin = '16px 0';
+            layout.appendChild(mobileDivider);
+          }
+        });
+
+        container.appendChild(layout);
+
         attachZoomListeners();
-        
-        // Adjust navigation layout based on device type
         adjustNavigationLayout();
 
-        // After rendering, update department button selected state
         const deptButtons = document.querySelectorAll('.dept-btn');
         deptButtons.forEach(btn => {
           if (selectedDepartments.includes(btn.getAttribute('data-department'))) {
