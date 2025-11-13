@@ -1060,7 +1060,7 @@
         }
 
         const layout = document.createElement('div');
-        layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full';
+        layout.className = 'flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12 w-full pr-4 lg:pr-8';
 
         const matchSectionHeights = () => {
           const baseSection = londonSection || sections[0];
@@ -1097,6 +1097,7 @@
         });
 
         container.appendChild(layout);
+        container.style.paddingRight = '16px';
 
         setTimeout(matchSectionHeights, 200);
         setTimeout(matchSectionHeights, 400);
