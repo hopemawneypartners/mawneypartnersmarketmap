@@ -301,6 +301,31 @@
             </svg>
             <span class="font-bold">Notes</span>
           </button>
+          <div class="relative hidden" id="business-location-filter">
+            <button id="business-location-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
+              <span class="font-semibold">Locations:</span>
+              <span id="business-location-summary" class="text-xs md:text-sm">London &amp; New York</span>
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="md:w-4 md:h-4">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="business-location-dropdown" class="absolute right-0 top-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg p-3 md:p-4 z-50 hidden" style="min-width: 220px; max-width: 90vw;">
+              <div class="mb-3">
+                <p class="text-xs md:text-sm font-semibold" style="color: var(--color-mawney-green);">Show offices:</p>
+              </div>
+              <div class="space-y-2">
+                <label class="flex items-center gap-2 text-xs md:text-sm">
+                  <input type="checkbox" value="london" class="business-location-checkbox">
+                  <span>London</span>
+                </label>
+                <label class="flex items-center gap-2 text-xs md:text-sm">
+                  <input type="checkbox" value="new-york" class="business-location-checkbox">
+                  <span>New York</span>
+                </label>
+              </div>
+              <p class="text-[11px] md:text-xs mt-3 text-gray-500">Select one or both locations to update the grid.</p>
+            </div>
+          </div>
           <div class="relative">
             <button id="filter-toggle" class="px-3 md:px-4 py-2 rounded text-xs md:text-sm border flex items-center gap-2" style="border-color: var(--color-mawney-green); color: var(--color-mawney-green); background: var(--color-parchment);">
             Filter Specialisms
@@ -724,7 +749,34 @@
       };
 
       let selectedDepartments = ['business'];
+      let selectedBusinessLocations = ['london', 'new-york'];
+      let businessLocationToggle = null;
+      let businessLocationDropdown = null;
+      let businessLocationFilterContainer = null;
+      let businessLocationCheckboxes = [];
       let zoomLevels = {};
+
+      function getBusinessLocationSummary() {
+        if (selectedBusinessLocations.length === 1) {
+          return selectedBusinessLocations[0] === 'london' ? 'London' : 'New York';
+        }
+        return 'London & New York';
+      }
+
+      function updateBusinessLocationSummaryText() {
+        const summaryEl = document.getElementById('business-location-summary');
+        if (summaryEl) {
+          summaryEl.textContent = getBusinessLocationSummary();
+        }
+      }
+
+      function syncBusinessLocationCheckboxes() {
+        if (!businessLocationCheckboxes.length) return;
+        businessLocationCheckboxes.forEach(cb => {
+          cb.checked = selectedBusinessLocations.includes(cb.value);
+        });
+        updateBusinessLocationSummaryText();
+      }
 
       // Detect tablet screen size (768px to 1024px) and specific high-res tablet (2560x1600)
       const isTablet = () => {
@@ -817,10 +869,24 @@
       function renderDepartmentGrids() {
         const container = document.getElementById('department-grids-container');
         container.innerHTML = '';
+        const isBusinessView = selectedDepartments.length === 1 && selectedDepartments[0] === 'business';
+
+        if (businessLocationFilterContainer) {
+          businessLocationFilterContainer.classList.toggle('hidden', !isBusinessView);
+          if (!isBusinessView && businessLocationDropdown) {
+            businessLocationDropdown.classList.add('hidden');
+          }
+        }
         
-        if (selectedDepartments.length === 1 && selectedDepartments[0] === 'business') {
-          // Business view: two grids side by side
-          // Grid 1 (London)
+        if (isBusinessView) {
+          if (!selectedBusinessLocations.length) {
+            selectedBusinessLocations = ['london', 'new-york'];
+          }
+          syncBusinessLocationCheckboxes();
+
+          const showLondon = selectedBusinessLocations.includes('london');
+          const showNewYork = selectedBusinessLocations.includes('new-york');
+
           const grid1Hierarchy = [
             ["Roger Coyle", "Miguel Ramos Fuentenebro"],
             ["Charles Carvell", "Tyler Wallace", "Barry Povey", "Prakash Panikker", "David Spence", "Morten Simonsen"],
@@ -828,7 +894,6 @@
             ["Luke Streeter", "Matilda Makitalo", "Bradley Pearman", "Aisha Fowosire", "Ilze Petersone"],
             ["Archie Hancock", "Firas Joumblat", "Miguel Arraya"]
           ];
-          // Grid 2 (New York)
           const grid2Hierarchy = [
             ["William Sheoris"],
             ["Jason So"],
@@ -838,17 +903,20 @@
           ];
           const grid1Employees = employees.filter(emp => grid1Hierarchy.flat().includes(emp.name));
           const grid2Employees = employees.filter(emp => grid2Hierarchy.flat().includes(emp.name));
-          
-          // Container for two grids side by side
+
           const businessContainer = document.createElement('div');
-          businessContainer.className = 'flex flex-col lg:flex-row gap-8 justify-between w-full';
-          
-          // Grid 1 (London)
-          const gridDiv1 = document.createElement('div');
-          gridDiv1.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-          gridDiv1.style.height = 'auto';
-          gridDiv1.style.minHeight = 'auto';
-          gridDiv1.innerHTML = `
+          businessContainer.className = showLondon && showNewYork
+            ? 'flex flex-col lg:flex-row gap-8 justify-between w-full'
+            : 'flex flex-col gap-8 w-full';
+
+          let gridDiv1 = null;
+          if (showLondon) {
+            gridDiv1 = document.createElement('div');
+            const londonWidthClass = showLondon && showNewYork ? 'w-full lg:w-1/2' : 'w-full';
+            gridDiv1.className = `${londonWidthClass} min-w-0 overflow-x-auto relative`;
+            gridDiv1.style.height = 'auto';
+            gridDiv1.style.minHeight = 'auto';
+            gridDiv1.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
               <div class="flex items-center justify-between mb-2">
                 <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">London</h3>
@@ -865,53 +933,40 @@
               </div>
             </div>
           `;
-          
-          // Calculate and set height after content is rendered
-          setTimeout(() => {
-            const zoomArea = gridDiv1.querySelector('.zoom-area');
-            const contentDiv = zoomArea.querySelector('.flex.flex-col');
-            if (contentDiv) {
-              const contentHeight = contentDiv.scrollHeight;
-              console.log('Business1 - Content height:', contentHeight);
-              const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
-              const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
-              console.log('Business1 - Scaled height:', scaledHeight);
-              zoomArea.style.height = scaledHeight + 'px';
-              gridDiv1.style.height = (scaledHeight + 60) + 'px'; // Add space for header
-            }
-          }, 100);
-          
-          businessContainer.appendChild(gridDiv1);
-          
-          // Add dashed line divider between London and New York
-          const divider1 = document.createElement('div');
-          divider1.className = 'hidden lg:block w-px mx-4';
-          divider1.style.borderLeft = '2px dashed var(--color-espresso)';
-          divider1.style.height = '100%';
-          businessContainer.appendChild(divider1);
-          
-          // Set divider height to match grid container after rendering
-          setTimeout(() => {
-            const gridHeight = gridDiv1.style.height;
-            if (gridHeight) {
-              divider1.style.height = gridHeight;
-            }
-          }, 50);
-          
-          // Update divider height when grid height changes
-          setTimeout(() => {
-            const gridHeight = gridDiv1.style.height;
-            if (gridHeight) {
-              divider1.style.height = gridHeight;
-            }
-          }, 150);
-          
-          // Grid 2 (New York)
-          const gridDiv2 = document.createElement('div');
-          gridDiv2.className = 'w-full lg:w-1/2 min-w-0 overflow-x-auto relative';
-          gridDiv2.style.height = 'auto';
-          gridDiv2.style.minHeight = 'auto';
-          gridDiv2.innerHTML = `
+
+            setTimeout(() => {
+              const zoomArea = gridDiv1.querySelector('.zoom-area');
+              const contentDiv = zoomArea ? zoomArea.querySelector('.flex.flex-col') : null;
+              if (contentDiv) {
+                const contentHeight = contentDiv.scrollHeight;
+                console.log('Business1 - Content height:', contentHeight);
+                const scaleFactor = isTablet() ? 0.5 : 0.7;
+                const scaledHeight = contentHeight * scaleFactor;
+                console.log('Business1 - Scaled height:', scaledHeight);
+                zoomArea.style.height = scaledHeight + 'px';
+                gridDiv1.style.height = (scaledHeight + 60) + 'px';
+              }
+            }, 100);
+
+            businessContainer.appendChild(gridDiv1);
+          }
+
+          let divider1 = null;
+          if (showLondon && showNewYork) {
+            divider1 = document.createElement('div');
+            divider1.className = 'hidden lg:block w-px mx-4';
+            divider1.style.borderLeft = '2px dashed var(--color-espresso)';
+            divider1.style.height = '100%';
+            businessContainer.appendChild(divider1);
+          }
+
+          if (showNewYork) {
+            const gridDiv2 = document.createElement('div');
+            const newYorkWidthClass = showLondon && showNewYork ? 'w-full lg:w-1/2' : 'w-full';
+            gridDiv2.className = `${newYorkWidthClass} min-w-0 overflow-x-auto relative`;
+            gridDiv2.style.height = 'auto';
+            gridDiv2.style.minHeight = 'auto';
+            gridDiv2.innerHTML = `
             <div class="w-full min-w-0 overflow-x-auto relative" style="height: auto;">
               <div class="flex items-center justify-between mb-2">
                 <h3 class="text-lg font-serif font-semibold" style="color: var(--color-mawney-green);">New York</h3>
@@ -928,37 +983,44 @@
               </div>
             </div>
           `;
-          
-          // Calculate and set height after content is rendered
-          setTimeout(() => {
-            const zoomArea = gridDiv2.querySelector('.zoom-area');
-            const contentDiv = zoomArea.querySelector('.flex.flex-col');
-            if (contentDiv) {
-              // Mirror the London business section height
-              const londonZoomArea = gridDiv1.querySelector('.zoom-area');
-              if (londonZoomArea) {
-                const londonHeight = londonZoomArea.style.height;
-                console.log('Business2 - Mirroring London height:', londonHeight);
-                zoomArea.style.height = londonHeight;
-                gridDiv2.style.height = gridDiv1.style.height;
-              } else {
-                // Fallback to own content height if London not found
-                const contentHeight = contentDiv.scrollHeight;
-                console.log('Business2 - Content height:', contentHeight);
-                const scaleFactor = isTablet() ? 0.5 : 0.7; // 70% visual zoom for tablet, 100% for desktop
-                const scaledHeight = contentHeight * scaleFactor; // Account for scale transform
-                console.log('Business2 - Scaled height:', scaledHeight);
-                zoomArea.style.height = scaledHeight + 'px';
-                gridDiv2.style.height = (scaledHeight + 60) + 'px'; // Add space for header
+
+            setTimeout(() => {
+              const zoomArea = gridDiv2.querySelector('.zoom-area');
+              const contentDiv = zoomArea ? zoomArea.querySelector('.flex.flex-col') : null;
+              if (contentDiv) {
+                if (gridDiv1) {
+                  const londonZoomArea = gridDiv1.querySelector('.zoom-area');
+                  if (londonZoomArea) {
+                    const londonHeight = londonZoomArea.style.height;
+                    console.log('Business2 - Mirroring London height:', londonHeight);
+                    zoomArea.style.height = londonHeight;
+                    gridDiv2.style.height = gridDiv1.style.height;
+                  }
+                } else {
+                  const contentHeight = contentDiv.scrollHeight;
+                  console.log('Business2 - Content height:', contentHeight);
+                  const scaleFactor = isTablet() ? 0.5 : 0.7;
+                  const scaledHeight = contentHeight * scaleFactor;
+                  console.log('Business2 - Scaled height:', scaledHeight);
+                  zoomArea.style.height = scaledHeight + 'px';
+                  gridDiv2.style.height = (scaledHeight + 60) + 'px';
+                }
               }
-            }
-          }, 200); // Increased delay to ensure London is calculated first
-          
-          businessContainer.appendChild(gridDiv2);
-          container.appendChild(businessContainer);
-          
-          // Attach zoom listeners for both grids
-          attachZoomListeners();
+            }, gridDiv1 ? 200 : 100);
+
+            businessContainer.appendChild(gridDiv2);
+          }
+
+          if (divider1 && gridDiv1) {
+            setTimeout(() => {
+              divider1.style.height = gridDiv1.style.height;
+            }, 150);
+          }
+
+          if (showLondon || showNewYork) {
+            container.appendChild(businessContainer);
+            attachZoomListeners();
+          }
           return;
         }
         
@@ -1295,6 +1357,39 @@
       const clearAllBtn = document.getElementById('clear-filters');
       const applyFilterBtn = document.getElementById('apply-filters');
       const specialismFilters = document.querySelectorAll('.specialism-filter');
+      businessLocationFilterContainer = document.getElementById('business-location-filter');
+      businessLocationToggle = document.getElementById('business-location-toggle');
+      businessLocationDropdown = document.getElementById('business-location-dropdown');
+      businessLocationCheckboxes = Array.from(document.querySelectorAll('.business-location-checkbox'));
+      syncBusinessLocationCheckboxes();
+
+      if (businessLocationToggle) {
+        businessLocationToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (businessLocationDropdown) {
+            businessLocationDropdown.classList.toggle('hidden');
+          }
+        });
+      }
+
+      if (businessLocationCheckboxes.length) {
+        businessLocationCheckboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', function() {
+            const checkedValues = businessLocationCheckboxes
+              .filter(cb => cb.checked)
+              .map(cb => cb.value);
+
+            if (!checkedValues.length) {
+              this.checked = true;
+              return;
+            }
+
+            selectedBusinessLocations = checkedValues;
+            updateBusinessLocationSummaryText();
+            renderDepartmentGrids();
+          });
+        });
+      }
 
       // Toggle filter dropdown
       filterToggle.addEventListener('click', function(e) {
@@ -1304,8 +1399,11 @@
 
       // Close dropdown when clicking outside
       document.addEventListener('click', function(e) {
-        if (!filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
+        if (filterDropdown && filterToggle && !filterDropdown.contains(e.target) && !filterToggle.contains(e.target)) {
           filterDropdown.classList.add('hidden');
+        }
+        if (businessLocationDropdown && businessLocationToggle && !businessLocationDropdown.contains(e.target) && !businessLocationToggle.contains(e.target)) {
+          businessLocationDropdown.classList.add('hidden');
         }
       });
 
